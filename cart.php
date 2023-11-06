@@ -7,7 +7,9 @@
     <title>カート画面</title>
 </head>
 <body>
+    <button type="button" onclick="history.back()">←</button>
     <h2>カート</h2>
+    <img src="sozai/mypage.png" width="30px" height="30px">
     <p>カートを閲覧するにはログインしてください</p>
     <p>ログインは<a href="">こちら</a></p>
 
