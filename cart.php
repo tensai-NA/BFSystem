@@ -12,6 +12,13 @@
     <p>ログインは<a href="">こちら</a></p>
 
     <img src="">
-    〇〇〇
-    〇〇〇〇〇
-    <p></p>
+    〇〇〇<br>
+    〇〇〇〇〇<br>
+    <p>￥0,000</p>
+
+    <form method="post">
+	    <div>
+		    <label for="number">数量</label>
+		    <input type="number" name="number" value="1" />
+	    </div>
+    </form>
