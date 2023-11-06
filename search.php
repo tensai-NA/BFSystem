@@ -8,6 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    
+    検索結果画面
 </body>
 </html>
