@@ -1,4 +1,4 @@
-
+<?php require 'db/db-connect.php'?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,11 +7,11 @@
     <title>ホーム画面</title>
 </head>
 <body>
-    <img src="sozai/mypage.png" width="30px" height="30px">
-    <img src="sozai/cart.png" width="30px" height="30px">
-    <p>マイポイント 〇〇pt</p>
-    <p>search</p>
-    <h2>おすすめ</h2>
-    
+        <img src="sozai/mypage.png" width="30px" height="30px">
+        <img src="sozai/cart.png" width="30px" height="30px">
+        <p>マイポイント 〇〇pt</p>
+        <p>search</p>
+        <h2>おすすめ</h2>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>
