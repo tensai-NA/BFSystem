@@ -11,7 +11,7 @@
     <h2>カート</h2>
     <img src="sozai/mypage.png" width="30px" height="30px">
     <p>カートを閲覧するにはログインしてください</p>
-    <p>ログインは<a href="">こちら</a></p>
+    <p>ログインは<a href="login.php">こちら</a></p>
 
     <img src="">
     〇〇〇<br>
