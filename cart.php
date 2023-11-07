@@ -9,11 +9,11 @@
 <body>
     <button type="button" onclick="history.back()">←</button>
     <h2>カート</h2>
-    <img src="/sozai/mypage.png" width="30px" height="30px">
+    <img src="sozai/home.png" width="30px" height="30px">
     <p>カートを閲覧するにはログインしてください</p>
     <p>ログインは<a href="login.php">こちら</a></p>
 
-    <input type="checkbox" name=“a” value="1">
+    <input type="checkbox" name=“a” value="1" checked /><br>
     <img src="">
     〇〇〇<br>
     〇〇〇〇〇<br>
@@ -45,3 +45,6 @@
     <p>注文合計　　　　　　　　　0,000円</p>
 
     <button type="submit">ご注文手続きへ ＞</button>
+
+</body>
+</html>
