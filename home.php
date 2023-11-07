@@ -13,7 +13,20 @@
         <p>マイポイント 〇〇pt</p>
         <div class="A">search</div>
         <div class="B">
-            商品名検索<input type="text" name="search">
+            <label for="cate">カテゴリ検索</label>
+                <input type="radio" name="kate" value="1">
+                    <label for="hinmei">商品名</label>
+                <input type="text" id="hinmei"><br>
+
+                <input type="radio" name="kate" value="2">
+                    <label for="brand">ブランド</label>
+                <input type="text" id="brand"><br>
+
+                <input type="radio" name="kate" value="3">
+                    <label for="color">カラー</label>
+                <input type="text" id="color"><br>
+
+
         </div>
         <script src="https://code.jquery.com/jquery.min.js"></script>
         <script>
