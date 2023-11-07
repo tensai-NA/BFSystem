@@ -19,7 +19,7 @@
     送料                      ￥000
     <hr>
     </h5>
-    <h4>ご注文合計      ￥00000 
+    <h4>ご注文合計      ￥00000 <br>
             獲得予定ポイント   000pt
     </h4>
     <form action="home.php" method="post">
