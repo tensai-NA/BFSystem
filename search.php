@@ -8,6 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    
+<a href="home.php"><img src="sozai/home.png" alt="home" width="10%" hight="10%"></a>
 </body>
 </html>
