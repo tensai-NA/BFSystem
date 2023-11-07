@@ -1,4 +1,3 @@
-<!--　担当：中嶋　1.ログイン画面-->
 <?php session_start(); ?>
 <?php require 'db-connect.php'; ?>
 <?php 
