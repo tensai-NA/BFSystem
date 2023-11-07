@@ -14,6 +14,8 @@
             〇〇県××市△△町☐☐-〇<br>
             080-〇〇〇〇-☐☐☐☐<br>
             山田 太郎様<br>
+
+            <button type="submit">変更</button>
         </p>
     <p>配送希望日</p>
         <select name="day">
