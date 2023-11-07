@@ -19,11 +19,13 @@
     <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>
+        </select>
 
     <p>
         希望時間帯<br>
         <select name="time">
             <option value="">指定しない</option>
+        </select>
     </p>
     
     <p>
@@ -36,6 +38,7 @@
         決済方法 <br>
         <select name="kessai">
             <option value="">クレカ払い</option>
+        </select>
     </p>
 
     <p>
