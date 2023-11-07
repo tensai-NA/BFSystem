@@ -31,7 +31,7 @@
     <p>
         ポイント利用<br>
             ご利用可能ポイント：100pt<br>
-            ご利用ポイント：<input id="number" type="number" value="0" />
+            ご利用ポイント：<input id="number" type="number" value="0" />pt
     </p>
 
     <p>
@@ -59,9 +59,9 @@
     <hr>
 
     <p>
-        ご注文合計　　　　　　　　￥00000<br>
-        獲得予定ポイント　000pt
+        ご注文合計　　　　　　　￥00000<br>
+        　　　　獲得予定ポイント　000pt
     </p>
 
-    <button type="submit">ご注文を確定する</button>
-    <a href="cart.php">カートへ戻る</a>
+    <button type="submit">ご注文を確定する</button><br>
+    <a href="cart.php">←カートへ戻る</a>
