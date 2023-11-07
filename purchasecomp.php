@@ -21,6 +21,9 @@
     </h5>
     ご注文合計      ￥00000 <br>
             獲得予定ポイント   000pt <br>
+    <form action="home.php" method="post">
     <button type="submit" name="home">ホームへ戻る</button>
+    </form>
+    
 </body>
 </html>
