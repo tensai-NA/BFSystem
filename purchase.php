@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>購入確認</h2>
-    <p>配送先住所
+    <p>配送先住所 <br>
             〇〇〇-▽▽▽▽<br>
             〇〇県××市△△町☐☐-〇<br>
             080-〇〇〇〇-☐☐☐☐<br>
@@ -16,12 +16,12 @@
     </p>
         <p><button type="submit">変更</button></p>
 
-    <p>配送希望日
+    <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>
 
     <p>
-        希望時間帯
+        希望時間帯<br>
         <select name="time">
             <option value="">指定しない</option>
     </p>
@@ -33,7 +33,7 @@
     </p>
 
     <p>
-        決済方法
+        決済方法 <br>
         <select name="kessai">
             <option value="">クレカ払い</option>
     </p>
@@ -47,7 +47,6 @@
     </p>
     
     <hr>
-
     <p>
             リピート割　　　　　　　　-￥000<br>
             商品点数　　　　　　　　　　〇点<br>
