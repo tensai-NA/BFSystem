@@ -8,8 +8,9 @@
 </head>
 <body>
     <h4>ログアウトしますか？</h4>
-    ※　再度ログインするためにはメール<br>
+    <h6>※　再度ログインするためにはメール<br>
     アドレスとパスワードが必要です
+    </h6>
     <form action="login.php" method="post">
     <button type="submit" name="logout">ログアウトする➝</button>
     </form>
