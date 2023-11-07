@@ -9,7 +9,7 @@
 <body>
     <button type="button" onclick="history.back()">←</button>
     <h2>カート</h2>
-    <img src="sozai/mypage.png" width="30px" height="30px">
+    <img src="/sozai/mypage.png" width="30px" height="30px">
     <p>カートを閲覧するにはログインしてください</p>
     <p>ログインは<a href="login.php">こちら</a></p>
 
