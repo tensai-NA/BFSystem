@@ -9,10 +9,12 @@
 <body>
     <h4>ログアウトしますか？</h4>
     ※　再度ログインするためにはメール<br>
-    アドレスとパスワードが必要です<br>
-    <button type="submit" name="logout">ログアウトする➝</button><br>
-    
-    
+    アドレスとパスワードが必要です
+    <form action="login.php" method="post">
+    <button type="submit" name="logout">ログアウトする➝</button>
+    </form>
+    <form action="mypage.php" method="post">
         <button type="submit" name="cancel">キャンセル➝</button>
+    </form>
 </body>
 </html>
