@@ -13,6 +13,6 @@
      メールアドレス<br>
      <input type="text" name="meru"><br>
         <button type="submit">送信</button>
-        <p><a href="toroku.php">ログインへ戻る</a></p>
+        <p><a href="login.php">ログインへ戻る</a></p>
 </body>
 </html>
