@@ -1,0 +1,13 @@
+/* ここから下は編集するな　*/
+.A{
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.B{
+    background-color: bisque;
+    height: 100px;
+}
+.C{
+    display: none;
+}
