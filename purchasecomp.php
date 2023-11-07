@@ -7,8 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h4>ご注文ありがとうございました！</h4><br>
-    ご注文内容
+    <h3>ご注文ありがとうございました！</h3><br>
+    <h4>ご注文内容</h4>
     <h5>
     〇〇〇
     カラーピンク<br>
@@ -19,8 +19,9 @@
     送料                      ￥000
     <hr>
     </h5>
-    ご注文合計      ￥00000 <br>
-            獲得予定ポイント   000pt <br>
+    <h4>ご注文合計      ￥00000 <br>
+            獲得予定ポイント   000pt
+    </h4>
     <form action="home.php" method="post">
     <button type="submit" name="home">ホームへ戻る</button>
     </form>
