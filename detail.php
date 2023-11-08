@@ -1,5 +1,4 @@
 <!--　担当：山﨑　6.商品詳細画面-->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +11,10 @@
 </head>
 <body>
     <div class="head">
+    
         <a href=""><i class="fas fa-long-arrow-alt-left"></i></a> <!--　矢印下線消す　改行をなくす--> 
-        <a href="cart.php"><img src="sozai/cart.png" alt="home" width="10%" hight="10%"></a>
-        <a href="home.php"><img src="sozai/home.png" alt="home" width="10%" hight="10%"></a>
+        <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+        <a href="home.php"><i class="fas fa-home"></i></a>
     </div>
 
     <div class="main">
@@ -30,19 +30,14 @@
             <li><img src="" width="" height="" alt="image4"></li>
             <li><img src="" width="" height="" alt="image5"></li>
         </ul>
-
         <h3>商品名</h3>
         <h3>価格</h3>
         <button onclick="loction.href='cart.php'">カートに入れる</button>
     </div>
-
     <div class="notlogin">
         <p>カートに追加するにはログインしてください</p><!--赤字-->
         <p>ログインは <a href="login.php">こちら</a></p>
-
         
     </div>
-
-
 </body>
 </html>
