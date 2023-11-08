@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/home.css">
     <title>ホーム画面</title>
+    <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
     <img src="sozai/mypage.png" width="30px" height="30px">
     <img src="sozai/cart.png" width="30px" height="30px">
     <p>マイポイント 〇〇pt</p>
-    <div class="A">search</div>
-        <div class="B">
+        <a href="#" onclick="document.getElementById('A').style.display = 'block';">search</a>
+        <div class="kensaku" id="A">
             <h4>カテゴリ検索</h4>
                 <input type="radio" name="kate" value="1">
                     <label for="hinmei">商品名</label>
@@ -44,17 +44,11 @@
                     <option value="4000">4000円</option>
                 </select>
                 </label>
-            <br>
-            <button>検索</button>
+                <br>
+                <button>検索</button>
+                <br>
+                <a href="#" onclick="document.getElementById('A').style.visibility = 'none';">close</a>
         </div>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script>
-        $(function() {
-            $(".A").click(function() {
-                $(".B").toggleClass("C");
-            });
-        });
-    </script>
     <div class="a">
         <h2>おすすめ</h2>
     </div>
