@@ -65,5 +65,5 @@
         　　　　獲得予定ポイント　000pt
     </p>
 
-    <button type="submit">ご注文を確定する</button><br>
+    <button onclick="loction.href='purchasecomp.php'">ご注文を確定する</button><br>
     <a href="cart.php">←カートへ戻る</a>

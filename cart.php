@@ -46,7 +46,7 @@
 
     <p>注文合計　　　　　　　　　0,000円</p>
 
-    <button type="submit">ご注文手続きへ ＞</button>
+    <button onclick="loction.href='purchase.php'">ご注文手続きへ ＞</button>
 
 </body>
 </html>
