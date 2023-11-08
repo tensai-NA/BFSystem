@@ -5,12 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 </head>
 <body>
     <div class="head">
-        <a href="cart.php"><h1>←</h1></a> <!--　矢印下線消す　改行をなくす--> 
+        <a href=""><i class="fas fa-long-arrow-alt-left"></i></a> <!--　矢印下線消す　改行をなくす--> 
         <a href="cart.php"><img src="sozai/cart.png" alt="home" width="10%" hight="10%"></a>
         <a href="home.php"><img src="sozai/home.png" alt="home" width="10%" hight="10%"></a>
     </div>
