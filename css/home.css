@@ -1,6 +1,10 @@
 /* ここから下は編集するな　*/
 .A{
-    display: block;
+    display: inline-block;
+    background: #b6beff;
+    padding: 5px 10px;
+    cursor: pointer;
 }
-.A{
-    display: block;}
+.kensaku{
+    background-color: azure; 
+}

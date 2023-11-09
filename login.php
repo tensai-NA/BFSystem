@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php require 'db-connect.php'; ?>
+<?php require 'kyotu/db-connect.php'; ?>
 <?php 
     unset($_SESSION['customer']);
     $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
@@ -33,9 +33,9 @@
 </head>
 <body>
     <form action="login.php" method="post">
-     メールアドレス<br>
-     <input type="text" name="name"><br>
-     パスワード<br>
+     <p>メールアドレス<br>
+     <input type="text" name="name"></p>
+     <p>パスワード<br>
      <input type="text" name="pasu"><br>
         <button type="submit">ログイン</button>
         <button type="submit">キャンセル</button>
