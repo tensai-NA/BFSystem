@@ -1,17 +1,6 @@
 /* ここから下は編集するな　*/
 .A{
-    display: inline-block;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-.B{
-    position: absolute;
-    background-color: bisque;
-    z-index: 10;
-}
-.C{
-    display: none;
+    display: block;
 }
 .a{
-    position: absolute;
-    z-index: 5;}
+    display: block;}
