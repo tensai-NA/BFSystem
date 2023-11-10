@@ -7,7 +7,7 @@ new Vue({
             email:'email',
             pass1:'',
             pass2:'',
-            post:'11'
+            postnum:'11'
         };
     },
     computed:{
@@ -16,11 +16,13 @@ new Vue({
             return !regex.test(this.email);
         },
         isInValidPass(){
-            return this.pass1 == this.pass2
+            const Err =  this.pass1 === this.pass2;
+            return !Err;
         },
         isInValidPost(){
-            const post = this.post;
+            const post = this.postnum;
             const isErr = post.length != 7 || isNaN(Number(post));
+            return isErr;
         }
     }
 });
