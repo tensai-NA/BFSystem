@@ -1,6 +1,5 @@
-<!--　担当：中嶋　2.会員登録画面-->
 <?php session_start(); ?>
-<?php require 'db-connect.php'; ?>
+<?php require 'kyotu/db-connect.php'; ?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,23 +11,54 @@
     <title>会員登録</title>
 </head>
 <body>
-    <?php $name=$addresu ?>
-    <form action="login.php" method="post">
-     お名前<br>
-     <input type="text" name="sei"><input type="text" name="mei"><br>
-     メールアドレス<br>
-     <input type="text" name="mail"><br>
-     パスワード<br>
-     <input type="text" name="password"><br>
-     パスワード確認<br>
-     <input type="text" name="password2"><br>
-     郵便番号<br>
-     <input type="test" name="postnum"><br>
-     住所<br>
-     <input type="text" name="address"><br>
-        <button>登録</button>
-        <button onclick="location.href='login.php'">キャンセル</button>
-        <p><a href="login.php">アカウントをお持ちの方はこちら</a></p>
-    </form>
+    <?php
+        $sei=$mei=$mail=$password=$password2=$postnum=$address='';
+        if(isset($_SESSION['toroku'])){
+            $sei=$_SESSION['toroku']['sei'];
+            $mei=$_SESSION['toroku']['mei'];
+            $mail=$_SESSION['toroku']['mail'];
+            $password=$_SESSION['toroku']['password'];
+            $password2=$_SESSION['toroku']['password2'];
+            $postnum=$_SESSION['toroku']['postnnum'];
+            $address=$_SESSION['toroku']['address'];
+        }
+    
+     echo '<form action="toroku-output.php" method="post">';
+     echo '<table>';
+
+     echo '<tr><td>お名前</td><td>';
+     echo '<input type="text" name="sei" value="',$sei,'">','<input type="text" name="mei" value="',$mei,'">';
+     echo '</td></tr>';
+
+     echo '<tr><td>メールアドレス</td><td>';
+     echo '<input type="text" name="mail" value="',$mail,'">';
+     echo '</td></tr>';
+
+     echo '<tr><td>パスワード</td><td>';
+     echo '<input type="text" name="password" value="',$password,'">';
+     echo '</td></tr>';
+
+     echo '<tr><td>パスワード確認</td><td>';
+     echo '<input type="text" name="password2" value="',$password2,'">';
+     echo '</td></tr>';
+
+     echo '<tr><td>郵便番号</td><td>';
+     echo '<input type="test" name="postnum" value="',$postnum,'">';
+     echo '</td></tr>';
+
+     echo '<tr><td>住所</td><td>';
+     echo '<input type="text" name="address" value="',$address,'">';
+     echo '</td></tr>';
+
+     echo '</table>';
+     echo '<input type="submit" value="確定">';
+     echo '</form>';
+
+    echo '<button onclick="location.href=\'login.php\'">キャンセル</button>';
+    echo '<p><a href="login.php">アカウントをお持ちの方はこちら</a></p>'
+    ?>
+    
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 </body>
 </html>
