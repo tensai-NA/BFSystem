@@ -3,7 +3,6 @@
 <?php
 $msgMail = '';
 $msgPass = '';
-$ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
 if(isset($_POST['login'])){
     unset($_SESSION['customer']);
     $pdo=new PDO($connect,USER,PASS);
@@ -24,7 +23,7 @@ if(isset($_POST['login'])){
                 'postnum'=>$row['postnum'],
                 'point'=>$row['point'],
                 'address'=>$row['address'],
-                'password'=>$ps];
+                'password'=>$row['password']];
             }else{
                 $msgPass = 'パスワードが違います。';
             }
@@ -32,8 +31,7 @@ if(isset($_POST['login'])){
     }
     
     if(isset($_SESSION['customer'])){
-        echo 'window.location.href = "torokucomp.php"';
-        
+        header('Location: home.php');
     }
 }
 ?>
