@@ -17,3 +17,11 @@ $sql->execute([
     $_POST['sei'],$_POST['mei'],$_POST['mail'],$ps,$_POST['postnum'],
     $_POST['address']
 ]);
+?>
+
+<script>
+    window.location.href = 'torokucomp.php';
+</script>
+<?php require 'kyotu/footer.php'; ?>
+
+
