@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>購入確認画面</title>
 </head>
 <body>
@@ -19,23 +20,26 @@
     <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>
+        </select>
 
     <p>
         希望時間帯<br>
         <select name="time">
             <option value="">指定しない</option>
+        </select>
     </p>
     
     <p>
         ポイント利用<br>
             ご利用可能ポイント：100pt<br>
-            ご利用ポイント：<input id="number" type="number" value="0" />
+            ご利用ポイント：<input id="number" type="number" value="0" />pt
     </p>
 
     <p>
         決済方法 <br>
         <select name="kessai">
             <option value="">クレカ払い</option>
+        </select>
     </p>
 
     <p>
@@ -56,9 +60,9 @@
     <hr>
 
     <p>
-        ご注文合計　　　　　　　　￥00000<br>
-        獲得予定ポイント　000pt
+        ご注文合計　　　　　　　￥00000<br>
+        　　　　獲得予定ポイント　000pt
     </p>
 
-    <button type="submit">ご注文を確定する</button>
-    <a href="cart.php">カートへ戻る</a>
+    <button onclick="loction.href='purchasecomp.php'">ご注文を確定する</button><br>
+    <a href="cart.php">←カートへ戻る</a>
