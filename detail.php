@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="css/main.css">
-    <title>Document</title>
+    <title>商品詳細画面</title>
 </head>
 <body>
     <div class="head">
