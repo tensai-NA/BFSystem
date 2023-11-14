@@ -15,13 +15,10 @@
     <img src="sozai/home.png" width="30px" height="30px">
 
     <?php
-    if(){
-
-    } else {
-        echo "カートを閲覧するにはログインしてください";
+    if(!isset($_SESSION['customer'])){
+        echo '<p>カートを閲覧するにはログインしてください</p>';
+        echo '<p><a href="login.php">ログインはこちら</a></p>';
     }
-
-    <p>ログインは<a href="login.php">こちら</a></p>
 
     <input type="checkbox" name=“a” value="1" checked /><br>
     <img src="">
