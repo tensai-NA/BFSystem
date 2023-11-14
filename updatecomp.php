@@ -8,7 +8,9 @@
     <title>Document</title>
 </head>
 <body>
+<div class="has-text-centered">
     <h4>更新が完了しました</h4><br>
     <a href="mypage.php">マイページへ➝</a>
+</div>
 </body>
 </html>

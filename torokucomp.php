@@ -8,7 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-<h4>登録が完了しました</h4><br>
-<a href="login.php">ログインへ➝</a>
+<div class="has-text-centered">
+ <h4>登録が完了しました</h4><br>
+ <a href="login.php">ログインへ➝</a>
+</div>
 </body>
 </html>
