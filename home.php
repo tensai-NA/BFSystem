@@ -12,13 +12,15 @@
 <body>
     <i class="fas fa-user-circle"></i> 
     <i class="fas fa-shopping-cart"></i>
-    <p>マイポイント 00pt</p>
     <?php
         $id =$_SESSION['customer']['user_id'];
         $pdo=new PDO($connect,USER,PASS);
         $sql=$pdo->query("select point from User where user_id='".$id."'");
-        $point = $sql->fetch();
+        $point = $sql->fetch(PDO::FETCH_COLUMN);
+        echo '<p>マイポイント: ',$point,'pt</p>'
+
     ?>
+
     <script src="https://code.jquery.com/jquery.min.js"></script>
         <div class="A">search</div>
         <div class="kensaku">
