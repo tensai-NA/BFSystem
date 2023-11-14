@@ -1,4 +1,6 @@
 <!--　担当：荒巻　7.カート一覧画面-->
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,7 +13,14 @@
     <button type="button" onclick="history.back()">←</button>
     <h2>カート</h2>
     <img src="sozai/home.png" width="30px" height="30px">
-    <p>カートを閲覧するにはログインしてください</p>
+
+    <?php
+    if(){
+
+    } else {
+        echo "カートを閲覧するにはログインしてください";
+    }
+
     <p>ログインは<a href="login.php">こちら</a></p>
 
     <input type="checkbox" name=“a” value="1" checked /><br>
