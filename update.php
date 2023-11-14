@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>会員情報更新画面</title>
+    <link rel="stylesheet" href="css/main.css">
+    <title>会員情報更新</title>
 </head>
 <body>
     <form action="login.php" method="post">
@@ -28,7 +29,7 @@
             <label class="label">メールアドレス</label>
             <div class="field has-addons-fullwidth has-addons-centered">
                 <p class="control has-icons-left">
-                    <input class="input   is-normal is-focused "type="email" name="meru"  placeholder="メールアドレス">
+                    <input class="input  is-primary  is-normal is-focused "type="email" name="meru"  placeholder="メールアドレス">
                     <span class="icon is-small is-left">
                         <i class="fas fa-mail-bulk"></i>
                     </span>
@@ -53,7 +54,7 @@
             <label class="label">新しいパスワード</label>
             <div class="field has-addons-fullwidth has-addons-centered">
               <p class="control has-icons-left">
-                  <input class="input   is-normal is-focused "type="password" name="shin"  placeholder="新しいパスワード">
+                  <input class="input   is-primary is-normal is-focused "type="password" name="shin"  placeholder="新しいパスワード">
                   <span class="icon is-small is-left">
                       <i class="fas fa-key"></i>
                   </span>
@@ -78,7 +79,7 @@
     <label class="label">住所</label>
     <div class="field has-addons-fullwidth has-addons-centered">
       <p class="control has-icons-left">
-          <input class="input is-normal is-focused "type="password" name="home"  placeholder="住所">
+          <input class="input  is-primary is-normal is-focused "type="password" name="home"  placeholder="住所">
           <span class="icon is-small is-left">
             <i class="fas fa-house-user"></i>
           </span>

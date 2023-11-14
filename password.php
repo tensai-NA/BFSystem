@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="m-4 has-text-centered ">
-   <h1 class="title is-3"> パスワード再設定</h1>
+   <h1 class="title is-4"> パスワード再設定</h1>
 
    <p class="m-6">
     会員登録時に登録されたお名前とメールアドレスをご入力の上「送信」をタップしてください<br>
