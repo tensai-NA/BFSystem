@@ -1,3 +1,6 @@
+<?php session_start(); ?>
+<?php require 'kyotu/db-connect.php'?>
+
 <!--　担当：川崎　10.マイページ-->
 
 
@@ -12,13 +15,34 @@
 </head>
 <body>
 <h2>マイページ</h2>
-<font color="red">マイページを閲覧するにはログインしてください</font>
-<br>ログインは<a href="login.php">こちら</a></br>
-<br>○○○○様　　　　　　　　　<img src="sozai/home.png" width="30" height="30"></p>
+<?php //エラーメッセージ
+    if(!isset($_SESSION['customer'])){
+        echo '<p><a href="login.php">ログインはこちら</a></p>';
+        exit();
+    }
+
+?>
+<?php //名前取得
+        $id =$_SESSION['customer']['user_id'];
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select user_sei from User where user_id='".$id."'");
+        $sei = $sql->fetch(PDO::FETCH_COLUMN);
+        echo '<p>',$sei,'様</p>';
+
+    ?>
+
+<a href="home.php"><i class="fas fa-home"></i></a>
 <!--エラーメッセージ-->
 <p>ポイント</p>
 <hr>
-<p>利用可能ポイント:　　　 0pt</p>
+<?php //ポイント取得
+        $id =$_SESSION['customer']['user_id'];
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select point from User where user_id='".$id."'");
+        $point = $sql->fetch(PDO::FETCH_COLUMN);
+        echo '<p>利用可能ポイント: ',$point,'pt</p>';
+
+    ?>
 <p>最近の購入履歴</p>
     <hr>
     <p>○○<br>
