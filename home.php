@@ -12,7 +12,7 @@
 <body>
     
     <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
-    <i class="fas fa-shopping-cart"></i>
+    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
     <?php
         $id =$_SESSION['customer']['user_id'];
         $pdo=new PDO($connect,USER,PASS);
