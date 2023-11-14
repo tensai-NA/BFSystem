@@ -10,8 +10,9 @@
     <title>ホーム画面</title>
 </head>
 <body>
-    <i class="fas fa-user-circle"></i> 
-    <i class="fas fa-shopping-cart"></i>
+    
+    <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
+    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
     <?php
         $id =$_SESSION['customer']['user_id'];
         $pdo=new PDO($connect,USER,PASS);
