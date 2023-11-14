@@ -10,7 +10,8 @@
     <title>ホーム画面</title>
 </head>
 <body>
-    <i class="fas fa-user-circle"></i> 
+    
+    <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
     <i class="fas fa-shopping-cart"></i>
     <?php
         $id =$_SESSION['customer']['user_id'];
