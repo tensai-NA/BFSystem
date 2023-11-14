@@ -22,6 +22,14 @@
 
     <input type="checkbox" name=“a” value="1" checked /><br>
     <img src="">
+    if(!empty($_SESSION['Shohin'])){
+        
+        $total=0;
+        foreach($_SESSION['Shohin'] as $id=>$Shohin){
+            
+        }
+    }
+
     〇〇〇<br>
     〇〇〇〇〇<br>
     <p>￥0,000</p>
