@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -9,9 +10,18 @@
     <title>ホーム画面</title>
 </head>
 <body>
-    <img src="sozai/mypage.png" width="30px" height="30px">
-    <i class="fas fa-shopping-cart"></i> 
-    <p>マイポイント 〇〇pt</p>
+    
+    <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
+    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+    <?php
+        $id =$_SESSION['customer']['user_id'];
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select point from User where user_id='".$id."'");
+        $point = $sql->fetch(PDO::FETCH_COLUMN);
+        echo '<p>マイポイント: ',$point,'pt</p>'
+
+    ?>
+
     <script src="https://code.jquery.com/jquery.min.js"></script>
         <div class="A">search</div>
         <div class="kensaku">
@@ -37,6 +47,7 @@
                     <option value="4000">4000円</option>
                 </select>
                 </label>
+                <br>
                 <label>上限：
                 <select name="drop02">
                 <option value="0">指定なし</option>
@@ -59,11 +70,15 @@
         </script>
     <div class="a">
         <h2>おすすめ</h2>
-        <!--初期状態-->
+        <!--全顧客で一緒の表示にする-->
 
-
-        <!--顧客によって変更-->
     </div>
+<?php
+    if(!isset($_SESSION['customer'])){
+        echo '<p><a href="login.php">ログインはこちら</a></p>';
+    }
+
+?>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>

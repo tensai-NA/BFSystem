@@ -1,6 +1,8 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'; ?>
 
+<!--完成-->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,14 +17,14 @@
     <div id="app">
         <?php
             $sei=$mei=$mail=$password=$password2=$postnum=$address='';
-            if(isset($_SESSION['toroku'])){
-                $sei=$_SESSION['toroku']['sei'];
-                $mei=$_SESSION['toroku']['mei'];
-                $mail=$_SESSION['toroku']['mail'];
-                $password=$_SESSION['toroku']['password'];
-                $password2=$_SESSION['toroku']['password2'];
-                $postnum=$_SESSION['toroku']['postnnum'];
-                $address=$_SESSION['toroku']['address'];
+            if(isset($_SESSION['customer'])){
+                $sei=$_SESSION['customer']['sei'];
+                $mei=$_SESSION['customer']['mei'];
+                $mail=$_SESSION['customer']['mail'];
+                $password=$_SESSION['customer']['password'];
+                $password2=$_SESSION['customer']['password2'];
+                $postnum=$_SESSION['customer']['postnnum'];
+                $address=$_SESSION['customer']['address'];
             }
         
         echo '<form action="toroku-output.php" method="post">';
@@ -115,10 +117,4 @@
     <script src="js/toroku.js"></script>
 </body>
 </html>
-
-<!-- era- 
-pass1 to pass2 tigau 
-me-ru okasii
-yuubinn ketasuu
-    -->
 
