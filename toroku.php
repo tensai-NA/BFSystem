@@ -1,6 +1,8 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'; ?>
 
+<!--完成-->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -66,10 +68,4 @@
     <script src="js/toroku.js"></script>
 </body>
 </html>
-
-<!-- era- 
-pass1 to pass2 tigau 
-me-ru okasii
-yuubinn ketasuu
-    -->
 

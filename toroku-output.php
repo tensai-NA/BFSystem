@@ -1,4 +1,6 @@
 <?php session_start(); ?>
+<!--完成-->
+
 <?php require 'kyotu/db-connect.php'; ?>
 <?php require 'kyotu/header.php'; ?>
 <?php

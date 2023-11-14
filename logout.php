@@ -1,4 +1,4 @@
-<!--　担当：溝口　14.ログアウト確認画面-->
+<!--完成-->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
