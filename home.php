@@ -14,10 +14,10 @@
     <i class="fas fa-shopping-cart"></i>
     <p>マイポイント 00pt</p>
     <?php
+        $id =$_SESSION['customer']['user_id'];
         $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->prepare('select point from User where user_id=');
-    
-        $point = $sql;
+        $sql=$pdo->query("select point from User where user_id='".$id."'");
+        $point = $sql->fetch();
     ?>
     <script src="https://code.jquery.com/jquery.min.js"></script>
         <div class="A">search</div>
@@ -44,6 +44,7 @@
                     <option value="4000">4000円</option>
                 </select>
                 </label>
+                <br>
                 <label>上限：
                 <select name="drop02">
                 <option value="0">指定なし</option>
@@ -66,10 +67,8 @@
         </script>
     <div class="a">
         <h2>おすすめ</h2>
-        <!--初期状態-->
+        <!--全顧客で一緒の表示にする-->
 
-
-        <!--顧客によって変更-->
     </div>
 <?php
     if(!isset($_SESSION['customer'])){
