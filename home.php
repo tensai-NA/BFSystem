@@ -10,15 +10,14 @@
     <title>ホーム画面</title>
 </head>
 <body>
-    <img src="sozai/mypage.png" width="30px" height="30px">
-    <i class="fas fa-shopping-cart"></i> 
+    <i class="fas fa-user-circle"></i> 
+    <i class="fas fa-shopping-cart"></i>
+    <p>マイポイント 00pt</p>
     <?php
         $pdo=new PDO($connect,USER,PASS);
         $sql=$pdo->prepare('select point from User where user_id=');
-        $arry = $_SESSION['customer']['user_id'];
     
         $point = $sql;
-        echo '<p>マイポイント',$point,'pt</p>';
     ?>
     <script src="https://code.jquery.com/jquery.min.js"></script>
         <div class="A">search</div>
@@ -72,6 +71,12 @@
 
         <!--顧客によって変更-->
     </div>
+<?php
+    if(!isset($_SESSION['customer'])){
+        echo '<p><a href="login.php">ログインはこちら</a></p>';
+    }
+
+?>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>

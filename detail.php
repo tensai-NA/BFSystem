@@ -1,4 +1,3 @@
-<!--　担当：山﨑　6.商品詳細画面-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
