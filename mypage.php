@@ -16,11 +16,6 @@
 <br>ログインは<a href="login.php">こちら</a></br>
 <br>○○○○様　　　　　　　　　<img src="sozai/home.png" width="30" height="30"></p>
 <!--エラーメッセージ-->
-<p>マイページを閲覧するにはログインしてください</p>
-<p><a href="login.php">ログインはこちら</a></p>
-
-<P><img alt="sozai" src="sozai/home.jpg"></p>
-<p>○○○○様</p>
 <p>ポイント</p>
 <hr>
 <p>利用可能ポイント:　　　 0pt</p>
