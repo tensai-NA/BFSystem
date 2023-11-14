@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -11,7 +12,14 @@
 <body>
     <img src="sozai/mypage.png" width="30px" height="30px">
     <i class="fas fa-shopping-cart"></i> 
-    <p>マイポイント 〇〇pt</p>
+    <?php
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->prepare('select point from User where user_id=');
+        $arry = $_SESSION['customer']['user_id'];
+    
+        $point = $sql;
+        echo '<p>マイポイント',$point,'pt</p>';
+    ?>
     <script src="https://code.jquery.com/jquery.min.js"></script>
         <div class="A">search</div>
         <div class="kensaku">

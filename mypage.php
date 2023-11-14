@@ -9,8 +9,10 @@
 </head>
 <body>
 <h2>マイページ</h2>
+<!--エラーメッセージ-->
 <p>マイページを閲覧するにはログインしてください</p>
 <p><a href="login.php">ログインはこちら</a></p>
+
 <P><img alt="sozai" src="sozai/home.jpg"></p>
 <p>○○○○様</p>
 <p>ポイント</p>
