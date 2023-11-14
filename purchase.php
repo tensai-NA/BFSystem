@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>購入確認画面</title>
 </head>
 <body>
@@ -63,5 +64,5 @@
         　　　　獲得予定ポイント　000pt
     </p>
 
-    <button type="submit">ご注文を確定する</button><br>
+    <button onclick="loction.href='purchasecomp.php'">ご注文を確定する</button><br>
     <a href="cart.php">←カートへ戻る</a>

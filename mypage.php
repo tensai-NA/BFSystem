@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>マイページ</title>
 </head>
 <body>
@@ -14,6 +15,12 @@
 <font color="red">マイページを閲覧するにはログインしてください</font>
 <br>ログインは<a href="login.php">こちら</a></br>
 <br>○○○○様　　　　　　　　　<img src="sozai/home.png" width="30" height="30"></p>
+<!--エラーメッセージ-->
+<p>マイページを閲覧するにはログインしてください</p>
+<p><a href="login.php">ログインはこちら</a></p>
+
+<P><img alt="sozai" src="sozai/home.jpg"></p>
+<p>○○○○様</p>
 <p>ポイント</p>
 <hr>
 <p>利用可能ポイント:　　　 0pt</p>

@@ -1,16 +1,26 @@
 <!--　担当：荒巻　7.カート一覧画面-->
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>カート画面</title>
 </head>
 <body>
     <button type="button" onclick="history.back()">←</button>
     <h2>カート</h2>
     <img src="sozai/home.png" width="30px" height="30px">
-    <p>カートを閲覧するにはログインしてください</p>
+
+    <?php
+    if(){
+
+    } else {
+        echo "カートを閲覧するにはログインしてください";
+    }
+
     <p>ログインは<a href="login.php">こちら</a></p>
 
     <input type="checkbox" name=“a” value="1" checked /><br>
@@ -44,7 +54,7 @@
 
     <p>注文合計　　　　　　　　　0,000円</p>
 
-    <button type="submit">ご注文手続きへ ＞</button>
+    <button onclick="loction.href='purchase.php'">ご注文手続きへ ＞</button>
 
 </body>
 </html>
