@@ -1,4 +1,4 @@
-<!--　担当：溝口　3.会員登録完了画面-->
+<!--完成-->
 <!DOCTYPE html>
 <html lang="ja">
 <head>

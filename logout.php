@@ -1,4 +1,4 @@
-<!--　担当：溝口　14.ログアウト確認画面-->
+<!--完成-->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,7 +12,7 @@
     <h6>※　再度ログインするためにはメール<br>
     アドレスとパスワードが必要です
     </h6>
-    <form action="login.php" method="post">
+    <form action="logoutcomp.php" method="post">
     <button type="submit" name="logout">ログアウトする➝</button>
     </form>
     <form action="mypage.php" method="post">

@@ -1,11 +1,13 @@
 <?php session_start(); ?>
+<!--完成-->
+
 <?php require 'kyotu/db-connect.php'; ?>
 <?php require 'kyotu/header.php'; ?>
 <?php
 $pdo=new PDO($connect,USER,PASS);
 $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
-if(isset($_SESSION['toroku'])){
-    $id=$_SESSION['toroku']['id'];
+if(isset($_SESSION['customer'])){
+    $id=$_SESSION['customer']['id'];
     $sql=$pdo->prepare('select * from User where id!=? and mail=?');
     $sql->execute([$id,$_POST['mail']]);
 }else{          //メールが一緒のとき
