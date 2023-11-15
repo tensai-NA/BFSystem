@@ -13,7 +13,7 @@
         
         <nav class="level  is-mobile">
         <div class="level-left">
-            <a href="home.php"><i class="fas fa-long-arrow-alt-left fa-4x" ></i></a>
+            <a href="mypage.php"><i class="fas fa-long-arrow-alt-left fa-4x" ></i></a>
           </div>
           <div class="level-item">
           <h1 class="title is-3">購入履歴</h1>
