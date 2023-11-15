@@ -20,6 +20,7 @@
         echo '<p>カートを閲覧するにはログインしてください</p>';
         echo '<p><a href="login.php">ログインはこちら</a></p>';
     }
+    ?>
 
     <input type="checkbox" name=“a” value="1" checked /><br>
     <img src="">
