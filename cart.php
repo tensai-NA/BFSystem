@@ -12,7 +12,7 @@
 <body>
     <button type="button" onclick="history.back()">←</button>
     <h2>カート</h2>
-    <img src="sozai/home.png" width="30px" height="30px">
+    <a href="home.php"><i class="fas fa-home"></i></a>
 
     <?php
     if(!isset($_SESSION['customer'])){
@@ -20,19 +20,27 @@
         echo '<p><a href="login.php">ログインはこちら</a></p>';
     }
 
-    <input type="checkbox" name=“a” value="1" checked /><br>
+    <input type="checkbox" name=“checkbox” value="1" checked /><br>
+        if(isset($_POST['checkbox'])){
+            $a=0;
+        }else{
+            $a=1;
+        }
+
     <img src="">
     if(!empty($_SESSION['Shohin'])){
         
         $total=0;
         foreach($_SESSION['Shohin'] as $id=>$Shohin){
-            
+            echo '<a href="detail.php?id=',$id,'">',
+                $Shohin['name'],'</a>';
+            echo '',$Shohin['price'];
+            echo $Shohin['count'];
+            $subtotal=$Shohin['price']*$Shohin['count'];
+            $total+=$subtotal;
+            echo $subtotal;
         }
     }
-
-    〇〇〇<br>
-    〇〇〇〇〇<br>
-    <p>￥0,000</p>
 
     <form method="post">
 	    <div>
@@ -42,6 +50,7 @@
     </form>
 
     <p>
+        
         小計 ￥0,000 <br>
         ポイント -pt <br>
         リピート割 -￥000 <br>
