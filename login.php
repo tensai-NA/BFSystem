@@ -48,10 +48,11 @@ if(isset($_POST['login'])){
     <title>ログイン</title>
 </head>
 <body>
+<form action="login.php" method="post">
     <div class="m-4 has-text-centered ">
         <h1 class="title is-4"> ログイン</h1>
 
-    <form action="login.php" method="post">
+   
 
     <div class=" box has-background-light m-6">
 
