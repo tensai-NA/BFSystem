@@ -9,6 +9,7 @@
     <title>商品詳細画面</title>
 </head>
 <body>
+<div class="m-4 has-text-centered ">
     <div class="head">
     
         <p class="back">
