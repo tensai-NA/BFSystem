@@ -44,6 +44,7 @@ if(isset($_POST['login'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>ログイン</title>
 </head>
 <body>
@@ -53,30 +54,35 @@ if(isset($_POST['login'])){
     <form action="login.php" method="post">
 
     <div class=" box has-background-light m-6">
+
+        <div class="field">
+
         <div class="control m-1">
         <label class="label">メールアドレス</label>
         <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">
-                <input class="input is-success  is-normal is-focused "type="email" name="meru"  placeholder="メールアドレス"><br><?= $msgMail ?></p>
+                <input class="input is-success  is-normal is-focused "type="email" name="meru"  placeholder="メールアドレス">
              <span class="icon is-small is-left">
                 <i class="fas fa-mail-bulk"></i>
                 </span>
                 </p>
+                <?= $msgMail ?>
     </div></div>
 
     <div class="control m-1">
         <label class="label">パスワード</label>
         <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">
-     <input type="text"  class="input  is-normal is-focused "name="password"><?= $msgPass ?>
+     <input type="text"  class="input  is-normal is-focused "name="password"  placeholder="パスワード">
      <span class="icon is-small is-left">
         <i class="fas fa-key"></i>
     </span>
         </p>
-            </div></div>
+        <?= $msgPass ?>
+            </div></div></div>
 
-        <button type="submit" name="login" value="send">ログイン</button>
-        <button type="submit">キャンセル</button>
+        <button type="submit" class="button is-danger m-3"　 name="login" value="send">ログイン</button>
+        <button onclick="home.php"  class="button is-info m-3">キャンセル</button>
         <p><a href="toroku.php">新規登録はこちら</a></p>
         <p><a href="password.php">パスワードを忘れた方はこちら</a></p>
     </form>
