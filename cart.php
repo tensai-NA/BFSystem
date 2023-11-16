@@ -51,15 +51,10 @@
             echo $subtotal;
 
             echo floor($Shohin['price']/100);
-            echo
+            echo $Shohin-($Shohin*0.1);
         }
     }
     ?>
-
-    <p>
-        ポイント -pt <br>
-        リピート割 -￥000 <br>
-    </p>
 
     <a href="">削除</a>
 
