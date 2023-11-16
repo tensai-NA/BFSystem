@@ -22,11 +22,13 @@
     ?>
     <form action="cart.php" method="post">
         <input type="checkbox" name=“checkbox” value="1" checked /><br>
+        <?php
             if(isset($_POST['checkbox'])){
                 $a=0;
             }else{
                 $a=1;
             }
+        ?>
     </form>
 
     <img src="">
@@ -47,13 +49,13 @@
             $subtotal=$Shohin['price']*$Shohin['count'];
             $total+=$subtotal;
             echo $subtotal;
+
+            echo floor($Shohin['price']/100);
         }
     }
     ?>
 
     <p>
-        
-        小計 ￥0,000 <br>
         ポイント -pt <br>
         リピート割 -￥000 <br>
     </p>
