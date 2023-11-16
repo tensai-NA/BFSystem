@@ -20,17 +20,13 @@
         echo '<p>カートを閲覧するにはログインしてください</p>';
         echo '<p><a href="login.php">ログインはこちら</a></p>';
     }
-    ?>
 
-    <form action="cart.php" method="post">
     <input type="checkbox" name=“checkbox” value="1" checked /><br>
         if(isset($_POST['checkbox'])){
             $a=0;
         }else{
             $a=1;
         }
-
-    </form>
 
     <img src="">
     if(!empty($_SESSION['Shohin'])){
