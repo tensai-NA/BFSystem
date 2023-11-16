@@ -1,4 +1,3 @@
-<!--　担当：荒巻　7.カート一覧画面-->
 <?php session_start(); ?>
 
 <!DOCTYPE html>
@@ -20,15 +19,19 @@
         echo '<p>カートを閲覧するにはログインしてください</p>';
         echo '<p><a href="login.php">ログインはこちら</a></p>';
     }
-
-    <input type="checkbox" name=“checkbox” value="1" checked /><br>
-        if(isset($_POST['checkbox'])){
-            $a=0;
-        }else{
-            $a=1;
-        }
+    ?>
+    <form action="cart.php" method="post">
+        <input type="checkbox" name=“checkbox” value="1" checked /><br>
+            if(isset($_POST['checkbox'])){
+                $a=0;
+            }else{
+                $a=1;
+            }
+    </form>
 
     <img src="">
+
+    <?php
     if(!empty($_SESSION['Shohin'])){
         
         $total=0;
