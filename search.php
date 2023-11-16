@@ -10,7 +10,7 @@
 </head>
 <body>
 <i class="fas fa-search"></i>
-<a href="home.php"><img src="sozai/home.png" alt="home" width="10%" hight="10%"></a>
+<a href="home.php"><i class="fas fa-home"></i> </a>
 
 </body>
 </html>
