@@ -62,8 +62,8 @@
                 </select>
                 </label>
                 <br>
-                <button>検索</button>
-                <!--検索機能どうするか js? php?-->
+                <button onclick="location.href='search.php'">検索</button>
+        
                 <br>
         </div>
         <script>
