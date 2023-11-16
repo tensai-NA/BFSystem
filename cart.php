@@ -51,6 +51,7 @@
             echo $subtotal;
 
             echo floor($Shohin['price']/100);
+            echo
         }
     }
     ?>
