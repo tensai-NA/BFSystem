@@ -12,13 +12,16 @@
 <body>
     
     <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
-    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a><br>
     <?php
-        $id =$_SESSION['customer']['user_id'];
-        $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->query("select point from User where user_id='".$id."'");
-        $point = $sql->fetch(PDO::FETCH_COLUMN);
-        echo '<p>マイポイント: ',$point,'pt</p>'
+
+        if(isset($_SESSION['customer'])){
+            $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+            $pdo=new PDO($connect,USER,PASS);
+            $sql=$pdo->query("select point from User where user_id='".$id."'");
+            $point = $sql->fetch(PDO::FETCH_COLUMN);
+            echo 'マイポイント: ',$point,'pt';
+        }
 
     ?>
 
@@ -59,6 +62,7 @@
                 </label>
                 <br>
                 <button>検索</button>
+                <!--検索機能どうするか js? php?-->
                 <br>
         </div>
         <script>
@@ -71,7 +75,9 @@
     <div class="a">
         <h2>おすすめ</h2>
         <!--全顧客で一緒の表示にする-->
-
+        <img src="images/eyeshadow.png">
+        <img src="images/nail1.png">
+        
     </div>
 <?php
     if(!isset($_SESSION['customer'])){
