@@ -57,6 +57,10 @@
     ?>
 
     <a href="">削除</a>
+    <?php
+        unset($_SESSION['Shohin'][$_GET['id']]);
+        require 'cart.php';
+    ?>
 
     <hr>
     <p>
