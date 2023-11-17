@@ -1,4 +1,5 @@
-<!--　担当：中嶋　11.会員情報更新画面-->
+<?php session_start(); ?>
+<?php require 'kyotu/db-connect.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,22 +8,32 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <title>会員情報更新画面</title>
 </head>
-<body>
-    <form action="login.php" method="post">
-     お名前<br>
-     <input type="text" name="name"><input type="text" name="name"><br>
-     メールアドレス<br>
-     <input type="text" name="meru"><br>
-     現在のパスワード<br>
-     <input type="text" name="pasu"><br>
-     新しいパスワード<br>
-     <input type="text" name="shin"><br>
-     郵便番号<br>
-     <input type="text" name="yubin"><br>
-     住所<br>
-     <input type="text" name="home"><br>
-        <button type="submit">登録</button>
-        <button type="submit">キャンセル</button>
-    </form>
-</body>
-</html>
+
+<?php
+$user_sei=$user_mei=$mail=$password=$shin=$postnum=$address='';
+if(isset($_SESSION['customer'])){
+    $user_sei=$_SESSION['customer']['user_sei'];
+    $user_mei=$_SESSION['customer']['user_mei'];
+    $mail=$_SESSION['customer']['mail'];
+    $password=$_SESSION['customer']['password'];
+    $shin=$_SESSION['customer']['shin'];
+    $postnum=$_SESSION['customer']['postnum'];
+    $address=$_SESSION['customer']['address'];
+}
+    echo '<form action="updatecomp.php" method="post">';
+     echo '<p>お名前<br>';
+     echo '<input type="text" name="user_sei" value="',$user_sei,'">　<input type="text" name="user_mei" value="',$user_mei,'"></p>';
+     echo '<p>メールアドレス<br>';
+     echo '<input type="text" name="mail" value="',$mail,'">';
+     echo '<p>現在のパスワード<br>';
+     echo '<input type="text" name="password" value="',$password,'">';
+     echo '<p>新しいパスワード<br>';
+     echo '<input type="text" name="shin" value="',$shin,'">';
+     echo '<p>郵便番号<br>';
+     echo '<input type="text" name="postnum" value="',$postnum,'">';
+     echo '<p>住所<br>';
+     echo '<input type="text" name="address" value="',$address,'">';
+     echo '<p><button type="submit" name="touroku" >登録</button>';
+     echo '<button type="submit">キャンセル</button></p>';
+echo '</form>';
+?>
