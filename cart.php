@@ -86,7 +86,7 @@
     }
     ?>
 
-    <button onclick="loction.href='purchase.php'">ご注文手続きへ ＞</button>
+    <button onclick="location.href='purchase.php'">ご注文手続きへ ＞</button>
 
 </body>
 </html>
