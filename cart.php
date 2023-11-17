@@ -1,4 +1,3 @@
-<!--　担当：荒巻　7.カート一覧画面-->
 <?php session_start(); ?>
 
 <!DOCTYPE html>
@@ -21,44 +20,44 @@
         echo '<p><a href="login.php">ログインはこちら</a></p>';
     }
     ?>
-
-    <input type="checkbox" name=“checkbox” value="1" checked /><br>
-        if(isset($_POST['checkbox'])){
-            $a=0;
-        }else{
-            $a=1;
-        }
+    <form action="cart.php" method="post">
+        <input type="checkbox" name=“checkbox” value="1" checked /><br>
+        <?php
+            if(isset($_POST['checkbox'])){
+                $a=0;
+            }else{
+                $a=1;
+            }
+        ?>
+    </form>
 
     <img src="">
+
+    <?php
     if(!empty($_SESSION['Shohin'])){
         
         $total=0;
         foreach($_SESSION['Shohin'] as $id=>$Shohin){
             echo '<a href="detail.php?id=',$id,'">',
                 $Shohin['name'],'</a>';
-            echo '',$Shohin['price'];
-            echo $Shohin['count'];
+            echo $Shohin['price'];
+            echo '<form method="post">';
+            echo '<input type="number" name="quantity['.$id.']" value="'.$Shohin['count'].'" min="1" />';
+            echo '<input type="submit" name="update" name="update" value="update" />';
+            echo '</form>';
+
             $subtotal=$Shohin['price']*$Shohin['count'];
             $total+=$subtotal;
             echo $subtotal;
+
+            echo floor($Shohin['price']/100);
+            echo $Shohin-($Shohin*0.1);
         }
     }
-
-    <form method="post">
-	    <div>
-		    <label for="number">数量</label>
-		    <input type="number" name="number" value="1" />
-	    </div>
-    </form>
-
-    <p>
-        
-        小計 ￥0,000 <br>
-        ポイント -pt <br>
-        リピート割 -￥000 <br>
-    </p>
+    ?>
 
     <a href="">削除</a>
+    $sql = $pdo ->prepare('DELETE FROM  WHERE ');
 
     <hr>
     <p>
