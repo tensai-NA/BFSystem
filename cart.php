@@ -19,26 +19,25 @@
     if(!isset($_SESSION['customer'])){
         echo '<p>カートを閲覧するにはログインしてください</p>';
         echo '<p><a href="login.php">ログインはこちら</a></p>';
+        exit();
     }
     ?>
-    <form action="cart.php" method="post">
-        <input type="checkbox" name=“checkbox” value="1" checked /><br>
-        <?php
-            if(isset($_POST['checkbox'])){
-                $a=0;
-            }else{
-                $a=1;
-            }
-        ?>
-    </form>
-
-    <img src="">
 
     <?php
     if(!empty($_SESSION['Shohin'])){
-        
+
         $total=0;
         foreach($_SESSION['Shohin'] as $id=>$Shohin){
+            echo '<form method="post">';
+            echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
+                if(isset($_POST['checkbox'])){
+                    $a=0;
+                }else{
+                    $a=1;
+                }
+            echo '</form>';
+
+
             echo '<a href="detail.php?id=',$id,'">',
                 $Shohin['name'],'</a>';
             echo $Shohin['price'];
@@ -53,15 +52,10 @@
 
             echo 'ポイント',floor($Shohin['price']/100),'pt';
             echo 'リピート割 ￥',$Shohin-($Shohin*0.1);
+
+            echo '<a href="cart-delete.php?id=',$id,'">削除</a>';
         }
     }
-    ?>
-
-
-        <a href="">削除</a>
-    <?php
-        $pdo=new PDO($connect,USER,PASS);
-        $sql = $pdo ->prepare('delete from Cart WHERE id=?');
     ?>
 
     <hr>
