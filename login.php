@@ -1,6 +1,4 @@
 <?php session_start(); ?>
-<!--完成-->
-
 <?php require 'kyotu/db-connect.php'; ?>
 <?php
 $msgMail = '';
