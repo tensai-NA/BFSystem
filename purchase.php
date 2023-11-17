@@ -22,6 +22,7 @@
             $address = $sql->fetch(PDO::FETCH_COLUMN);
             echo $address ,'<br>';
         }
+
     ?>
 
         <p><button>変更</button></p>
@@ -30,7 +31,11 @@
     <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>
-            <!--current date ~7day-->
+            <?php
+            for($i=1;$i<=7;$i++){
+                echo '<option value="',date("Y-m-d", strtotime("$i day")),'" name="date">',date("Y-m-d", strtotime("$i day")),'</option>';           
+            }
+            ?>
         </select>
 
     <p>
@@ -68,10 +73,24 @@
 
     <p>
         ご注文内容<br>
-            〇〇〇<br>
-            カラー：ピンク<br>
-            価格：￥0,000<br>
-            小計　￥00000
+        <?php
+        if(isset($_SESSION['customer'])){
+            $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+            $pdo=new PDO($connect,USER,PASS);
+            $sql=$pdo->query("select Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                    from Shohin,Cart,Color
+                    where Shohin.shohin_id = Cart.shohin_id
+                    and Shohin.color = Color.color_code
+                    and Cart.user_id = '".$id."'");
+            foreach($sql as $row){
+                echo $row['shohin_mei'],'<br>';
+                echo 'カラー：',$row['color_mei'],'<br>';
+                echo '価格：',$row['price'],'円','<br>';
+                $total = $row['num'] * $row['price'];
+                echo '小計：',$total,'円','<br>';
+            }
+        }
+        ?>
     </p>
     
     <hr>
