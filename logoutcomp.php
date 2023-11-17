@@ -1,4 +1,7 @@
+<?php session_start(); ?>
+
 <!--完成-->
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,7 +12,13 @@
     <title>Document</title>
 </head>
 <body>
-<h4>登録が完了しました</h4><br>
-<a href="login.php">ログインへ➝</a>
+    <?php
+        if(isset($_SESSION['customer'])){
+            unset($_SESSION['customer']);
+            echo 'ログアウトしました';
+        }else{
+            echo 'すでにログアウトしています';
+        }
+    ?>
 </body>
 </html>

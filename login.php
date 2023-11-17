@@ -23,7 +23,7 @@ if(isset($_POST['login'])){
                 'postnum'=>$row['postnum'],
                 'point'=>$row['point'],
                 'address'=>$row['address'],
-                'password'=>$ps];
+                'password'=>$row['password']];
             }else{
                 $msgPass = 'パスワードが違います。';
             }
@@ -31,8 +31,7 @@ if(isset($_POST['login'])){
     }
     
     if(isset($_SESSION['customer'])){
-        echo 'いらっしゃいませ、',$_SESSION['customer']['name'],'さん。';
-        //header('location: home.php');
+        header('Location: home.php');
     }
 }
 ?>
@@ -42,18 +41,51 @@ if(isset($_POST['login'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>ログイン</title>
 </head>
 <body>
-    <form action="login.php" method="post">
-     <p>メールアドレス<br>
-     <input type="text" name="name"><br><?= $msgMail ?></p>
-     <p>パスワード<br>
-     <input type="text" name="password"><br><?= $msgPass ?></p>
-        <button type="submit" name="login" value="send">ログイン</button>
-        <button type="submit">キャンセル</button>
+<form action="login.php" method="post">
+    <div class="m-4 has-text-centered ">
+        <h1 class="title is-4"> ログイン</h1>
+
+   
+
+    <div class=" box has-background-light m-6">
+
+        <div class="field">
+
+        <div class="control m-1">
+        <label class="label">メールアドレス</label>
+        <div class="field has-addons-fullwidth has-addons-centered">
+            <p class="control has-icons-left">
+                <input class="input is-success  is-normal is-focused "  type="text" name="name"  placeholder="メールアドレス">
+             <span class="icon is-small is-left">
+                <i class="fas fa-mail-bulk"></i>
+                </span>
+                </p>
+                <?= $msgMail ?>
+    </div></div>
+
+    <div class="control m-1">
+        <label class="label">パスワード</label>
+        <div class="field has-addons-fullwidth has-addons-centered">
+            <p class="control has-icons-left">
+     <input type="password"  class="input  is-normal is-focused "name="password"  placeholder="パスワード">
+     <span class="icon is-small is-left">
+        <i class="fas fa-key"></i>
+    </span>
+        </p>
+        <?= $msgPass ?>
+            </div></div></div>
+
+        <button type="submit" class="button is-danger m-3"  name="login" value="send">ログイン</button>
+        <button type="submit"  class="button is-info m-3">キャンセル</button>
         <p><a href="toroku.php">新規登録はこちら</a></p>
         <p><a href="password.php">パスワードを忘れた方はこちら</a></p>
     </form>
+    </div>
+    </div>
 </body>
 </html>

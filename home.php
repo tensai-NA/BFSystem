@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -5,13 +6,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="css/home.css">
     <title>ホーム画面</title>
 </head>
 <body>
-    <img src="sozai/mypage.png" width="30px" height="30px">
-    <i class="fas fa-shopping-cart"></i> 
-    <p>マイポイント 〇〇pt</p>
+    
+    <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
+    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a><br>
+    <?php
+
+        if(isset($_SESSION['customer'])){
+            $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+            $pdo=new PDO($connect,USER,PASS);
+            $sql=$pdo->query("select point from User where user_id='".$id."'");
+            $point = $sql->fetch(PDO::FETCH_COLUMN);
+            echo 'マイポイント: ',$point,'pt';
+        }
+
+    ?>
+
     <script src="https://code.jquery.com/jquery.min.js"></script>
         <div class="A">search</div>
         <div class="kensaku">
@@ -37,6 +51,7 @@
                     <option value="4000">4000円</option>
                 </select>
                 </label>
+                <br>
                 <label>上限：
                 <select name="drop02">
                 <option value="0">指定なし</option>
@@ -47,7 +62,8 @@
                 </select>
                 </label>
                 <br>
-                <button>検索</button>
+                <button onclick="location.href='search.php'">検索</button>
+        
                 <br>
         </div>
         <script>
@@ -57,13 +73,20 @@
                 });
             });
         </script>
+
     <div class="a">
         <h2>おすすめ</h2>
-        <!--初期状態-->
-
-
-        <!--顧客によって変更-->
+        <!--全顧客で一緒の表示にする-->
+        <img src="images/eyeshadow.png">
+        <img src="images/nail1.png">
+        
     </div>
+<?php
+    if(!isset($_SESSION['customer'])){
+        echo '<p><a href="login.php">ログインはこちら</a></p>';
+    }
+
+?>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>

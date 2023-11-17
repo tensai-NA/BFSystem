@@ -1,10 +1,13 @@
 /* ここから下は編集するな　*/
-.A{
+.A .B{
     display: inline-block;
-    background: #b6beff;
     padding: 5px 10px;
     cursor: pointer;
 }
-.kensaku{
-    background-color: azure; 
+
+.kensaku {
+    display: none;
+}
+.shibori {
+    display: none;
 }

@@ -1,14 +1,15 @@
-<!--　担当：山﨑　6.商品詳細画面-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <title>Document</title>
+    <title>商品詳細画面</title>
 </head>
 <body>
+<div class="m-4 has-text-centered ">
     <div class="head">
     
         <p class="back">
@@ -36,7 +37,7 @@
     </div>
 
     <div class="notlogin">
-        <p>カートに追加するにはログインしてください</p><!--赤字-->
+        <p>カートに追加するにはログインしてください</p>
         <p>ログインは <a href="login.php">こちら</a></p>
         
     </div>
