@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php require 'kyotu/db-connect.php'; ?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -56,8 +57,10 @@
     }
     ?>
 
-    <?php
+
         <a href="">削除</a>
+    <?php
+        $pdo=new PDO($connect,USER,PASS);
         $sql = $pdo ->prepare('delete from Cart WHERE id=?');
     ?>
 
