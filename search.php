@@ -12,6 +12,7 @@
     <title>Document</title>
 </head>
 <body>
+<<<<<<< HEAD
     <div class="m-4 has-text-centered ">
 
     <nav class="level  is-mobile">
@@ -128,6 +129,10 @@
 
 </div>
 
+=======
+<i class="fas fa-search"></i>
+<a href="home.php"><i class="fas fa-home"></i> </a>
+>>>>>>> 0b033ade9892450a36958c31aa5970593526b1a8
 
 </body>
 </html>
