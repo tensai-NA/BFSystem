@@ -48,26 +48,46 @@
 
             $subtotal=$Shohin['price']*$Shohin['count'];
             $total+=$subtotal;
-            echo $subtotal;
+            echo '小計 ￥',$subtotal;
 
-            echo floor($Shohin['price']/100);
-            echo $Shohin-($Shohin*0.1);
+            echo 'ポイント',floor($Shohin['price']/100),'pt';
+            echo 'リピート割 ￥',$Shohin-($Shohin*0.1);
         }
     }
     ?>
 
-    <a href="">削除</a>
-    $sql = $pdo ->prepare('DELETE FROM  WHERE ');
+    <?php
+        <a href="">削除</a>
+        $sql = $pdo ->prepare('delete from Cart WHERE id=?');
+    ?>
 
     <hr>
-    <p>
-        商品合計（税込）　　　　0,000円<br>
-        リピート割　　　　　　　　000円<br>
-        送料　　　　　　　　　　　　0円<br>
-    </p>
+
+    <?php
+    if(!empty($_SESSION['Shohin'])){
+        
+        $total=0;
+        foreach($_SESSION['Shohin'] as $id=>$Shohin){
+            echo '商品合計（税込）',$total,'円';
+
+            echo 'リピート割 ￥',$Shohin-($Shohin*0.1),'円';
+
+            echo '送料350円';
+        }
+    }
+    ?>
+
     <hr>
 
-    <p>注文合計　　　　　　　　　0,000円</p>
+    <?php
+    if(!empty($_SESSION['Shohin'])){
+        
+        $total=0;
+        foreach($_SESSION['Shohin'] as $id=>$Shohin){
+            echo '注文合計',$total+350,'円';
+        }
+    }
+    ?>
 
     <button onclick="loction.href='purchase.php'">ご注文手続きへ ＞</button>
 
