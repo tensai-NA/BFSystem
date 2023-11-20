@@ -24,10 +24,17 @@
     ?>
 
     <?php
-    if(!empty($_SESSION['Shohin'])){
-
-        $total=0;
-        foreach($_SESSION['Shohin'] as $id=>$Shohin){
+    if(isset($_SESSION['customer'])){
+        $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                from Shohin,Cart,Color
+                where Shohin.shohin_id = Cart.shohin_id
+                and Shohin.color = Color.color_code
+                and Cart.user_id = '".$id."'");
+        
+        $total=0;        
+        foreach($sql as $row){
             echo '<form method="post">';
             echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
                 if(isset($_POST['checkbox'])){
@@ -37,21 +44,21 @@
                 }
             echo '</form>';
 
+            echo $row['shohin_mei'],'<br>';
+            echo $row['color_mei'],'<br>';
+            echo $row['price'],'円','<br>';  
 
-            echo '<a href="detail.php?id=',$id,'">',
-                $Shohin['name'],'</a>';
-            echo $Shohin['price'];
             echo '<form method="post">';
-            echo '<input type="number" name="quantity['.$id.']" value="'.$Shohin['count'].'" min="1" />';
+            echo '数量','<input type="number" name="quantity['.$id.']" value="'.$row['num'].'" min="1" />';
             echo '<input type="submit" name="update" name="update" value="update" />';
             echo '</form>';
 
-            $subtotal=$Shohin['price']*$Shohin['count'];
+            $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-            echo '小計 ￥',$subtotal;
-
-            echo 'ポイント',floor($Shohin['price']/100),'pt';
-            echo 'リピート割 ￥',$Shohin-($Shohin*0.1);
+            echo '小計 ￥',$subtotal,'<br>';
+            echo 'ポイント',floor($subtotal/100),'pt','<br>';
+            $repeat = $row['price']-($row['price'] * 0.1);
+            echo 'リピート割 ￥',$repeat,'<br>';
 
             echo '<a href="cart-delete.php?id=',$id,'">削除</a>';
         }
@@ -61,15 +68,25 @@
     <hr>
 
     <?php
-    if(!empty($_SESSION['Shohin'])){
+    if(isset($_SESSION['customer'])){
+        $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                from Shohin,Cart,Color
+                where Shohin.shohin_id = Cart.shohin_id
+                and Shohin.color = Color.color_code
+                and Cart.user_id = '".$id."'");
         
-        $total=0;
-        foreach($_SESSION['Shohin'] as $id=>$Shohin){
-            echo '商品合計（税込）',$total,'円';
+        $total=0;        
+        foreach($sql as $row){
+            $subtotal = $row['num'] * $row['price'];
+            $total+=$subtotal;
+            echo '商品合計（税込）',$total,'円','<br>';
 
-            echo 'リピート割 ￥',$Shohin-($Shohin*0.1),'円';
+            $repeat = $row['price']-($row['price'] * 0.1);
+            echo 'リピート割 ￥',$repeat,'円','<br>';
 
-            echo '送料350円';
+            echo '送料350円','<br>';
         }
     }
     ?>
@@ -77,11 +94,21 @@
     <hr>
 
     <?php
-    if(!empty($_SESSION['Shohin'])){
+    if(isset($_SESSION['customer'])){
+        $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                from Shohin,Cart,Color
+                where Shohin.shohin_id = Cart.shohin_id
+                and Shohin.color = Color.color_code
+                and Cart.user_id = '".$id."'");
         
-        $total=0;
-        foreach($_SESSION['Shohin'] as $id=>$Shohin){
-            echo '注文合計',$total+350,'円';
+        $total=0;        
+        foreach($sql as $row){
+            $subtotal = $row['num'] * $row['price'];
+            $total+=$subtotal;
+            $repeat = $row['price']-($row['price'] * 0.1);
+            echo '注文合計',$total-$repeat+350,'円';
         }
     }
     ?>

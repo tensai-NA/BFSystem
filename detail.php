@@ -1,3 +1,5 @@
+<?php require 'kyotu/db-connect.php'?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +25,11 @@
 
     </div><hr>
 
+
     <div class="main">
-        <img src="sozai/mypage.png"  width="70%"alt="image1">
+       
         <ul>
-            <li><img src="sozai/mypage.png" width="90%" alt="image2"></li>
-            <li><img src="sozai/mypage.png" width="90%" alt="image3"></li>
-            <li><img src="sozai/mypage.png" width="90%" alt="image4"></li>
-            <li><img src="sozai/mypage.png" width="90%" alt="image5"></li>
+          
         </ul>
         <h3>商品名</h3>
         <h3>価格</h3>
