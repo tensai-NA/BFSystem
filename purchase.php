@@ -25,9 +25,6 @@
 
     ?>
 
-        <p><button>変更</button></p>
-
-
     <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>
