@@ -25,9 +25,6 @@
 
     ?>
 
-        <p><button>変更</button></p>
-
-
     <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>
@@ -85,9 +82,9 @@
             foreach($sql as $row){
                 echo $row['shohin_mei'],'<br>';
                 echo 'カラー：',$row['color_mei'],'<br>';
-                echo '価格：',$row['price'],'円','<br>';
+                echo '価格：￥',$row['price'],'<br>';
                 $total = $row['num'] * $row['price'];
-                echo '小計：',$total,'円','<br>';
+                echo '小計：￥',$total,'<br>';
             }
 
             echo '</p>';
@@ -143,7 +140,7 @@
         
         ?>
 
-    <button onclick="loction.href='purchasecomp.php'">ご注文を確定する</button><br>
+    <button onclick="location.href='purchasecomp.php'">ご注文を確定する</button><br>
     <a href="cart.php">←カートへ戻る</a>
     </body>
 </html>

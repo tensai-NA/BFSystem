@@ -60,6 +60,8 @@
                     $subtotal;
                 }
 
+            $subtotal = $row['num'] * $row['price'];
+            $total+=$subtotal;
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
             $repeat = $row['price']-($row['price'] * 0.1);
             echo 'リピート割 ￥',$repeat,'<br>';
