@@ -27,7 +27,7 @@
     if(isset($_SESSION['customer'])){
         $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
         $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->query("select Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+        $sql=$pdo->query("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
                 from Shohin,Cart,Color
                 where Shohin.shohin_id = Cart.shohin_id
                 and Shohin.color = Color.color_code
@@ -66,7 +66,7 @@
             $repeat = $row['price']-($row['price'] * 0.1);
             echo 'リピート割 ￥',$repeat,'<br>';
 
-            echo '<a href="cart-delete.php?id=',$id,'">削除</a>';
+            echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>';
         }
     }
     ?>
