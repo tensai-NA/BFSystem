@@ -1,4 +1,6 @@
-<!--　担当：溝口　9.購入完了画面　-->
+<?php session_start(); ?>
+<?php require 'kyotu/db-connect.php'?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,10 +13,27 @@
 <body>
     <h3>ご注文ありがとうございました！</h3><br>
     <h4>ご注文内容</h4>
-    <h5>
-    〇〇〇
-    カラーピンク<br>
-    価格￥0000         小計　￥0000
+    <h5>        
+        <?php
+        if(isset($_SESSION['customer'])){  //ログイン済みの処理
+            $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
+            $pdo=new PDO($connect,USER,PASS);
+            $sql=$pdo->query("select Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                    from Shohin,Cart,Color
+                    where Shohin.shohin_id = Cart.shohin_id
+                    and Shohin.color = Color.color_code
+                    and Cart.user_id = '".$id."'");
+            foreach($sql as $row){
+                echo $row['shohin_mei'],'<br>';
+                echo 'カラー：',$row['color_mei'],'<br>';
+                echo '価格：￥',$row['price'],'<br>';
+                $total = $row['num'] * $row['price'];
+                echo '小計：￥',$total,'<br>';
+            }
+        }
+        ?>
+    </h5>
+
     <hr>
     商品点数                   〇点<br>
     代金合計                ￥00000 <br>

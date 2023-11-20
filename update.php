@@ -18,7 +18,7 @@ if(isset($_SESSION['customer'])){
     $user_mei=$_SESSION['customer']['user_mei'];
     $mail=$_SESSION['customer']['mail'];
     $password=$_SESSION['customer']['password'];
-    $shin=$_SESSION['customer']['shin'];
+    $password=$_SESSION['customer']['password'];
     $postnum=$_SESSION['customer']['postnum'];
     $address=$_SESSION['customer']['address'];
 }
