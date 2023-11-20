@@ -19,63 +19,80 @@
     if(!isset($_SESSION['customer'])){
         echo '<p>カートを閲覧するにはログインしてください</p>';
         echo '<p><a href="login.php">ログインはこちら</a></p>';
+        exit();
     }
     ?>
-    <form action="cart.php" method="post">
-        <input type="checkbox" name=“checkbox” value="1" checked /><br>
-        <?php
-            if(isset($_POST['checkbox'])){
-                $a=0;
-            }else{
-                $a=1;
-            }
-        ?>
-    </form>
-
-    <img src="">
 
     <?php
-    if(!empty($_SESSION['Shohin'])){
+    if(isset($_SESSION['customer'])){
+        $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                from Shohin,Cart,Color
+                where Shohin.shohin_id = Cart.shohin_id
+                and Shohin.color = Color.color_code
+                and Cart.user_id = '".$id."'");
         
-        $total=0;
-        foreach($_SESSION['Shohin'] as $id=>$Shohin){
-            echo '<a href="detail.php?id=',$id,'">',
-                $Shohin['name'],'</a>';
-            echo $Shohin['price'];
+        $total=0;        
+        foreach($sql as $row){
             echo '<form method="post">';
-            echo '<input type="number" name="quantity['.$id.']" value="'.$Shohin['count'].'" min="1" />';
-            echo '<input type="submit" name="update" name="update" value="update" />';
+            echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
+                if(isset($_POST['checkbox'])){
+                    $a=1;
+                }else{
+                    $a=0;
+                }
             echo '</form>';
 
-            $subtotal=$Shohin['price']*$Shohin['count'];
+            echo $row['shohin_mei'],'<br>';
+            echo $row['color_mei'],'<br>';
+            echo $row['price'],'円','<br>';  
+
+            echo '<form method="post">';
+            echo '数量','<input type="number" name="quantity['.$id.']" value="'.$row['num'].'" min="1" />';
+            echo '</form>';
+
+                if($a==1){
+                    $subtotal = $row['num'] * $row['price'];
+                    $total+=$subtotal;
+                    echo '小計 ￥',$subtotal;
+                }else{
+                    $subtotal;
+                }
+
+            $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-            echo '小計 ￥',$subtotal;
+            echo 'ポイント',floor($subtotal/100),'pt','<br>';
+            $repeat = $row['price']-($row['price'] * 0.1);
+            echo 'リピート割 ￥',$repeat,'<br>';
 
-            echo 'ポイント',floor($Shohin['price']/100),'pt';
-            echo 'リピート割 ￥',$Shohin-($Shohin*0.1);
+            echo '<a href="cart-delete.php?id=',$id,'">削除</a>';
         }
     }
     ?>
 
+    <hr>
 
-        <a href="">削除</a>
     <?php
+    if(isset($_SESSION['customer'])){
+        $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
         $pdo=new PDO($connect,USER,PASS);
-        $sql = $pdo ->prepare('delete from Cart WHERE id=?');
-    ?>
-
-    <hr>
-
-    <?php
-    if(!empty($_SESSION['Shohin'])){
+        $sql=$pdo->query("select Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                from Shohin,Cart,Color
+                where Shohin.shohin_id = Cart.shohin_id
+                and Shohin.color = Color.color_code
+                and Cart.user_id = '".$id."'");
         
-        $total=0;
-        foreach($_SESSION['Shohin'] as $id=>$Shohin){
-            echo '商品合計（税込）',$total,'円';
+        $total=0;        
+        foreach($sql as $row){
+            $subtotal = $row['num'] * $row['price'];
+            $total+=$subtotal;
+            echo '商品合計（税込）',$total,'円','<br>';
 
-            echo 'リピート割 ￥',$Shohin-($Shohin*0.1),'円';
+            $repeat = $row['price']-($row['price'] * 0.1);
+            echo 'リピート割 ￥',$repeat,'円','<br>';
 
-            echo '送料350円';
+            echo '送料350円','<br>';
         }
     }
     ?>
@@ -83,16 +100,26 @@
     <hr>
 
     <?php
-    if(!empty($_SESSION['Shohin'])){
+    if(isset($_SESSION['customer'])){
+        $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                from Shohin,Cart,Color
+                where Shohin.shohin_id = Cart.shohin_id
+                and Shohin.color = Color.color_code
+                and Cart.user_id = '".$id."'");
         
-        $total=0;
-        foreach($_SESSION['Shohin'] as $id=>$Shohin){
-            echo '注文合計',$total+350,'円';
+        $total=0;        
+        foreach($sql as $row){
+            $subtotal = $row['num'] * $row['price'];
+            $total+=$subtotal;
+            $repeat = $row['price']-($row['price'] * 0.1);
+            echo '注文合計',$total-$repeat+350,'円';
         }
     }
     ?>
 
-    <button onclick="loction.href='purchase.php'">ご注文手続きへ ＞</button>
+    <button onclick="location.href='purchase.php'">ご注文手続きへ ＞</button>
 
 </body>
 </html>
