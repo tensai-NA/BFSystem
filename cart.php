@@ -55,9 +55,9 @@
                 if($a==1){
                     $subtotal = $row['num'] * $row['price'];
                     $total+=$subtotal;
-                    echo '小計 ￥',$subtotal
+                    echo '小計 ￥',$subtotal;
                 }else{
-                    $subtotal
+                    $subtotal;
                 }
 
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
