@@ -38,9 +38,9 @@
             echo '<form method="post">';
             echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
                 if(isset($_POST['checkbox'])){
-                    $a=0;
-                }else{
                     $a=1;
+                }else{
+                    $a=0;
                 }
             echo '</form>';
 
@@ -50,12 +50,18 @@
 
             echo '<form method="post">';
             echo '数量','<input type="number" name="quantity['.$id.']" value="'.$row['num'].'" min="1" />';
-            echo '<input type="submit" name="update" name="update" value="update" />';
             echo '</form>';
+
+                if($a==1){
+                    $subtotal = $row['num'] * $row['price'];
+                    $total+=$subtotal;
+                    echo '小計 ￥',$subtotal;
+                }else{
+                    $subtotal;
+                }
 
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-            echo '小計 ￥',$subtotal,'<br>';
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
             $repeat = $row['price']-($row['price'] * 0.1);
             echo 'リピート割 ￥',$repeat,'<br>';
