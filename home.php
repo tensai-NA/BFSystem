@@ -11,75 +11,32 @@
     <title>ホーム画面</title>
 </head>
 <body>
-    
+<form action="search.php" method="post">
     <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
-    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a><br>
+    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
     <?php
-
-        if(isset($_SESSION['customer'])){
-            $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
-            $pdo=new PDO($connect,USER,PASS);
-            $sql=$pdo->query("select point from User where user_id='".$id."'");
-            $point = $sql->fetch(PDO::FETCH_COLUMN);
-            echo 'マイポイント: ',$point,'pt';
-        }
-
+        $id =$_SESSION['customer']['user_id'];
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->query("select point from User where user_id='".$id."'");
+        $point = $sql->fetch(PDO::FETCH_COLUMN);
+        echo '<p>マイポイント: ',$point,'pt</p>'
     ?>
 
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-        <div class="A">search</div>
-        <div class="kensaku">
-            <h4>カテゴリ検索</h4>
-                <input type="radio" name="kate" value="1">
-                    <label for="hinmei">商品名</label>
-                <input type="text" id="hinmei"><br>
+   
+<script src="https://code.jquery.com/jquery.min.js"></script>
+       
+ 
+          
+        </nav>
 
-                <input type="radio" name="kate" value="2">
-                    <label for="brand">ブランド</label>
-                <input type="text" id="brand"><br>
-
-                <input type="radio" name="kate" value="3">
-                    <label for="color">カラー</label>
-                <input type="text" id="color"><br>
-            <h4>金額検索</h4>
-                <label>下限：
-                <select name="drop01">
-                    <option value="0">指定なし</option>
-                    <option value="1000">1000円</option>
-                    <option value="2000">2000円</option>
-                    <option value="3000">3000円</option>
-                    <option value="4000">4000円</option>
-                </select>
-                </label>
-                <br>
-                <label>上限：
-                <select name="drop02">
-                <option value="0">指定なし</option>
-                    <option value="1000">1000円</option>
-                    <option value="2000">2000円</option>
-                    <option value="3000">3000円</option>
-                    <option value="4000">4000円</option>
-                </select>
-                </label>
-                <br>
-                <button onclick="location.href='search.php'">検索</button>
-        
-                <br>
-        </div>
-        <script>
-            $(function() {
-                $(".A").click(function() {
-                    $(".kensaku").slideToggle("");
-                });
-            });
-        </script>
+        <div class="A  has-background-light"><i class="fas fa-search"></i>　seach</div> 
+       
+        <?php require 'kyotu/searchbox.php'?>
 
     <div class="a">
         <h2>おすすめ</h2>
         <!--全顧客で一緒の表示にする-->
-        <img src="images/eyeshadow.png">
-        <img src="images/nail1.png">
-        
+
     </div>
 <?php
     if(!isset($_SESSION['customer'])){

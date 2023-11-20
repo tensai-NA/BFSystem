@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 <body>
-<<<<<<< HEAD
+<form action="search.php" method="post">
     <div class="m-4 has-text-centered ">
 
     <nav class="level  is-mobile">
@@ -28,111 +28,50 @@
             </div>
         </nav>
 
-      
-        <div class="kensaku">
-            <div class=" box has-background-light m-5">
-                <h5 class="title is-5">検索</h5>
-          
-                    <label for="hinmei">商品名</label>
-                <input type="text" id="hinmei"><br>
-
-               <div class="B m-1  has-text-left"> 絞り込み <i class="fas fa-angle-down"></i></div>
-            <div class="shibori has-text-left ml-6 mt-2">
-               
-           <div class="C m-1  has-text-left"> ブランド <i class="fas fa-angle-down"></i></div> 
-           <div class ="C-main">   
-     <?php
-           $pdo=new PDO($connect, USER, PASS);
-           $sql=$pdo->prepare('select  * from Brand');
-           $sql->execute();
-           foreach($sql as $row){
-            echo '<input  class="button is-ghost is-small  is-rounded" type="reset" name="brand" value="',$row['brand_mei'],'" />';
-
-         }
-           ?>
-
-            </div>
-           <div class="D m-1  has-text-left"> カラー <i class="fas fa-angle-down"></i></div> 
-
-           <div class ="D-main">   
-     <?php
-           $pdo=new PDO($connect, USER, PASS);
-           $sql=$pdo->prepare('select  * from Color');
-           $sql->execute();
-           foreach($sql as $row){
-            echo '<input class="button is-white is-small  is-rounded"  type="reset" name="brand" value="',$row['color_mei'],'" />';
-
-         }
-           ?>
-
-            </div>
-               
-           <div class="E m-1  has-text-left"> 金額 <i class="fas fa-angle-down"></i></div>
-           
-           <div class="E-main">
-                <label>下限：</label>
-                <select name="select1">
-                    <option value="0">指定なし</option>
-                    <option value="1000">1000円</option>
-                    <option value="2000">2000円</option>
-                    <option value="3000">3000円</option>
-                    <option value="4000">4000円</option>
-                </select>
-                
-                
-                <label>上限：</label>
-                <select name="select2">
-                <option value="0">指定なし</option>
-                    <option value="1000">1000円</option>
-                    <option value="2000">2000円</option>
-                    <option value="3000">3000円</option>
-                    <option value="4000">4000円</option>
-                </select>
-                
-                <br>
-                </div>
-</div>
-                <div class="seach m-5">
-                <button>検索</button>
-                
-                </div>
-        </div>
-    </div>
-        <script>
-            $(function() {
-                $(".A").click(function() {
-                    $(".kensaku").slideToggle("");
-                });
-            });
-            $(function() {
-                $(".B").click(function() {
-                    $(".shibori").slideToggle("");
-                });
-            });
-            $(function() {
-                $(".C").click(function() {
-                    $(".C-main").slideToggle("");
-                });
-            });
-            $(function() {
-                $(".D").click(function() {
-                    $(".D-main").slideToggle("");
-                });
-            });
-            $(function() {
-                $(".E").click(function() {
-                    $(".E-main").slideToggle("");
-                });
-            });
-        </script>
+  
+        <?php require 'kyotu/searchbox.php'?>
 
 
-</div>
+<!--以下　検索結果表示-->
+<?php
 
-=======
-<i class="fas fa-search"></i>
-<a href="home.php"><i class="fas fa-home"></i> </a>
->>>>>>> 0b033ade9892450a36958c31aa5970593526b1a8
+if (isset($_POST['brand']) && is_array($_POST['brand'])) {
+    $brand = $_POST['brand'];
+}
+if (isset($_POST['color']) && is_array($_POST['color'])) {
+    $color= $_POST['color'];
+}
 
+    if(isset($_POST['shohin_mei'])){
+       
+    $sql=$pdo->prepare('select * from Shohin where shohin_mei like ?');
+    $sql->execute(['%'.$_POST['shohin_mei'].'%']);
+    }else{
+       $sql=$pdo->query('select * from Shohin');
+    }
+   
+    foreach($sql as $row){
+       $id=$row['shohin_id'];
+       echo'<div class="column">';
+       echo '<div style="background:white; padding: 10px;">';
+       echo '<div class="section"> <div class="columns is-variable is-8">';
+       echo '<p><img src="images/',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
+       echo '<p><a href="detail.php?id=',$id,'">',$row['shohin_mei'],'</a></p>';
+       echo '<p class="has-text-left">',$row['price'],'円 </p>';
+       echo '</div></div></div></div>';
+    }
+
+ 
+   ?>
+<!--レスポンシブ対応　デザイン変更予定-->
+<style>
+ 
+.columns > div.column {
+  border: solid 1px #ddd;
+  text-align: center;
+}
+ 
+</style>
+   
 </body>
 </html>
