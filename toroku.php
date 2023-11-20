@@ -26,6 +26,7 @@
                 $postnum=$_SESSION['customer']['postnnum'];
                 $address=$_SESSION['customer']['address'];
             }
+            
         
         echo '<form action="toroku-output.php" method="post">';
         echo '<div class="m-4 has-text-centered ">

@@ -95,51 +95,53 @@
             echo '<p>';
             
             //IDとログインを比較　かつ　カート内の商品 cart と履歴 history を比較する
-            $his=$pdo->query("select num,price from Cart a inner join History b on a.shohin_id = b.shohin_id
-            and Cart.user_id = '".$id."'"); //何を抽出するか
-            
+            $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
+            and a.user_id ='".$id."'");            
             $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
             if(isset($his)){
                 foreach($his as $row){
                     $num = $row['num'];
                     $price = $row['price'];
                     $total = $num * $price; //商品それぞれの計をだす
-                    $kei = $total * 0.1;
+                    $ripi = $total * 0.1;
                 }
             }
-            echo 'リピート割　-￥',$kei,'<br>';
+            echo 'リピート割　-￥',$ripi,'<br>';
             if(isset($_SESSION['customer'])){  //ログイン済みの処理
                 $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $pdo=new PDO($connect,USER,PASS);
-                $sql=$pdo->query("select Cart.num,Shohin.price,Color.color_mei,Cart.num
-                        from Shohin,Cart,Color
-                        where Shohin.shohin_id = Cart.shohin_id
-                        and Shohin.color = Color.color_code
-                        and Cart.user_id = '".$id."'");
-                foreach($sql as $row){
-                    echo $row['shohin_mei'],'<br>';
-                    echo 'カラー：',$row['color_mei'],'<br>';
-                    echo '価格：',$row['price'],'円','<br>';
-                    $total = $row['num'] * $row['price'];
-                    echo '小計：',$total,'円','<br>';
+                $sql=$pdo->query("select num from Cart where user_id = '".$id."'");
+                $suryo = $sql->fetch(PDO::FETCH_NUM);
+                $kei = 0;
+                for($i=0;$i<count($suryo);$i++){
+                    $kei = (int)$suryo + $kei;
                 }
-    
-            echo '商品点数',〇,'点<br>'; //数量をDBから抽出
-            echo '代金合計￥',00000,'<br>';//合計を求めてリピート割分を引く
-            echo '送料￥350';
-            echo '</p>';
+                echo '商品点数',$kei,'点<br>'; //数量をDBから抽出
+                echo '送料￥350<br>';
+                $total = 0;
+                if(isset($_SESSION['customer'])){  //ログイン済みの処理
+                    $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
+                    $pdo=new PDO($connect,USER,PASS);
+                    $sql=$pdo->query("select num,price from Cart,Shohin where Cart.shohin_id = Shohin.shohin_id and user_id = '".$id."'");
+                    foreach($sql as $row){
+                        $total = $row['num'] * $row['price'];
+                    }
+                }
+                $total = (350 + $total) - $ripi ;
+                echo '代金合計￥',$total,'<br>';//合計を求めてリピート割分を引く
+                echo '</p>';
+                echo '</p>';
+                echo '<hr>';
+                echo '<p>';
+                echo 'ご注文合計￥',$total,'<br>';
+                echo '獲得予定ポイント',floor($total / 100),'pt<br>';
+                echo '</p>';
+            }
     
         }
 
         
         ?>
-    </p>
-    <hr>
-
-    <p>
-        ご注文合計　　　　　　　￥00000<br>
-        　　　　獲得予定ポイント　000pt
-    </p>
 
     <button onclick="loction.href='purchasecomp.php'">ご注文を確定する</button><br>
     <a href="cart.php">←カートへ戻る</a>
