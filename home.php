@@ -15,11 +15,19 @@
     <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
     <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
     <?php
-        $id =$_SESSION['customer']['user_id'];
-        $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->query("select point from User where user_id='".$id."'");
-        $point = $sql->fetch(PDO::FETCH_COLUMN);
-        echo '<p>マイポイント: ',$point,'pt</p>'
+?>
+
+    <?php
+        if(!isset($_SESSION['customer'])){
+            echo '<p><a href="login.php">ログインはこちら</a></p>';
+        }else{
+            $id =$_SESSION['customer']['user_id'];
+            $pdo=new PDO($connect,USER,PASS);
+            $sql=$pdo->query("select point from User where user_id='".$id."'");
+            $point = $sql->fetch(PDO::FETCH_COLUMN);
+            echo '<p>マイポイント: ',$point,'pt</p>'   ; 
+        }
+        
     ?>
 
 
@@ -36,12 +44,6 @@
         <!--全顧客で一緒の表示にする-->
 
     </div>
-<?php
-    if(!isset($_SESSION['customer'])){
-        echo '<p><a href="login.php">ログインはこちら</a></p>';
-    }
-
-?>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>
