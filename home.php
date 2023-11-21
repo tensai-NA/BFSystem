@@ -12,11 +12,27 @@
 </head>
 <body>
 <form action="search.php" method="post">
-    <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
-    <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
-    <?php
-?>
+<div class="m-4 has-text-centered ">
 
+<nav class="level  is-mobile">
+
+<div class="level-left">
+    <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
+</div>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+
+
+  <div class="level-right">
+  <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+    </div>
+</nav>
+   
+<script src="https://code.jquery.com/jquery.min.js"></script>       
+ 
+ <div class="A  "><i class="fas fa-search"></i>　search</div> 
+ <?php require 'kyotu/searchbox.php'?>
+
+  
     <?php
         if(!isset($_SESSION['customer'])){
             echo '<p><a href="login.php">ログインはこちら</a></p>';
@@ -34,15 +50,12 @@
 
 
        
-<script src="https://code.jquery.com/jquery.min.js"></script>       
- 
-        <div class="A  has-background-light"><i class="fas fa-search"></i>　seach</div> 
-        <?php require 'kyotu/searchbox.php'?>
 
-    <div class="a">
+    <div class="m-4 has-text-centered ">
         <h2>おすすめ</h2>
         <!--全顧客で一緒の表示にする-->
 
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
