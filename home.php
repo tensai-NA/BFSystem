@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/home.css">
     <title>ホーム画面</title>
 </head>
 <body>
@@ -15,11 +15,19 @@
     <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
     <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
     <?php
-        $id =$_SESSION['customer']['user_id'];
-        $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->query("select point from User where user_id='".$id."'");
-        $point = $sql->fetch(PDO::FETCH_COLUMN);
-        echo '<p>マイポイント: ',$point,'pt</p>'
+?>
+
+    <?php
+        if(!isset($_SESSION['customer'])){
+            echo '<p><a href="login.php">ログインはこちら</a></p>';
+        }else{
+            $id =$_SESSION['customer']['user_id'];
+            $pdo=new PDO($connect,USER,PASS);
+            $sql=$pdo->query("select point from User where user_id='".$id."'");
+            $point = $sql->fetch(PDO::FETCH_COLUMN);
+            echo '<p>マイポイント: ',$point,'pt</p>'   ; 
+        }
+        
     ?>
 a
 
@@ -36,13 +44,6 @@ a
         <!--全顧客で一緒の表示にする-->
 
     </div>
-   
-<?php
-    if(!isset($_SESSION['customer'])){
-        echo '<p><a href="login.php">ログインはこちら</a></p>';
-    }
-
-?>
-   
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </body>
 </html>
