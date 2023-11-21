@@ -1,4 +1,4 @@
-<!--　担当：溝口　14.ログアウト確認画面-->
+<!--完成-->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>ログアウト確認画面</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>Document</title>
 </head>
 <body>
     <p class="my-6">
@@ -19,6 +22,8 @@
     <form action="login.php" method="post">
         <p class="mt-6">
           <button type="submit" name="logout" class="button is-danger is-rounded is-normal">ログアウトする➝</button>
+    <form action="logoutcomp.php" method="post">
+    <button type="submit" name="logout">ログアウトする➝</button>
     </form>
 </p>
 <p class="mb-5">

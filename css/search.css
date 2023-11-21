@@ -1,9 +1,5 @@
 /* ここから下は編集するな　*/
-.A .B{
-    display: inline-block;
-    padding: 5px 10px;
-    cursor: pointer;
-}
+
 
 .kensaku {
     display: none;
