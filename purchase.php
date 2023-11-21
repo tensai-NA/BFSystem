@@ -102,8 +102,9 @@
                     $total = $num * $price; //商品それぞれの計をだす
                     $ripi = $total * 0.1;
                 }
+                echo 'リピート割　-￥',$ripi,'<br>';
+
             }
-            echo 'リピート割　-￥',$ripi,'<br>';
             if(isset($_SESSION['customer'])){  //ログイン済みの処理
                 $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $pdo=new PDO($connect,USER,PASS);

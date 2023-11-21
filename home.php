@@ -21,7 +21,7 @@
         $point = $sql->fetch(PDO::FETCH_COLUMN);
         echo '<p>マイポイント: ',$point,'pt</p>'
     ?>
-
+a
 
 
 
