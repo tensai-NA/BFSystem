@@ -2,12 +2,12 @@ new Vue({
     el:'#app',
     data(){
         return{
-            sei:'苗字',
-            mei:'名前',
-            email:'email',
+            sei:'',
+            mei:'',
+            email:'',
             pass1:'',
             pass2:'',
-            postnum:'11'
+            postnum:''
         };
     },
     computed:{
