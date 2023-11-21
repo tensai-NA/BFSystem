@@ -1,4 +1,12 @@
-<!--　担当：中嶋　15.パスワード再設定画面-->
+<?php session_start(); ?>
+<?php require 'kyotu/db-connect.php'; ?>
+<?php
+$msgMail = '';
+$msgPass = '';
+if(isset($_POST['send'])){
+     $msgMail = "指定されたメールアドレスにリンクを送信しました。";
+}
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,8 +25,9 @@
     会員登録時に登録されたお名前とメールアドレスをご入力の上「送信」をタップしてください<br>
     パスワード再設定ページURLを記載したメールをお送りいたします。<br>
     </p>
+    <p><?= $msgMail ?></p>
    <div class=" box has-background-light m-6"> <!--ボックスのwidthを指定-->
-
+   <form action="password.php" method="post">
     <label class="label"> お名前 </label><br><!--横並びに-->
     <div class="field  has-addons has-addons-centered ">
     <input class="input is-info is-normal is-focused m-1"type="text" name="name"  placeholder="姓">
@@ -37,7 +46,7 @@
         </p>
         
     </div><br>
-        <button type="submit" class="button is-info">送信</button>
+        <button type="submit" class="button is-info" name="send">送信</button>
      
         </div>
     </div>

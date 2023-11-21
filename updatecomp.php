@@ -4,24 +4,25 @@
 $pdo= new PDO($connect,USER,PASS);
 $msg = '';
 if(isset($_POST['touroku'])){
-    $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    if(!empty($_POST['password'])){
+        $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    }else{
+        $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    }
     if(isset($_SESSION['customer'])){
         $user_id=$_SESSION['customer']['user_id'];
         $sql=$pdo->prepare('select *from User where user_id!=? and mail=?');
         $sql->execute([$user_id,$_POST['mail']]);
-        echo 'a';
     }else{
         $sql=$pdo->prepare('select * from User where mail=?');
         $sql->execute([$_POST['mail']]);
-        echo 'b';
     }
     if(empty($sql->fetchAll())){
         if(isset($_SESSION['customer'])){
-            echo 'c';
             $sql=$pdo->prepare('update User set user_sei=?,user_mei=?,mail=?,shin=?,postnum=?,address=?,'.
-                                'mail=?,password=? where user_id=?');
+                                'password=? where user_id=?');
             $sql->execute([
-                $_POST['user_sei'],$_POST['user_mei'],$_POST['user_sei'],$_POST['mail'],$_POST['password'],$_POST['shin'],
+                $_POST['user_sei'],$_POST['user_mei'],$_POST['mail'],$_POST['shin'],
                 $_POST['postnum'],$_POST['address'],$ps,$user_id]);
             $_SESSION['customer']=[
                 'user_id'=>$user_id,'name'=>$_POST['name'],
