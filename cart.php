@@ -57,7 +57,7 @@
                     $total+=$subtotal;
                     echo '小計 ￥',$subtotal;
                 }else{
-                    $subtotal;
+                    
                 }
 
             $subtotal = $row['num'] * $row['price'];
