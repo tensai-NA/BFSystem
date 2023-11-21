@@ -63,7 +63,7 @@
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
-            $repeat = $row['price']-($row['price'] * 0.1);
+            $repeat = $row['price'] * 0.1;
             echo 'リピート割 ￥',$repeat,'<br>';
 
             echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>';
@@ -89,7 +89,7 @@
             $total+=$subtotal;
             echo '商品合計（税込）',$total,'円','<br>';
 
-            $repeat = $row['price']-($row['price'] * 0.1);
+            $repeat = $row['price'] * 0.1;
             echo 'リピート割 ￥',$repeat,'円','<br>';
 
             echo '送料350円','<br>';
@@ -114,7 +114,7 @@
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
             $repeat = $row['price']-($row['price'] * 0.1);
-            echo '注文合計',$total-$repeat+350,'円';
+            echo '注文合計',$total-$repeat+350,'円','<br>';
         }
     }
     ?>
