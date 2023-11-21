@@ -6,7 +6,7 @@ if(isset($_SESSION['customer'])){
             from OrderA,Shohin,Color,History
             where History.order_id = OrderA.order_id
             and   History.shohin_id = Shohin.shohin_id
-            and   Shohin.color_id = Color.color_id
+            and   Shohin.color = Color.color_code
             and OrderA.user_id = '".$id."'");
 
     foreach($sql as $row){
