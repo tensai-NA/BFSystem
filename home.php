@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/search.css">
     <title>ホーム画面</title>
 </head>
 <body>
@@ -21,16 +21,14 @@
         $point = $sql->fetch(PDO::FETCH_COLUMN);
         echo '<p>マイポイント: ',$point,'pt</p>'
     ?>
+a
 
-   
+
 
        
+<script src="https://code.jquery.com/jquery.min.js"></script>       
  
-          
-        </nav>
-
         <div class="A  has-background-light"><i class="fas fa-search"></i>　seach</div> 
-       
         <?php require 'kyotu/searchbox.php'?>
 
     <div class="a">
@@ -38,12 +36,13 @@
         <!--全顧客で一緒の表示にする-->
 
     </div>
+   
 <?php
     if(!isset($_SESSION['customer'])){
         echo '<p><a href="login.php">ログインはこちら</a></p>';
     }
 
 ?>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   
 </body>
 </html>

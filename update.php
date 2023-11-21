@@ -27,8 +27,6 @@ if(isset($_SESSION['customer'])){
     $user_sei=$_SESSION['customer']['user_sei'];
     $user_mei=$_SESSION['customer']['user_mei'];
     $mail=$_SESSION['customer']['mail'];
-    $password=$_SESSION['customer']['password'];
-    $shin=$_SESSION['customer']['shin'];
     $postnum=$_SESSION['customer']['postnum'];
     $address=$_SESSION['customer']['address'];
 }
@@ -55,7 +53,7 @@ if(isset($_SESSION['customer'])){
             <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">';     
 
-     echo '<input type="password"  class="input  is-normal is-focused " name="password" value="',$password,'">';
+     echo '<input type="password"  class="input  is-normal is-focused " name="password" value="">';
      echo ' <span class="icon is-small is-left">
             <i class="fas fa-key"></i>
             </span>
@@ -67,7 +65,7 @@ if(isset($_SESSION['customer'])){
             <label class="label">新しいパスワード</label>
             <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">';
-     echo '<input type="text"  class="input   is-primary is-normal is-focused " name="shin" value="',$shin,'">';
+     echo '<input type="text"  class="input   is-primary is-normal is-focused " name="shin" value="">';
      echo '<span class="icon is-small is-left">
             <i class="fas fa-key"></i>
             </span>
