@@ -10,10 +10,10 @@ if(isset($_SESSION['customer'])){
             and order.user_id = '".$id."'");
 
     foreach($sql as $row){
-        echo '購入日'$row['buy_date'],'<br>';
-        echo '商品名'$row['shohin_mei'],'<br>';
+        echo '購入日',$row['buy_date'],'<br>';
+        echo '商品名',$row['shohin_mei'],'<br>';
         echo '色：',$row['color_mei'],'<br>';
-        echo '価格:￥',$row['price'],;
+        echo '価格:￥',$row['price'],'<br>';
     }
 }
 
