@@ -1,3 +1,28 @@
+<?php
+if(isset($_SESSION['customer'])){
+    $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+    $pdo=new PDO($connect,USER,PASS);
+    $sql=$pdo->query("select OrdarA.buy_date,  shohin.Shohin.mei,   Color.color_mei,shohin.price
+            from Shohin,Cart,Color
+            where history.order_id = orderA.order_id
+            and   history.shohin_id = shohin.shohin_id
+            and   shohin.color_id = color.color_id
+            and order.user_id = '".$id."'");
+
+    foreach($sql as $row){
+        echo '購入日',$row['buy_date'],'<br>';
+        echo '商品名',$row['shohin_mei'],'<br>';
+        echo '色：',$row['color_mei'],'<br>';
+        echo '価格:￥',$row['price'],'<br>';
+    }
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
