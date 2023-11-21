@@ -60,7 +60,7 @@ if(isset($_POST['login'])){
         <label class="label">メールアドレス</label>
         <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">
-                <input class="input is-success  is-normal is-focused "  type="text" name="name"  placeholder="メールアドレス">
+                <input class="input is-success  is-normal is-focused "  type="email" name="name"  placeholder="メールアドレス">
              <span class="icon is-small is-left">
                 <i class="fas fa-mail-bulk"></i>
                 </span>

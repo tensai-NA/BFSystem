@@ -23,7 +23,7 @@
                 $mail=$_SESSION['customer']['mail'];
                 $password=$_SESSION['customer']['password'];
                 $password2=$_SESSION['customer']['password2'];
-                $postnum=$_SESSION['customer']['postnnum'];
+                $postnum=$_SESSION['customer']['postnnum']; 
                 $address=$_SESSION['customer']['address'];
             }
             
@@ -37,8 +37,8 @@
         echo ' <div class="control m-1">
                 <label class="label"> お名前 </label>
                 <div class="field  has-addons has-addons-centered "> ';
-        echo '<input type="text" class="input  is-normal is-focused m-1" name="sei" v-model="sei"value="',$sei,'"/>',
-                '<input type="text" class="input  is-normal is-focused m-1" name="mei" v-model="mei"value="',$mei,'"/>';
+        echo '<input type="text" class="input  is-normal is-focused m-1" name="sei" v-model="sei"   placeholder="姓"/>',
+                '<input type="text" class="input  is-normal is-focused m-1" name="mei" v-model="mei"    placeholder="名"/>';
         echo '</div><div>';
 
 
@@ -46,7 +46,7 @@
                  <label class="label">メールアドレス</label>';
         echo '   <div class="field has-addons-fullwidth has-addons-centered">
                      <p class="control has-icons-left">
-                         <input type="text"  class="input  is-primary  is-normal is-focused " name="mail" v-model="email" value="',$mail,'"/>
+                         <input type="email"  class="input  is-primary  is-normal is-focused " name="mail" v-model="email"  placeholder="メールアドレス"/>
                          <span class="icon is-small is-left">
                              <i class="fas fa-mail-bulk"></i>
                           </span>
@@ -60,7 +60,7 @@
         <label class="label">パスワード</label>';
         echo '   <div class="field has-addons-fullwidth has-addons-centered">
                     <p class="control has-icons-left">
-                     <input type="password"  class="input  is-normal is-focused " name="password" v-model="pass1" value="',$password,'"/>
+                     <input type="password"  class="input  is-normal is-focused " name="password" v-model="pass1" placeholder="パスワード"/>
                      <span class="icon is-small is-left">
                      <i class="fas fa-key"></i>
                  </span>
@@ -72,7 +72,7 @@
                 <label class="label">パスワード確認</label>';
         echo '  <div class="field has-addons-fullwidth has-addons-centered">
                     <p class="control has-icons-left">
-                     <input type="password"  class="input  is-primary is-normal is-focused " name="password2" v-model="pass2" value="',$password2,'" />
+                     <input type="password"  class="input  is-primary is-normal is-focused " name="password2" v-model="pass2" placeholder="パスワード(確認)" />
                      <span class="icon is-small is-left">
                      <i class="fas fa-key"></i>
                  </span>
@@ -86,7 +86,7 @@
                  <label class="label">郵便番号</label>';
         echo ' <div class="field has-addons-fullwidth has-addons-centered">
                  <p class="control has-icons-left">
-                    <input type="text" class="input  is-normal is-focused " name="postnum" v-model="postnum" value="',$postnum,'"/>
+                    <input type="text" class="input  is-normal is-focused " name="postnum" v-model="postnum" placeholder="郵便番号(ハイフン無し)"/>
                     <span class="icon is-small is-left">
                     <i class="has-text-weight-bold">〒</i>
                  </span>
@@ -99,7 +99,7 @@
                  <label class="label">住所</label>';
         echo ' <div class="field has-addons-fullwidth has-addons-centered">
                  <p class="control has-icons-left">
-                    <input type="text" class="input  is-primary is-normal is-focused " name="address" value="',$address,'">
+                    <input type="text" class="input  is-primary is-normal is-focused " name="address" placeholder="住所">
                     <span class="icon is-small is-left">
                     <i class="fas fa-house-user"></i>
                   </span>
