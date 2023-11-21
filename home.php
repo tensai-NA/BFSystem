@@ -22,13 +22,11 @@
         echo '<p>マイポイント: ',$point,'pt</p>'
     ?>
 
-   
+
+
 
        
  
-          
-        </nav>
-
         <div class="A  has-background-light"><i class="fas fa-search"></i>　seach</div> 
        
         <?php require 'kyotu/searchbox.php'?>
