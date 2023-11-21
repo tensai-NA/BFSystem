@@ -60,7 +60,7 @@ if(isset($_POST['login'])){
         <label class="label">メールアドレス</label>
         <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">
-                <input class="input is-success  is-normal is-focused "  type="text" name="name"  placeholder="メールアドレス">
+                <input class="input is-success  is-normal is-focused "  type="email" name="name"  placeholder="メールアドレス">
              <span class="icon is-small is-left">
                 <i class="fas fa-mail-bulk"></i>
                 </span>
@@ -79,9 +79,10 @@ if(isset($_POST['login'])){
         </p>
         <?= $msgPass ?>
             </div></div></div>
+           
+        <button type="submit" class="button is-danger m-3 is-small"  name="login" value="send">ログイン</button>
+       <button type="submit"  class="button is-info m-3 is-small">キャンセル</button>
 
-        <button type="submit" class="button is-danger m-3"  name="login" value="send">ログイン</button>
-        <button type="submit"  class="button is-info m-3">キャンセル</button>
         <p><a href="toroku.php">新規登録はこちら</a></p>
         <p><a href="password.php">パスワードを忘れた方はこちら</a></p>
     </form>
