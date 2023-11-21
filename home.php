@@ -34,9 +34,9 @@
 
 
        
+<script src="https://code.jquery.com/jquery.min.js"></script>       
  
         <div class="A  has-background-light"><i class="fas fa-search"></i>　seach</div> 
-       
         <?php require 'kyotu/searchbox.php'?>
 
     <div class="a">
