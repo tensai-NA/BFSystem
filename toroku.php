@@ -10,22 +10,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="css/main.css">
     <title>会員登録</title>
 </head>
 <body>
     <div id="app">
         <?php
-            $sei=$mei=$mail=$password=$password2=$postnum=$address='';
-            if(isset($_SESSION['customer'])){
-                $sei=$_SESSION['customer']['sei'];
-                $mei=$_SESSION['customer']['mei'];
-                $mail=$_SESSION['customer']['mail'];
-                $password=$_SESSION['customer']['password'];
-                $password2=$_SESSION['customer']['password2'];
-                $postnum=$_SESSION['customer']['postnnum'];
-                $address=$_SESSION['customer']['address'];
-            }
+            //$sei=$mei=$mail=$password=$password2=$postnum=$address='';
+            //if(isset($_SESSION['customer'])){
+                //$sei=$_SESSION['customer']['sei'];
+                //$mei=$_SESSION['customer']['mei'];
+                //$mail=$_SESSION['customer']['mail'];
+                //$password=$_SESSION['customer']['password'];
+                //$password2=$_SESSION['customer']['password2'];
+                //$postnum=$_SESSION['customer']['postnnum'];
+                //$address=$_SESSION['customer']['address'];
+            //}
             
         
         echo '<form action="toroku-output.php" method="post">';
@@ -37,8 +36,8 @@
         echo ' <div class="control m-1">
                 <label class="label"> お名前 </label>
                 <div class="field  has-addons has-addons-centered "> ';
-        echo '<input type="text" class="input  is-normal is-focused m-1" name="sei" v-model="sei"value="',$sei,'"/>',
-                '<input type="text" class="input  is-normal is-focused m-1" name="mei" v-model="mei"value="',$mei,'"/>';
+        echo '<input type="text" class="input  is-normal is-focused m-1" name="sei" placeholder="姓" v-model="sei" />',
+                '<input type="text" class="input  is-normal is-focused m-1" name="mei" placeholder="名" v-model="mei" />';
         echo '</div><div>';
 
 
@@ -46,7 +45,7 @@
                  <label class="label">メールアドレス</label>';
         echo '   <div class="field has-addons-fullwidth has-addons-centered">
                      <p class="control has-icons-left">
-                         <input type="text"  class="input  is-primary  is-normal is-focused " name="mail" v-model="email" value="',$mail,'"/>
+                         <input type="text"  class="input  is-primary  is-normal is-focused" name="mail" placeholder="メールアドレス" v-model="email" />
                          <span class="icon is-small is-left">
                              <i class="fas fa-mail-bulk"></i>
                           </span>
@@ -60,7 +59,7 @@
         <label class="label">パスワード</label>';
         echo '   <div class="field has-addons-fullwidth has-addons-centered">
                     <p class="control has-icons-left">
-                     <input type="password"  class="input  is-normal is-focused " name="password" v-model="pass1" value="',$password,'"/>
+                     <input type="password"  class="input  is-normal is-focused" name="password" placeholder="パスワード" v-model="pass1" />
                      <span class="icon is-small is-left">
                      <i class="fas fa-key"></i>
                  </span>
@@ -72,7 +71,7 @@
                 <label class="label">パスワード確認</label>';
         echo '  <div class="field has-addons-fullwidth has-addons-centered">
                     <p class="control has-icons-left">
-                     <input type="password"  class="input  is-primary is-normal is-focused " name="password2" v-model="pass2" value="',$password2,'" />
+                     <input type="password"  class="input  is-primary is-normal is-focused " name="password2" placeholder="パスワード再確認" v-model="pass2" />
                      <span class="icon is-small is-left">
                      <i class="fas fa-key"></i>
                  </span>
@@ -86,7 +85,7 @@
                  <label class="label">郵便番号</label>';
         echo ' <div class="field has-addons-fullwidth has-addons-centered">
                  <p class="control has-icons-left">
-                    <input type="text" class="input  is-normal is-focused " name="postnum" v-model="postnum" value="',$postnum,'"/>
+                    <input type="text" class="input  is-normal is-focused " name="postnum" placeholder="郵便番号" v-model="postnum" />
                     <span class="icon is-small is-left">
                     <i class="has-text-weight-bold">〒</i>
                  </span>
@@ -99,7 +98,7 @@
                  <label class="label">住所</label>';
         echo ' <div class="field has-addons-fullwidth has-addons-centered">
                  <p class="control has-icons-left">
-                    <input type="text" class="input  is-primary is-normal is-focused " name="address" value="',$address,'">
+                    <input type="text" class="input  is-primary is-normal is-focused " placeholder="住所" name="address" >
                     <span class="icon is-small is-left">
                     <i class="fas fa-house-user"></i>
                   </span>
