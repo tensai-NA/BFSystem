@@ -2,12 +2,12 @@
 if(isset($_SESSION['customer'])){
     $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
     $pdo=new PDO($connect,USER,PASS);
-    $sql=$pdo->query("select OrdarA.buy_date,  shohin.Shohin.mei,   Color.color_mei,shohin.price
-            from Shohin,Cart,Color
-            where history.order_id = orderA.order_id
-            and   history.shohin_id = shohin.shohin_id
-            and   shohin.color_id = color.color_id
-            and order.user_id = '".$id."'");
+    $sql=$pdo->query("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price
+            from OrderA,Shohin,Color,History
+            where History.order_id = OrderA.order_id
+            and   History.shohin_id = Shohin.shohin_id
+            and   Shohin.color_id = Color.color_id
+            and OrderA.user_id = '".$id."'");
 
     foreach($sql as $row){
         echo '購入日',$row['buy_date'],'<br>';
