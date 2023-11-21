@@ -26,6 +26,7 @@
                 $postnum=$_SESSION['customer']['postnnum'];
                 $address=$_SESSION['customer']['address'];
             }
+            
         
         echo '<form action="toroku-output.php" method="post">';
         echo '<div class="m-4 has-text-centered ">
@@ -105,7 +106,7 @@
                     </p>';
         echo '</div></div>';
 
-        echo '</table>';
+       
         echo '<input type="submit" class="button is-danger m-5" value="確定">';
         echo '</form>';
 
