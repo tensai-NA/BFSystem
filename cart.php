@@ -27,7 +27,7 @@
     if(isset($_SESSION['customer'])){
         $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
         $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->query("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+        $sql=$pdo->query("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num,Cart.flag
                 from Shohin,Cart,Color
                 where Shohin.shohin_id = Cart.shohin_id
                 and Shohin.color = Color.color_code
@@ -38,9 +38,9 @@
             echo '<form method="post">';
             echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
                 if(isset($_POST['checkbox'])){
-                    $a=1;
-                }else{
                     $a=0;
+                }else{
+                    $a=1;
                 }
             echo '</form>';
 
@@ -55,7 +55,7 @@
                 if($a==1){
                     $subtotal = $row['num'] * $row['price'];
                     $total+=$subtotal;
-                    echo '小計 ￥',$subtotal;
+                    echo '小計 ￥',$subtotal,'<br>';
                 }else{
                     
                 }
@@ -63,8 +63,8 @@
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
-            $repeat = $row['price']-($row['price'] * 0.1);
-            echo 'リピート割 ￥',$repeat,'<br>';
+            $repeat = $subtotal * 0.1;
+            echo 'リピート割 -￥',$repeat,'<br>';
 
             echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>';
         }
@@ -83,17 +83,19 @@
                 and Shohin.color = Color.color_code
                 and Cart.user_id = '".$id."'");
         
-        $total=0;        
+        $total=0; 
+        $totalrepeat=0;       
         foreach($sql as $row){
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-            echo '商品合計（税込）',$total,'円','<br>';
 
-            $repeat = $row['price']-($row['price'] * 0.1);
-            echo 'リピート割 ￥',$repeat,'円','<br>';
+            $repeat = $subtotal * 0.1;
+            $totalrepeat += $repeat;
 
-            echo '送料350円','<br>';
         }
+        echo '商品合計（税込）',$total,'円','<br>';
+        echo 'リピート割 ',$totalrepeat,'円','<br>';
+        echo '送料350円','<br>';
     }
     ?>
 
@@ -113,9 +115,9 @@
         foreach($sql as $row){
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-            $repeat = $row['price']-($row['price'] * 0.1);
-            echo '注文合計',$total-$repeat+350,'円';
+            $repeat = $subtotal * 0.1;
         }
+        echo '注文合計',$total-$repeat+350,'円','<br>';
     }
     ?>
 
