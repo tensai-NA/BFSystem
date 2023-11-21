@@ -106,7 +106,7 @@
                     </p>';
         echo '</div></div>';
 
-        echo '</table>';
+       
         echo '<input type="submit" class="button is-danger m-5" value="確定">';
         echo '</form>';
 
