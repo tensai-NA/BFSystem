@@ -79,9 +79,10 @@ if(isset($_POST['login'])){
         </p>
         <?= $msgPass ?>
             </div></div></div>
+           
+        <button type="submit" class="button is-danger m-3 is-small"  name="login" value="send">ログイン</button>
+       <button type="submit"  class="button is-info m-3 is-small">キャンセル</button>
 
-        <button type="submit" class="button is-danger m-3"  name="login" value="send">ログイン</button>
-        <button type="submit"  class="button is-info m-3">キャンセル</button>
         <p><a href="toroku.php">新規登録はこちら</a></p>
         <p><a href="password.php">パスワードを忘れた方はこちら</a></p>
     </form>
