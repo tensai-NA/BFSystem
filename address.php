@@ -2,6 +2,16 @@
 
 <?php require 'kyotu/db-connect.php'?>
 
+<?php
+    if(isset($_POST['update'])){
+        $name = $_POST['sei'].$_POST['mei'];
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->prepare("update Delivery set del_name=?,del_address=?,del_psnum=?,koshinbi=?");
+        $sql->execute([$name,$_POST['address'],$_POST['postnum'],date("Y-m-d")]);
+        echo '変更しました。';
+    }
+    ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -23,23 +33,33 @@
 
     ?>
     <script src="https://code.jquery.com/jquery.min.js"></script>
+
+    <script>
+        $(function() {
+            $(".D").click(function() {
+                $(".E").slideToggle("");
+            });
+        });
+    </script>
+    <style>
+        .E{
+            display: none;
+        }
+    </style>
     <div class="D">住所を変更する</div>
     <div class="E">
-        <label>お名前</label>
-            <input type="text" name="sei">
-            <input type="text" name="mei">
-        <label>住所</label>
-            <input type="text" name="address">
-        <label>郵便番号</label>
-            <input type="number" name="postnum">
-        <button>変更</button>
+        <form action="address.php" method="post">
+            <label>お名前</label>
+                <p><input type="text" name="sei">
+                <input type="text" name="mei"></p>
+            <label>住所</label>
+                <p><input type="text" name="address"></p>
+            <label>郵便番号</label>
+                <p><input type="number" name="postnum"></p>
+            <button name="update">変更</button>
+        </form>
     </div>
+    <button onclick="location.href='purchase.php'">前のページに戻る</button>
 
-    <?php
-        $name = $_POST['sei'].$_POST['mei'];
-        $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->prepare("update Delivery set del_name=?,del_address=?,del_psnum=?,koshinbi=?");
-        $sql->execute([$name,$_POST['address'],$_POST['postnum'],date("Y-m-d")]);
-    ?>
 </body>
 </html>

@@ -100,6 +100,7 @@
             $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
             and a.user_id ='".$id."' and a.flag=0");            
             $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
+            $ripi = 0;
             if(isset($his)){
                 foreach($his as $row){
                     $num = $row['num'];
@@ -114,10 +115,10 @@
                 $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $pdo=new PDO($connect,USER,PASS);
                 $sql=$pdo->query("select num from Cart where user_id = '".$id."'and flag=0");
-                $suryo = $sql->fetch(PDO::FETCH_NUM);
+                $suryo = $sql->fetchAll();
                 $kei = 0;
-                for($i=0;$i<count($suryo);$i++){
-                    $kei = (int)$suryo + $kei;
+                foreach($suryo as $s){
+                    $kei = $s['num'] + $kei;
                 }
                 echo '商品点数',$kei,'点<br>'; //数量をDBから抽出
                 echo '送料￥350<br>';
@@ -127,7 +128,7 @@
                     $pdo=new PDO($connect,USER,PASS);
                     $sql=$pdo->query("select num,price from Cart,Shohin where Cart.shohin_id = Shohin.shohin_id and user_id = '".$id."'and flag=0");
                     foreach($sql as $row){
-                        $total = $row['num'] * $row['price'];
+                        $total += $row['num'] * $row['price'];
                     }
                 }
                 $total = (350 + $total) - $ripi ;
