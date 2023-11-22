@@ -36,7 +36,7 @@
         $total=0;        
         foreach($sql as $row){
             echo '<form method="post">';
-            echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
+            echo '<input type="checkbox" name=“checkbox” value="'.$row['shohin_id'].'" checked /><br>';
                 if(isset($_POST['checkbox'])){
                     $flag=0; //チェックボックスがついてるとき
                 }else{
@@ -65,7 +65,7 @@
                 
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-            echo '小計 ￥',$subtotal,'<br>'
+            echo '小計 ￥',$subtotal,'<br>';
     
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
             $repeat = $subtotal * 0.1;
