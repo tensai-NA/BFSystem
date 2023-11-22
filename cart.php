@@ -62,16 +62,11 @@
                     $sql -> execute([$id,$row['shohin_id']]); 
                 }
 
-                if($flag==0){
-                    $subtotal = $row['num'] * $row['price'];
-                    $total+=$subtotal;
-                    echo '小計 ￥',$subtotal,'<br>';
-                }else{
-                    
-                }
-
+                
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
+            echo '小計 ￥',$subtotal,'<br>'
+    
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
             $repeat = $subtotal * 0.1;
             echo 'リピート割 -￥',$repeat,'<br>';
