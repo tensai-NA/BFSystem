@@ -85,12 +85,15 @@
                 echo '</p>';
             }
             $zikan = ['指定しない','午前10時-午後12時','午後2時-午後4時','午後6時-午後8時'];
+            $pay = ['クレジット','現金','銀行振込','後払い'];
             $zi = $_POST['time'];
+            $siharai = $_POST['kessai'];
+            $houhou = $pay[$siharai];
             $kiboutime = $zikan[$zi];
             $del = $pdo->query("select del_id from Delivery where user_id = '".$id."'");
     
             $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
-            $sql->execute([$id,$del,$total,$point,date("Y-m-d"),$_POST['day'],$kiboutime,$_POST['use'],$_POST['kessai']]);
+            $sql->execute([$id,$del,$total,$point,date("Y-m-d"),$_POST['day'],$kiboutime,$_POST['use'],$siharai]);
     
         }
 
