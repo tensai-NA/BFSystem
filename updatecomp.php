@@ -3,7 +3,7 @@
 <?php
 $pdo= new PDO($connect,USER,PASS);
 $msg = '';
-if(isset($_POST['touroku'])){
+//if(isset($_POST['touroku'])){
     if(!empty($_POST['password'])){
         $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
     }else{
@@ -18,7 +18,9 @@ if(isset($_POST['touroku'])){
         $sql->execute([$_POST['mail']]);
     }
     if(empty($sql->fetchAll())){
+        echo 'a';
         if(isset($_SESSION['customer'])){
+            echo 'b';
             $sql=$pdo->prepare('update User set user_sei=?,user_mei=?,mail=?,shin=?,postnum=?,address=?,'.
                                 'password=? where user_id=?');
             $sql->execute([
@@ -34,7 +36,7 @@ if(isset($_POST['touroku'])){
         echo 'd';
         $msg = 'ログイン名が既に使用されていますので、変更してください。';
     }
-}
+//}
 ?>
 <!--完成-->
 <!DOCTYPE html>

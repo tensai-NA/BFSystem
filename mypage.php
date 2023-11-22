@@ -32,7 +32,6 @@
 
 <a href="home.php"><i class="fas fa-home"></i></a>
 <!--エラーメッセージ-->
-<p>ポイント</p>
 <hr>
 <?php //ポイント取得
         $id =$_SESSION['customer']['user_id'];

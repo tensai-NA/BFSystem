@@ -65,7 +65,7 @@ if(isset($_SESSION['customer'])){
             <label class="label">新しいパスワード</label>
             <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">';
-     echo '<input type="text"  class="input   is-primary is-normal is-focused " name="shin" value="">';
+     echo '<input type="password"  class="input   is-primary is-normal is-focused " name="shin" value="">';
      echo '<span class="icon is-small is-left">
             <i class="fas fa-key"></i>
             </span>
@@ -78,7 +78,7 @@ if(isset($_SESSION['customer'])){
             <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">';
 
-     echo '<input type="text" class="input  is-normal is-focused "  name="postnum" value="',$postnum,'">';
+     echo '<input type="number" class="input  is-normal is-focused "  name="postnum" value="',$postnum,'">';
      echo '<span class="icon is-small is-left">
             <i class="has-text-weight-bold">〒</i>
              </span>
