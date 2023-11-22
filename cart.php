@@ -38,6 +38,12 @@
             echo '<form method="post">';
             echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
                 if(isset($_POST['checkbox'])){
+                    $flag=0;
+                }else{
+                    $flag=1;
+                }
+
+                if(isset($_POST['checkbox'])){
                     $a=0;
                 }else{
                     $a=1;
@@ -51,6 +57,15 @@
             echo '<form method="post">';
             echo '数量','<input type="number" name="quantity['.$id.']" value="'.$row['num'].'" min="1" />';
             echo '</form>';
+            
+                if($flag==1){
+                    $pdo=new PDO($connect,USER,PASS);
+                    $sql = $pdo -> prepare('update Cart set flag = 1 where user_id = ? and shohin_id = ? ');
+                    $sql -> execute([$id,$row['shohin_id']]);
+                }else{
+                    $sql = $pdo -> prepare('update Cart set flag = 0 where user_id = ? and shohin_id = ? ');
+                    $sql -> execute([$id,$row['shohin_id']]); 
+                }
 
                 if($a==1){
                     $subtotal = $row['num'] * $row['price'];
