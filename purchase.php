@@ -12,7 +12,8 @@
     <title>購入確認画面</title>
 </head>
 <body>
-    <h2>購入確認</h2>
+    <div class="has-text-centered">
+    <p >購入確認</p>
     <p>配送先住所</p>
     <?php
     if(isset($_SESSION['customer'])){
@@ -145,7 +146,8 @@
         
         ?>
 
-    <button onclick="location.href='purchasecomp.php'">ご注文を確定する</button><br>
+    <button onclick="location.href='purchasecomp.php'" class="button is-active">ご注文を確定する</button><br>
     <a href="cart.php">←カートへ戻る</a>
+    </div>
     </body>
 </html>
