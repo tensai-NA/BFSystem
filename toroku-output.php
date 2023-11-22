@@ -19,6 +19,12 @@ $sql->execute([
     $_POST['sei'],$_POST['mei'],$_POST['mail'],$ps,$_POST['postnum'],
     $_POST['address']
 ]);
+$name = $_POST['sei'].$_POST['mei'];
+$sql=$pdo->prepare('insert into Delivery values(null,?,?,?,?,?,null)');
+$sql->execute([
+    $id,$name,$_POST['address'],$_POST['postnum'],$date('Y-m-d')
+]);
+
 ?>
 
 <script>

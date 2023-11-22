@@ -11,12 +11,13 @@
 </head>
 <body>
     <div class="has-text-centered">
-     <p class="mb-4">
-       <p><span class="is-size-4">ご注文ありがとうございました！</span></p><br>
-         <p class="my-6">
-         <p><span class="is-size-6">ご注文内容</span></p>
-         <p><span class="is-size-7">
-            <?php
+    <p class="mb-4">
+        <p><span class="is-size-4">ご注文ありがとうございました！</span></p>
+        <p class="my-6">
+        <p><span class="is-size-6">ご注文内容</span></p>
+        <p><span class="is-size-7">
+
+        <?php
             if(isset($_SESSION['customer'])){  //ログイン済みの処理
                 $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $pdo=new PDO($connect,USER,PASS);
@@ -38,7 +39,7 @@
             echo '<p><span class="is-size-7">';
             $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
             and a.user_id ='".$id."'");            
-            $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
+            $kei = 0;   
             if(isset($his)){
                 foreach($his as $row){
                     $num = $row['num'];
@@ -63,6 +64,7 @@
                 echo '</span></p>';
                 echo '<p><span class="is-size-6">';
                 $total = 0;
+                $point = 0;
                 if(isset($_SESSION['customer'])){  //ログイン済みの処理
                     $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                     $pdo=new PDO($connect,USER,PASS);
@@ -72,23 +74,31 @@
                     }
                 }
                 $total = (350 + $total) - $ripi ;
+                $point = floor($total / 100);
                 echo '代金合計￥',$total,'<br>';//合計を求めてリピート割分を引く
                 echo '</p>';
                 echo '</p>';
                 echo '<hr>';
                 echo '<p>';
                 echo 'ご注文合計￥',$total,'<br>';
-                echo '獲得予定ポイント',floor($total / 100),'pt<br>';
+                echo '獲得予定ポイント',$point,'pt<br>';
                 echo '</p>';
             }
-
+            $zikan = ['指定しない','午前10時-午後12時','午後2時-午後4時','午後6時-午後8時'];
+            $zi = $_POST['time'];
+            $kiboutime = $zikan[$zi];
+            $del = $pdo->query("select del_id from Delivery where user_id = '".$id."'");
+    
+            $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
+            $sql->execute([$id,$del,$total,$point,date("Y-m-d"),$_POST['day'],$kiboutime,$_POST['use'],$_POST['kessai']]);
+    
         }
+
         ?>
          </span></p>
         </p>
         <p class="my-6">
-        <button onclick="location.href='home.php'">ホームへ戻る</button>
-
+            <button onclick="location.href='home.php'">ホームへ戻る</button>
         </p>
      </p>
     </div>    
