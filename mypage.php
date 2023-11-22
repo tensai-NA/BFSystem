@@ -1,8 +1,6 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 
-<!--　担当：川崎　10.マイページ-->
-
 
 
 <!DOCTYPE html>
@@ -42,34 +40,40 @@
         $sql=$pdo->query("select point from User where user_id='".$id."'");
         $point = $sql->fetch(PDO::FETCH_COLUMN);
         echo '<p>利用可能ポイント: ',$point,'pt</p>';
+?>
 
-    ?>
+
 <p>最近の購入履歴</p>
     <hr>
-    <p>○○<br>
-    カラー:ピンク<br>
-    価格:￥0,000</p>
+    <?php
+            if(isset($_SESSION['customer'])){
+                $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+                $pdo=new PDO($connect,USER,PASS);
+                $sql=$pdo->query("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price
+                        from OrderA,Shohin,Color,History
+                        where History.order_id = OrderA.order_id
+                        and   History.shohin_id = Shohin.shohin_id
+                        and   Shohin.color = Color.color_code
+                        and OrderA.user_id = '".$id."'
+                        order by OrderA.buy_date DESC
+                        limit 3
+                        ");
 
-    <p>○○<br>
-    カラー:オレンジ<br>
-    価格:￥0,000</p>
+                foreach($sql as $row){
+                    echo '<h2>',$row['buy_date'],'</h2>';
+                    echo '商品名',$row['shohin_mei'],'<br>';
+                    echo '色：',$row['color_mei'],'<br>';
+                    echo '価格:￥',$row['price'],'<br>';
+                    echo '<hr>';
+                }
+            }
 
-    <p>○○<br>
-    カラー:イエロー<br>
-    価格:￥0,000</p>
+
+            ?>
     　　　　　　　　　　<a href="history.php">購入履歴一覧へ→</a></p>
 
 
 <p><a href="logout.php">ログアウト</a><br>
 <a href="update.php">登録情報更新</a></p>
 </body>
-</html>
-
-
-
-
-
-
-
-    
-    
+</html>   
