@@ -96,12 +96,20 @@
             $siharai = $_POST['kessai'];
             $houhou = $pay[$siharai];
             $kiboutime = $zikan[$zi];
+            $id = $_SESSION['customer']['user_id'];
             $today = date("Y-m-d");
-            $del = $pdo->query("select del_id from Delivery where user_id = '".$id."'");
-            $deli = $sql->fetch(PDO::FETCH_COLUMN);
+            $del = $pdo->prepare("select del_id from Delivery where user_id = ?");
+            $del->execute([$id]);
+            $deli = $del->fetch();
+
             $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
-            $sql->execute([$id,$deli,$total,$point,$today,$_POST['day'],$kiboutime,$_POST['use'],$siharai]);
-    
+            $sql->execute([$id,$deli['del_id'],$total,$point,$today,$_POST['day'],$kiboutime,$_POST['use'],$houhou]);
+
+
+            //Userにポイントを追加する
+            $fuyo=$pdo->prepare("update User set from User where id = ?");
+            $fuyo->execute([$id]);
+            
         }
 
         ?>
