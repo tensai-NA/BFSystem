@@ -75,8 +75,7 @@ if(isset($_SESSION['customer'])){
         </div>
         </div>';
        ?>
-     <button type="submit" class="button is-danger m-3">更新</button>
-</form>
+     <button onclick="location.href='updatecomp.php'" class="button is-danger m-3">更新</button>
        <button class="button is-link m-3" onclick="location.href='mypage.php'">キャンセル</button>
     </div>
     </div>
