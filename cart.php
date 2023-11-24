@@ -66,6 +66,9 @@
             echo '小計 ￥',$subtotal,'<br>';
     
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
+            
+            $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
+            and a.user_id ='".$id."' and flag=0"); 
             $repeat = $subtotal * 0.1;
             echo 'リピート割 -￥',$repeat,'<br>';
 
