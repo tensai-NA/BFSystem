@@ -66,7 +66,26 @@
             echo '小計 ￥',$subtotal,'<br>';
     
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
-            $repeat = $subtotal * 0.1;
+
+            $his=$pdo->prepare("select num,price
+            from Cart,History
+            where Cart.user_id = ?
+            and Cart.user_id = History.user_id
+            and Cart.shohin_id = History.shohin_id
+            and flag=0");
+            $his->execute([$id]);
+
+            $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
+            $repeat = 0;
+            if(isset($his)){
+                foreach($his as $row){
+                        $num = $row['num'];
+                        $price = $row['price'];
+                        $total = $num * $price; //商品それぞれの計をだす
+                        $repeat = $subtotal * 0.1;    
+                }
+            }
+
             echo 'リピート割 -￥',$repeat,'<br>';
 
             echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';

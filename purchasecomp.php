@@ -37,8 +37,14 @@
                 echo '<hr>';
                 echo '</span></p>';
             echo '<p><span class="is-size-7">';
-            $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
-            and a.user_id ='".$id."'");            
+            $his=$pdo->prepare("select num,price
+            from Cart,History
+            where Cart.user_id = ?
+            and Cart.user_id = History.user_id
+            and Cart.shohin_id = History.shohin_id
+            and flag=0");
+            $his->execute([$id]);
+
             $kei = 0;   
             if(isset($his)){
                 foreach($his as $row){
@@ -90,10 +96,11 @@
             $siharai = $_POST['kessai'];
             $houhou = $pay[$siharai];
             $kiboutime = $zikan[$zi];
+            $today = date("Y-m-d");
             $del = $pdo->query("select del_id from Delivery where user_id = '".$id."'");
-    
+            $deli = $sql->fetch(PDO::FETCH_COLUMN);
             $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
-            $sql->execute([$id,$del,$total,$point,date("Y-m-d"),$_POST['day'],$kiboutime,$_POST['use'],$siharai]);
+            $sql->execute([$id,$deli,$total,$point,$today,$_POST['day'],$kiboutime,$_POST['use'],$siharai]);
     
         }
 

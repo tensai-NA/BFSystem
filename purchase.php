@@ -14,6 +14,7 @@
 <body>
     <div class="has-text-centered">
     <p >購入確認</p>
+    <form action="purchasecomp.php" method="post">
     <p>配送先住所</p>
     <?php
     if(isset($_SESSION['customer'])){
@@ -168,7 +169,8 @@
         
         ?>
 
-    <button onclick="location.href='purchasecomp.php'" class="button is-active">ご注文を確定する</button><br>
+    <button type="submit" button is-active">ご注文を確定する</button><br>
+    </form>
     <a href="cart.php">←カートへ戻る</a>
     </div>
     </body>
