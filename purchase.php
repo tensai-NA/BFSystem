@@ -110,11 +110,17 @@
             echo '<p>';
             
             //IDとログインを比較　かつ　カート内の商品 cart と履歴 history を比較する
-            $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
-            and a.user_id ='".$id."' and flag=0");            
+            $his=$pdo->query("select a.num,b.price,c.user_id
+            from Cart a 
+            inner join History b 
+            on a.shohin_id = b.shohin_id 
+            inner join OrderA c
+            on b.order_id = c.order_id
+            and a.user_id ='".$id."' and flag=0");
+
             $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
             $ripi = 0;
-            if(isset($his)){
+            if(isset($his) && $his['user_id'] = $id){
                 foreach($his as $row){
                     $num = $row['num'];
                     $price = $row['price'];
