@@ -37,23 +37,27 @@
                 $pdo=new PDO($connect,USER,PASS);
                 $sql=$pdo->query("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price
                                     from Shohin
-                                    where Shohin.shohin_id = Cart.shohin_id
-                                    and Cart.user_id = '".$id."'");
+                                    where ");
+
+                echo '<form method="post" action="cart.php">';        
+                foreach($sql as $row){
+                    echo $row['shohin_mei'],'<br>';
+                    echo $row['price'],'円','<br>';
+                }
             }
-        
-        <h3>商品名</h3>
-        <h3>価格</h3>
-        <button  onclick="loction.href='cart.php'">カートに入れる</button>
+        ?>
+        <button type="submit">カートに入れる</button>
+        </form>
     </div>
 
     <div class="notlogin">
         <?php
             if(!isset($_SESSION['customer'])){
-                echo '<p>カートを閲覧するにはログインしてください</p>';
+                echo '<p>カートに追加するにはログインしてください</p>';
                 echo '<p><a href="login.php">ログインはこちら</a></p>';
             exit();
             }
-    ?>
+        ?>
         
     </div>
 </body>
