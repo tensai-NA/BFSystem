@@ -90,7 +90,7 @@
             var_dump($_POST);
             var_dump($check);
             foreach($sql as $row){
-                if(array_search($row['shohin_id'], $check) != false){
+                if(in_array($row['shohin_id'], $check) != false){
                     echo $row['shohin_mei'],'<br>';
                     echo 'カラー：',$row['color_mei'],'<br>';
                     echo '価格：￥',$row['price'],'<br>';
