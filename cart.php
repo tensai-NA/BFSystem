@@ -81,14 +81,14 @@
                 foreach($his as $row){
                         $num = $row['num'];
                         $price = $row['price'];
-                        $total = $num * $price; //商品それぞれの計をだす
+                        $subtotal = $num * $price; //商品それぞれの計をだす
                         $repeat = $subtotal * 0.1;    
                 }
+                
+                echo 'リピート割 -￥',$repeat,'<br>';
+
+                echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';
             }
-
-            echo 'リピート割 -￥',$repeat,'<br>';
-
-            echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';
         }
     }
     ?>
