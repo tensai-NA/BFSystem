@@ -87,8 +87,8 @@
             if(isset($_POST['checkbox'])){
                 $check=$_POST['checkbox']; //チェックボックスがついてるとき
             }
-            var_dump($_POST);
-            var_dump($check);
+            //var_dump($_POST);
+            //var_dump($check);
             foreach($sql as $row){
                 if(in_array($row['shohin_id'], $check) != false){
                     echo $row['shohin_mei'],'<br>';
@@ -97,10 +97,10 @@
                     $total = $row['num'] * $row['price'];
                     echo '小計：￥',$total,'<br>';
                     $sql = $pdo -> prepare('update Cart set flag = 0 where user_id = ? and shohin_id = ? ');
-                    echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
+                    //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
                 }else{
                     $sql = $pdo -> prepare('update Cart set flag = 1 where user_id = ? and shohin_id = ? ');
-                    echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
+                    //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
                 }
                 $sql -> execute([$id,$row['shohin_id']]);
             }
