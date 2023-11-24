@@ -136,6 +136,7 @@
                 echo '商品点数',$kei,'点<br>'; //数量をDBから抽出
                 echo '送料￥350<br>';
                 $total = 0;
+                $point = 0;
                 if(isset($_SESSION['customer'])){  //ログイン済みの処理
                     $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                     $pdo=new PDO($connect,USER,PASS);
@@ -145,13 +146,14 @@
                     }
                 }
                 $total = (350 + $total) - $ripi ;
+                $point = floor($total / 100) ;
                 echo '代金合計￥',$total,'<br>';//合計を求めてリピート割分を引く
                 echo '</p>';
                 echo '</p>';
                 echo '<hr>';
                 echo '<p>';
                 echo 'ご注文合計￥',$total,'<br>';
-                echo '獲得予定ポイント',floor($total / 100),'pt<br>';
+                echo '獲得予定ポイント',$point,'pt<br>';
                 echo '</p>';
             }
     

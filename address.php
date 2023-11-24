@@ -1,12 +1,11 @@
 <?php session_start(); ?>
-
 <?php require 'kyotu/db-connect.php'?>
 
 <?php
     if(isset($_POST['update'])){
         $name = $_POST['sei'].$_POST['mei'];
         $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->prepare("update Delivery set del_name=?,del_address=?,del_psnum=?,koshinbi=?");
+        $sql=$pdo->prepare("update Delivery set del_name=?,del_address=?,del_psnum=?,koshinbi=? where user_id = '".$id."'");
         $sql->execute([$name,$_POST['address'],$_POST['postnum'],date("Y-m-d")]);
         echo '変更しました。';
     }
