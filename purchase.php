@@ -77,19 +77,32 @@
         if(isset($_SESSION['customer'])){  //ログイン済みの処理
             $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
             $pdo=new PDO($connect,USER,PASS);
-            $sql=$pdo->prepare("select Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+            $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
                     from Shohin,Cart,Color
                     where Shohin.shohin_id = Cart.shohin_id
                     and Shohin.color = Color.color_code
-                    and Cart.user_id = ?
-                    and Cart.flag = 0");
+                    and Cart.user_id = ?");
             $sql->execute([$id]);
+            $check=array();
+            if(isset($_POST['checkbox'])){
+                $check=$_POST['checkbox']; //チェックボックスがついてるとき
+            }
+            //var_dump($_POST);
+            //var_dump($check);
             foreach($sql as $row){
-                echo $row['shohin_mei'],'<br>';
-                echo 'カラー：',$row['color_mei'],'<br>';
-                echo '価格：￥',$row['price'],'<br>';
-                $total = $row['num'] * $row['price'];
-                echo '小計：￥',$total,'<br>';
+                if(in_array($row['shohin_id'], $check) != false){
+                    echo $row['shohin_mei'],'<br>';
+                    echo 'カラー：',$row['color_mei'],'<br>';
+                    echo '価格：￥',$row['price'],'<br>';
+                    $total = $row['num'] * $row['price'];
+                    echo '小計：￥',$total,'<br>';
+                    $sql = $pdo -> prepare('update Cart set flag = 0 where user_id = ? and shohin_id = ? ');
+                    //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
+                }else{
+                    $sql = $pdo -> prepare('update Cart set flag = 1 where user_id = ? and shohin_id = ? ');
+                    //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
+                }
+                $sql -> execute([$id,$row['shohin_id']]);
             }
 
             echo '</p>';
@@ -98,7 +111,7 @@
             
             //IDとログインを比較　かつ　カート内の商品 cart と履歴 history を比較する
             $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
-            and a.user_id ='".$id."' and a.flag=0");            
+            and a.user_id ='".$id."' and flag=0");            
             $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
             $ripi = 0;
             if(isset($his)){
@@ -114,7 +127,7 @@
             if(isset($_SESSION['customer'])){  //ログイン済みの処理
                 $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $pdo=new PDO($connect,USER,PASS);
-                $sql=$pdo->query("select num from Cart where user_id = '".$id."'and flag=0");
+                $sql=$pdo->query("select num from Cart where user_id = '".$id."' and flag=0");
                 $suryo = $sql->fetchAll();
                 $kei = 0;
                 foreach($suryo as $s){
@@ -127,7 +140,7 @@
                 if(isset($_SESSION['customer'])){  //ログイン済みの処理
                     $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                     $pdo=new PDO($connect,USER,PASS);
-                    $sql=$pdo->query("select num,price from Cart,Shohin where Cart.shohin_id = Shohin.shohin_id and user_id = '".$id."'and flag=0");
+                    $sql=$pdo->query("select num,price from Cart,Shohin where Cart.shohin_id = Shohin.shohin_id and user_id = '".$id."'  and flag=0");
                     foreach($sql as $row){
                         $total += $row['num'] * $row['price'];
                     }
