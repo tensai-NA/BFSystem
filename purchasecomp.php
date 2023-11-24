@@ -32,6 +32,14 @@
                     echo '価格：￥',$row['price'],'<br>';
                     $total = $row['num'] * $row['price'];
                     echo '小計：￥',$total,'<br>';
+
+                                //Historyに追加
+                $sho=$pdo->prepare("select shohin_id from Cart where user_id=?");
+                $sho->execute([$id]);
+                $shohin = $sho->fetch();
+                $history=$pdo->prepare("insert into History values(null,?,?,?,?)");
+                $history->execute([$id,$shohin['shohin_id'],$row['num'],$row['price']]);
+
                 }
 
                 echo '<hr>';
@@ -112,7 +120,7 @@
 
             $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
             $sql->execute([$id,$deli['del_id'],$total,$point,$today,$_POST['day'],$kiboutime,$_POST['use'],$houhou]);
-
+            
         }
         ?>
          </span></p>
