@@ -2,7 +2,7 @@
 <?php
 $pdo=new PDO($connect,USER,PASS);
 if(isset($_POST['add'])){   // 追加ボタンが押された処理
-    $sql=$pdo->prepare("inset into Shohin (shohin_mei,price,shohin_img) value (?, ?, ?)");
+    $sql=$pdo->prepare("insert into Shohin (shohin_mei,price,shohin_img) value (?, ?, ?)");
     $sql->execute([$_POST['name'], $_POST['price'], $_POST['img']]);
 }else if(isset($_POST['update'])){  //　更新ボタンが押された処理
     $sql=$pdo->prepare("update Shohin set shohin_mei=? ,price=? ,shohin_img=? where shohin_id=?");
