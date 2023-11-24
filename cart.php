@@ -45,12 +45,13 @@
                 }
                 */
 
-            echo $row['shohin_mei'],'<br>';
+            echo '<a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a><br>';
             echo $row['color_mei'],'<br>';
             echo $row['price'],'円','<br>';  
+            echo $row['num'],'個','<br>';  
+            //echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
 
-            echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
-            /*
+            /*'
                 if($flag==0){
                     $pdo=new PDO($connect,USER,PASS);
                     $sql = $pdo -> prepare('update Cart set flag = 0 where user_id = ? and shohin_id = ? ');
@@ -67,32 +68,31 @@
     
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
 
-            $his=$pdo->prepare("select num,price
-            from Cart,History
-            where Cart.user_id = ?
-            and Cart.user_id = History.user_id
-            and Cart.shohin_id = History.shohin_id
-            and flag=0");
-            $his->execute([$id]);
+            $his=$pdo->prepare("select shohin_id from History
+            where user_id = ?
+            and shohin_id = ?
+            ");
+            $his->execute([$id, $row['shohin_id']]);
 
-            $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
             $repeat = 0;
             if(isset($his)){
+                /*
                 foreach($his as $row){
                         $num = $row['num'];
                         $price = $row['price'];
-                        $subtotal = $num * $price; //商品それぞれの計をだす
-                        $repeat = $subtotal * 0.1;    
+                        $subtotal = $num * $price; //商品それぞれの計をだす  
+                        echo 'shohin_id=[',$row['shohin_id'],'],num=[',$row['num'],'], price=[', $row['price'], '] subtotal=[', $subtotal, ']';
+                        $repeat = $subtotal * 0.1;
                 }
-                
-                echo 'リピート割 -￥',$repeat,'<br>';
+                */
+                $repeat = $subtotal * 0.1;
 
-                echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';
             }
+            echo 'リピート割 -￥',$repeat,'<br>';
+            echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';
         }
     }
     ?>
-
     <hr>
 
     <?php
@@ -142,7 +142,7 @@
         echo '注文合計',$total-$repeat+350,'円','<br>';
     }
     ?>
-    <button type="submit">ご注文手続きへ ＞</button>
+    <button type="submit" name="purchase">ご注文手続きへ ＞</button>
 </form>
 </body>
 </html>
