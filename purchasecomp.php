@@ -79,8 +79,12 @@
                         $total = $row['num'] * $row['price'];
                     }
                 }
+                $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $total = (350 + $total) - $ripi ;
                 $point = floor($total / 100);
+                $use_point = $_POST['use'];
+                $point = $point - $use_point;
+
                 echo '代金合計￥',$total,'<br>';//合計を求めてリピート割分を引く
                 echo '</p>';
                 echo '</p>';
@@ -89,6 +93,10 @@
                 echo 'ご注文合計￥',$total,'<br>';
                 echo '獲得予定ポイント',$point,'pt<br>';
                 echo '</p>';
+
+                $fuyo=$pdo->prepare("update User set point = point + ? where user_id = ?");
+                $fuyo->execute([$point,$id]);
+    
             }
             $zikan = ['指定しない','午前10時-午後12時','午後2時-午後4時','午後6時-午後8時'];
             $pay = ['クレジット','現金','銀行振込','後払い'];
@@ -105,13 +113,7 @@
             $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
             $sql->execute([$id,$deli['del_id'],$total,$point,$today,$_POST['day'],$kiboutime,$_POST['use'],$houhou]);
 
-
-            //Userにポイントを追加する
-            $fuyo=$pdo->prepare("update User set from User where id = ?");
-            $fuyo->execute([$id]);
-            
         }
-
         ?>
          </span></p>
         </p>
