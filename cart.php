@@ -49,7 +49,7 @@
             echo $row['color_mei'],'<br>';
             echo $row['price'],'円','<br>';  
 
-            echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />';
+            echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
             /*
                 if($flag==0){
                     $pdo=new PDO($connect,USER,PASS);
@@ -69,7 +69,7 @@
             $repeat = $subtotal * 0.1;
             echo 'リピート割 -￥',$repeat,'<br>';
 
-            echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>';
+            echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';
         }
     }
     ?>
