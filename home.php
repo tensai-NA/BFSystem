@@ -29,7 +29,7 @@
    
 <script src="https://code.jquery.com/jquery.min.js"></script>       
  
- <div class="A  "><i class="fas fa-search"></i>　search</div> 
+ <div class="A"><i class="fas fa-search"></i>　search</div> 
  <?php require 'kyotu/searchbox.php'?>
 
   
@@ -41,7 +41,7 @@
             $pdo=new PDO($connect,USER,PASS);
             $sql=$pdo->query("select point from User where user_id='".$id."'");
             $point = $sql->fetch(PDO::FETCH_COLUMN);
-            echo '<p>マイポイント: ',$point,'pt</p>'   ; 
+            echo '<p>マイポイント: ',$point,'pt</p>'; 
         }
         
     ?>
