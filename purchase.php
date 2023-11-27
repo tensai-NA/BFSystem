@@ -87,8 +87,8 @@
             if(isset($_POST['checkbox'])){
                 $check=$_POST['checkbox']; //チェックボックスがついてるとき
             }
-            //var_dump($_POST);
-            //var_dump($check);
+
+            $total = 0;
             foreach($sql as $row){
                 if(in_array($row['shohin_id'], $check) != false){
                     echo $row['shohin_mei'],'<br>';
@@ -103,34 +103,24 @@
                     //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
                 }
                 $sql -> execute([$id,$row['shohin_id']]);
+
+                $his=$pdo->prepare("select shohin_id from History
+                where user_id = ?
+                and shohin_id = ?
+                ");
+                $his->execute([$id, $row['shohin_id']]);
+
+                $repeat = 0;
+                if(isset($his)){
+                    $repeat += $total * 0.1;
+                }
             }
 
             echo '</p>';
             echo '<hr>';
             echo '<p>';
-            
-            //IDとログインを比較　かつ　カート内の商品 cart と履歴 history を比較する
-            $his=$pdo->prepare("select num,price
-            from Cart,History
-            where Cart.user_id = ?
-            and Cart.user_id = History.user_id
-            and Cart.shohin_id = History.shohin_id
-            and flag=0");
-            $his->execute([$id]);
-
-            $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
-            $ripi = 0;
-            if(isset($his)){
-                foreach($his as $row){
-                        $num = $row['num'];
-                        $price = $row['price'];
-                        $total = $num * $price; //商品それぞれの計をだす
-                        $ripi = $total * 0.1;
-    
-                }
-                echo 'リピート割　-￥',$ripi,'<br>';
-
-            }
+ 
+            echo 'リピート割 -￥',$repeat,'<br>';
             if(isset($_SESSION['customer'])){  //ログイン済みの処理
                 $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $pdo=new PDO($connect,USER,PASS);
@@ -152,7 +142,7 @@
                         $total += $row['num'] * $row['price'];
                     }
                 }
-                $total = (350 + $total) - $ripi ;
+                $total = (350 + $total) - $repeat ;
                 $point = floor($total / 100) ;
                 echo '代金合計￥',$total,'<br>';//合計を求めてリピート割分を引く
                 echo '</p>';
@@ -169,7 +159,7 @@
         
         ?>
 
-    <button type="submit" button is-active">ご注文を確定する</button><br>
+    <button type="submit" button is-active>ご注文を確定する</button><br>
     </form>
     <a href="cart.php">←カートへ戻る</a>
     </div>
