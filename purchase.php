@@ -87,7 +87,7 @@
             if(isset($_POST['checkbox'])){
                 $check=$_POST['checkbox']; //チェックボックスがついてるとき
             }
-            $repeat = 0;
+
             $total = 0;
             foreach($sql as $row){
                 if(in_array($row['shohin_id'], $check) != false){
@@ -110,6 +110,7 @@
                 ");
                 $his->execute([$id, $row['shohin_id']]);
 
+                $repeat = 0;
                 if(isset($his)){
                     $repeat += $total * 0.1;
                 }
@@ -182,7 +183,7 @@
         
         ?>
 
-    <button type="submit" button is-active">ご注文を確定する</button><br>
+    <button type="submit" button is-active>ご注文を確定する</button><br>
     </form>
     <a href="cart.php">←カートへ戻る</a>
     </div>
