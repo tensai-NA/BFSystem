@@ -48,7 +48,7 @@
             echo '<a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a><br>';
             echo $row['color_mei'],'<br>';
             echo $row['price'],'円','<br>';  
-            echo $row['num'],'個','<br>';  
+            echo '数量 ',$row['num'],'<br>';  
             //echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
 
             /*'
