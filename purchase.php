@@ -118,30 +118,6 @@
             echo '</p>';
             echo '<hr>';
             echo '<p>';
-            
-            //IDとログインを比較　かつ　カート内の商品 cart と履歴 history を比較する
-            /*
-            $his=$pdo->prepare("select num,price
-            from Cart,History
-            where Cart.user_id = ?
-            and Cart.user_id = History.user_id
-            and Cart.shohin_id = History.shohin_id
-            and flag=0");
-            $his->execute([$id]);
-
-            $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
-            $ripi = 0;
-            $total = 0;
-            if(isset($his)){
-                foreach($his as $row){
-                        $num = $row['num'];
-                        $price = $row['price'];
-                        $total += $num * $price; //商品それぞれの計をだす
-                }
-                $ripi = $total * 0.1;
-                echo 'リピート割　-￥',$ripi,'<br>';
-            }
-            */
  
             echo 'リピート割 -￥',$repeat,'<br>';
             if(isset($_SESSION['customer'])){  //ログイン済みの処理
