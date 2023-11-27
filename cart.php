@@ -33,44 +33,66 @@
                 and Shohin.color = Color.color_code
                 and Cart.user_id = '".$id."'");
         
-        $total=0;        
+        $total=0;
+        echo '<form method="post" action="purchase.php">';        
         foreach($sql as $row){
-            echo '<form method="post">';
-            echo '<input type="checkbox" name=“checkbox” value="1" checked /><br>';
+            echo '<input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" checked /><br>';
+            /*
                 if(isset($_POST['checkbox'])){
-                    $a=0;
+                    $flag=0; //チェックボックスがついてるとき
                 }else{
-                    $a=1;
+                    $flag=1;
                 }
-            echo '</form>';
+                */
 
-            echo $row['shohin_mei'],'<br>';
+            echo '<a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a><br>';
             echo $row['color_mei'],'<br>';
             echo $row['price'],'円','<br>';  
+            echo $row['num'],'個','<br>';  
+            //echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
 
-            echo '<form method="post">';
-            echo '数量','<input type="number" name="quantity['.$id.']" value="'.$row['num'].'" min="1" />';
-            echo '</form>';
-
-                if($a==1){
-                    $subtotal = $row['num'] * $row['price'];
-                    $total+=$subtotal;
-                    echo '小計 ￥',$subtotal,'<br>';
+            /*'
+                if($flag==0){
+                    $pdo=new PDO($connect,USER,PASS);
+                    $sql = $pdo -> prepare('update Cart set flag = 0 where user_id = ? and shohin_id = ? ');
+                    $sql -> execute([$id,$row['shohin_id']]);
                 }else{
-                    
+                    $sql = $pdo -> prepare('update Cart set flag = 1 where user_id = ? and shohin_id = ? ');
+                    $sql -> execute([$id,$row['shohin_id']]); 
                 }
 
+             */   
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
+            echo '小計 ￥',$subtotal,'<br>';
+    
             echo 'ポイント',floor($subtotal/100),'pt','<br>';
-            $repeat = $subtotal * 0.1;
-            echo 'リピート割 -￥',$repeat,'<br>';
 
-            echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>';
+            $his=$pdo->prepare("select shohin_id from History
+            where user_id = ?
+            and shohin_id = ?
+            ");
+            $his->execute([$id, $row['shohin_id']]);
+
+            $repeat = 0;
+            if(isset($his)){
+                /*
+                foreach($his as $row){
+                        $num = $row['num'];
+                        $price = $row['price'];
+                        $subtotal = $num * $price; //商品それぞれの計をだす  
+                        echo 'shohin_id=[',$row['shohin_id'],'],num=[',$row['num'],'], price=[', $row['price'], '] subtotal=[', $subtotal, ']';
+                        $repeat = $subtotal * 0.1;
+                }
+                */
+                $repeat = $subtotal * 0.1;
+
+            }
+            echo 'リピート割 -￥',$repeat,'<br>';
+            echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';
         }
     }
     ?>
-
     <hr>
 
     <?php
@@ -120,8 +142,7 @@
         echo '注文合計',$total-$repeat+350,'円','<br>';
     }
     ?>
-
-    <button onclick="location.href='purchase.php'">ご注文手続きへ ＞</button>
-
+    <button type="submit" name="purchase">ご注文手続きへ ＞</button>
+</form>
 </body>
 </html>

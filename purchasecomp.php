@@ -11,65 +11,49 @@
 </head>
 <body>
     <div class="has-text-centered">
-     <p class="mb-4">
-       <p><span class="is-size-4">ご注文ありがとうございました！</span></p><br>
-         <p class="my-6">
-         <p><span class="is-size-6">ご注文内容</span></p>
-         <p><span class="is-size-7">
-         〇〇〇
-         カラーピンク<br>
-         価格￥0000         小計　￥0000
-        </span></p> 
-         <hr>
-        <p><span class="is-size-7">
-         商品点数                   〇点<br>
-         代金合計                ￥00000 <br>
-         送料                      ￥000
-         <hr>
-       </span></p>
-         <p><span class="is-size-6">
-            ご注文合計      ￥00000 <br>
-            獲得予定ポイント   000pt
-         </span></p>
-        </p>
+    <p class="mb-4">
+        <p><span class="is-size-4">ご注文ありがとうございました！</span></p>
         <p class="my-6">
-       <form action="home.php" method="post">
-         <button type="submit" name="home" class="button is-active">ホームへ戻る</button>
-        </form>
-        </p>
-     </p>
-    </div>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>Document</title>
-</head>
-<body>
-    <h3>ご注文ありがとうございました！</h3><br>
-    <h4>ご注文内容</h4>
-    <h5>        
+        <p><span class="is-size-6">ご注文内容</span></p>
+        <p><span class="is-size-7">
+
         <?php
-        if(isset($_SESSION['customer'])){  //ログイン済みの処理
-            $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
-            $pdo=new PDO($connect,USER,PASS);
-            $sql=$pdo->query("select Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
-                    from Shohin,Cart,Color
-                    where Shohin.shohin_id = Cart.shohin_id
-                    and Shohin.color = Color.color_code
-                    and Cart.user_id = '".$id."'");
-            foreach($sql as $row){
-                echo $row['shohin_mei'],'<br>';
-                echo 'カラー：',$row['color_mei'],'<br>';
-                echo '価格：￥',$row['price'],'<br>';
-                $total = $row['num'] * $row['price'];
-                echo '小計：￥',$total,'<br>';
-            }
+            if(isset($_SESSION['customer'])){  //ログイン済みの処理
+                $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
+                $pdo=new PDO($connect,USER,PASS);
+                $sql=$pdo->query("select Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+                        from Shohin,Cart,Color
+                        where Shohin.shohin_id = Cart.shohin_id
+                        and Shohin.color = Color.color_code
+                        and Cart.user_id = '".$id."'");
+                foreach($sql as $row){
+                    echo $row['shohin_mei'],'<br>';
+                    echo 'カラー：',$row['color_mei'],'<br>';
+                    echo '価格：￥',$row['price'],'<br>';
+                    $total = $row['num'] * $row['price'];
+                    echo '小計：￥',$total,'<br>';
 
-            echo '</h5>';
-            echo '<hr>';
+                                //Historyに追加
+                $sho=$pdo->prepare("select shohin_id from Cart where user_id=?");
+                $sho->execute([$id]);
+                $shohin = $sho->fetch();
+                $history=$pdo->prepare("insert into History values(null,?,?,?,?)");
+                $history->execute([$id,$shohin['shohin_id'],$row['num'],$row['price']]);
 
-            $his=$pdo->query("select a.num,b.price from Cart a inner join History b on a.shohin_id = b.shohin_id
-            and a.user_id ='".$id."'");            
-            $kei = 0;   //もしカートにリピート割対象商品が2種類以上ある場合はどうなる？？
+                }
+
+                echo '<hr>';
+                echo '</span></p>';
+            echo '<p><span class="is-size-7">';
+            $his=$pdo->prepare("select num,price
+            from Cart,History
+            where Cart.user_id = ?
+            and Cart.user_id = History.user_id
+            and Cart.shohin_id = History.shohin_id
+            and flag=0");
+            $his->execute([$id]);
+
+            $kei = 0;   
             if(isset($his)){
                 foreach($his as $row){
                     $num = $row['num'];
@@ -90,11 +74,11 @@
                 }
                 echo '商品点数',$kei,'点<br>'; //数量をDBから抽出
                 echo '送料￥350<br>';
-
                 echo '<hr>';
-                echo '</h5>';
-
+                echo '</span></p>';
+                echo '<p><span class="is-size-6">';
                 $total = 0;
+                $point = 0;
                 if(isset($_SESSION['customer'])){  //ログイン済みの処理
                     $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                     $pdo=new PDO($connect,USER,PASS);
@@ -103,20 +87,48 @@
                         $total = $row['num'] * $row['price'];
                     }
                 }
+                $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                 $total = (350 + $total) - $ripi ;
+                $point = floor($total / 100);
+                $use_point = $_POST['use'];
+                $point = $point - $use_point;
+
                 echo '代金合計￥',$total,'<br>';//合計を求めてリピート割分を引く
                 echo '</p>';
                 echo '</p>';
                 echo '<hr>';
                 echo '<p>';
                 echo 'ご注文合計￥',$total,'<br>';
-                echo '獲得予定ポイント',floor($total / 100),'pt<br>';
+                echo '獲得予定ポイント',$point,'pt<br>';
                 echo '</p>';
-            }
 
+                $fuyo=$pdo->prepare("update User set point = point + ? where user_id = ?");
+                $fuyo->execute([$point,$id]);
+    
+            }
+            $zikan = ['指定しない','午前10時-午後12時','午後2時-午後4時','午後6時-午後8時'];
+            $pay = ['クレジット','現金','銀行振込','後払い'];
+            $zi = $_POST['time'];
+            $siharai = $_POST['kessai'];
+            $houhou = $pay[$siharai];
+            $kiboutime = $zikan[$zi];
+            $id = $_SESSION['customer']['user_id'];
+            $today = date("Y-m-d");
+            $del = $pdo->prepare("select del_id from Delivery where user_id = ?");
+            $del->execute([$id]);
+            $deli = $del->fetch();
+
+            $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
+            $sql->execute([$id,$deli['del_id'],$total,$point,$today,$_POST['day'],$kiboutime,$_POST['use'],$houhou]);
+            
         }
         ?>
-    <button onclick="location.href='home.php'">ホームへ戻る</button>
-    
+         </span></p>
+        </p>
+        <p class="my-6">
+            <button onclick="location.href='home.php'">ホームへ戻る</button>
+        </p>
+     </p>
+    </div>    
 </body>
 </html>

@@ -48,37 +48,12 @@ if(isset($_SESSION['customer'])){
             </div>
             </div>';
 
-     echo  '<div class="control m-1">
-            <label class="label">現在のパスワード</label>
-            <div class="field has-addons-fullwidth has-addons-centered">
-            <p class="control has-icons-left">';     
-
-     echo '<input type="password"  class="input  is-normal is-focused " name="password" value="">';
-     echo ' <span class="icon is-small is-left">
-            <i class="fas fa-key"></i>
-            </span>
-            </p>
-            </div>
-            </div>';
-
-     echo ' <div class="control m-1">
-            <label class="label">新しいパスワード</label>
-            <div class="field has-addons-fullwidth has-addons-centered">
-            <p class="control has-icons-left">';
-     echo '<input type="text"  class="input   is-primary is-normal is-focused " name="shin" value="">';
-     echo '<span class="icon is-small is-left">
-            <i class="fas fa-key"></i>
-            </span>
-            </p>
-            </div>
-            </div>';
-
      echo ' <div class="control m-1">
             <label class="label">郵便番号</label>
             <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">';
 
-     echo '<input type="text" class="input  is-normal is-focused "  name="postnum" value="',$postnum,'">';
+     echo '<input type="number" class="input  is-normal is-focused "  name="postnum" value="',$postnum,'">';
      echo '<span class="icon is-small is-left">
             <i class="has-text-weight-bold">〒</i>
              </span>
@@ -99,11 +74,9 @@ if(isset($_SESSION['customer'])){
         </p>
         </div>
         </div>';
-
-     echo ' <button type="submit" class="button is-danger m-3">更新</button>';
-     echo ' <button onclick="mypage.php" class="button is-info m-3">キャンセル</button>';
-echo '</form>';
-?>
+       ?>
+     <button onclick="location.href='updatecomp.php'" class="button is-danger m-3">更新</button>
+       <button class="button is-link m-3" onclick="location.href='mypage.php'">キャンセル</button>
     </div>
     </div>
     </div>
