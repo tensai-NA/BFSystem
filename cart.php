@@ -49,7 +49,7 @@
             echo $row['color_mei'],'<br>';
             echo $row['price'],'円','<br>';  
             echo '数量 ',$row['num'],'<br>';  
-            //echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
+            echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
 
             /*'
                 if($flag==0){

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 
 <!DOCTYPE html>
@@ -65,13 +66,7 @@
                 }
                 
         ?>
-        <?php
-      echo '<select name="num">';
-      for($i=1; $i<=12;$i++) {
-      echo '<option value="', $i, '">', $i, '</option>';
-      }
-      ?>
-      </select>
+      個数<input type="number" name="num" min="0">
         <button type="submit">カートに入れる</button> 
         </form>
     </div>
