@@ -189,21 +189,27 @@ if(isset($_POST['price'])){
      
     } 
 
-  
-    echo '<form action="index.php" method="get">';
+    $count=$sql-> rowCount();
+    if($count==0){
+      echo '<p class="m-4 has-text-centered ">検索に一致する商品がありません';
+    }else{
+   
+     echo ' <div class="columns">';
     foreach($sql as $row){
        $id=$row['shohin_id'];
        echo'<div class="column">';
        echo '<div style="background:white; padding: 10px;">';
        echo '<div class="section"> <div class="columns is-variable is-8">';
-       echo '<p><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
-       echo '<p><a href="detail.php?id=',$row['shohin_id'],'">',$row['shohin_mei'],'</a></p>';
-       echo '<p class="has-text-left">',$row['price'],'円 </p>';
+       echo '<a href="detail.php?id=',$id,'"><p><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
+       echo '<p class="has-text-center">',$row['shohin_mei'],'</a></p>';
+       echo '<p class="has-text-center">',$row['price'],'円 </p>';
        echo '</div></div></div></div>';
     }
-    echo'<form>';
+  }
+  
  
    ?>
+   </div>
 <!--　デザイン変更予定-->
 <style>
  
