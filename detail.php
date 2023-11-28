@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
           
         </ul>
         <?php
-        /*
+            /*
             if(isset($_SESSION['customer'])){
                 $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
                 $pdo=new PDO($connect,USER,PASS);
@@ -42,12 +43,14 @@
 
                 echo '<form method="post" action="cart.php">';        
                 foreach($sql as $row){
+                    echo '<img src="' ,$row['shohin_img'], '">','<br>';
                     echo $row['shohin_mei'],'<br>';
                     echo $row['price'],'円','<br>';
                 }
 
             }
-            */
+      */
+            
             $id = $_GET['id']; //ログイン済みの処理
                 $pdo=new PDO($connect,USER,PASS);
                 $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price
@@ -61,14 +64,16 @@
                     echo $row['shohin_mei'],'<br>';
                     echo $row['price'],'円','<br>';
                 }
-
+                
         ?>
+      個数<input type="number" name="num" min="0">
         <button type="submit">カートに入れる</button> 
         </form>
     </div>
 
     <div class="notlogin">
         <?php
+        
             if(!isset($_SESSION['customer'])){
                 echo '<p>カートに追加するにはログインしてください</p>';
                 echo '<p><a href="login.php">ログインはこちら</a></p>';

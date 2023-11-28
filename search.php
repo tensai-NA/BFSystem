@@ -34,21 +34,85 @@
 
 <!--以下　検索結果表示-->
 <?php
+   $pdo=new PDO($connect,USER,PASS);
+    $cate="";
+    $brand="";
+    $color="";
+    $price="";
 
-if (isset($_POST['brand']) && is_array($_POST['brand'])) {
-    $brand = $_POST['brand'];
-}
-if (isset($_POST['color']) && is_array($_POST['color'])) {
-    $color= $_POST['color'];
-}
+    if(isset($_POST['cate'])){
+    foreach($_POST['cate'] as $ca){
+        $arr0[] = " category = '$ca' ";
+        }
+        $a = implode(" OR ",$arr0);
+        $cate=" AND ($a)";
+      }
+    if(isset($_POST['brand'])){
+    foreach($_POST['brand'] as $br){
+        $arr1[] = " brand = '$br' ";
+        }
+        $b = implode(" OR ",$arr1);
+        $brand=" OR ($b) ";
+      }
+      if(isset($_POST['color'])){
+        foreach($_POST['color'] as $co){
+            $arr2[] = " color= '$co' ";
+            }
+            $c = implode(" OR ",$arr2);
+            $color="OR ($c) ";
+          }
+
+          $sql ="SELECT MAX(price) AS `max` FROM Shohin";
+          $stmt = $pdo->query( $sql );
+       
+         
+          $prices=array(
+            0 =>1500,
+            1500=>5000,
+            5000=>10000,
+            10000=>30000,
+            8=>  $stmt
+         );
+
+      if(isset($_POST['price'])){
+          foreach($_POST['price'] as $pr){
+            $arr3[] = $pr;
+                }
+
+                $min=$arr3[0];
+                $max=$arr3[0];
+            
+                for ($v=1;$v<count($arr3);$v++){
+                
+                  if($min>$arr3[$v]){
+                     $min=$arr3[$v];
+                  }
+                }
+                for ($i=1;$i<count($arr3);$i++){
+                  
+                  if($max<$arr3[$i]){
+                     $max=$arr3[$i];
+                     $count=$i;
+                  }
+                }
+                $max=$prices[$max];
+                $price="AND (price between $min and $max)";  
+              }
+
 
     if(isset($_POST['shohin_mei'])){
-       
-    $sql=$pdo->prepare('select * from Shohin where shohin_mei like ?');
-    $sql->execute(['%'.$_POST['shohin_mei'].'%']);
+      $sql = $pdo->query("select * from Shohin where  (shohin_mei like ?)  $price $cate  $brand  $color ");
+    $sql->execute($_POST['shohin_mei']);
     }else{
-       $sql=$pdo->query('select * from Shohin');
+       $sql=$pdo->query("select * from Shohin where  $price $cate  $brand  $color ");
+       $sql->execute();
     }
+
+    $count=$sql-> rowCount();
+    if($count==0){
+      echo '検索に一致する商品がありません';
+    }else{
+  
    
     foreach($sql as $row){
        $id=$row['shohin_id'];
@@ -60,7 +124,7 @@ if (isset($_POST['color']) && is_array($_POST['color'])) {
        echo '<p class="has-text-left">',$row['price'],'円 </p>';
        echo '</div></div></div></div>';
     }
-
+  }
  
    ?>
 <!--　デザイン変更予定-->
