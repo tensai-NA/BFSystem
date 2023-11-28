@@ -123,12 +123,12 @@ if(isset($_POST['price'])){
           }
 
           if($flag2 &&  $flagprice){
-            $price=" '$price' AND ";
+            $price= $price ." AND ";
           }
            
 
 
-
+          
 
   
 
@@ -136,13 +136,13 @@ if(isset($_POST['price'])){
       if($flag1){
           $price =" AND '$price'";
       }
-      echo $price,'<br>';           
-      echo $cate,'<br>';
+      $sql = $pdo->prepare("select * from Shohin where  (shohin_mei like ?) ? ? ? ? ");
+      echo $_POST["shohin_mei"],'<br>';
+      echo  $cate,'<br>';
       echo $brand,'<br>';
-      echo $color,'<br>'; 
-      $sql = $pdo->prepare("select * from Shohin where  (shohin_mei like ?)  $price $cate  $brand  $color ");
-      
-      $sql->execute('%'.$_POST['shohin_mei'].'%');
+      echo $color,'<br>';
+      echo $price,'<br>';
+      $sql->execute([$_POST['shohin_mei'],$price,$cate,$brand,$color]);
     }else {
       if($flag1){
        $sql=$pdo->prepare("select * from Shohin where  $price $cate  $brand  $color ");
