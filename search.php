@@ -59,14 +59,14 @@ if(isset($_POST['price'])){
   
   foreach ($_POST['price'] as $pr){
       if($pr==8){
-        $arr3[] = " price >=30000";
+        $arr3[] = "price >=30000";
       }else{
-        $arr3[] = " price between '$pr' and '$prices[$pr]' ";
+        $arr3[] = " price between $pr and $prices[$pr] ";
       }
      
 }
     $d = implode("or",$arr3);
-    $price="  ($d)  ";
+    $price="  ( $d )  ";
     $flag1=true;
     $flagprice=true;
    
@@ -98,7 +98,7 @@ if(isset($_POST['price'])){
           $brand=" $b ";
           $flag1=true;
           if($flag2){
-            $brand=" OR '$brand' ";
+            $brand=" OR $brand ";
           }else{
             $flag2=true;
           }
@@ -115,37 +115,46 @@ if(isset($_POST['price'])){
               $color=" $c ";
               $flag1=true;
               if($flag2){
-                $color=" OR '$color' ";
+                $color=" OR $color ";
               }else{
             $flag2=true;
               }
              
           }
 
+         
+           
           if($flag2 &&  $flagprice){
             $price= $price ." AND ";
           }
            
 
-
           
 
   
 
-    if(isset($_POST['shohin_mei'])){/*何も入力していなくてもtrueになっている */
+    if(isset($_POST['shohin_mei'])){
       if($flag1){
-          $price =" AND '$price'";
+          $price =" AND $price";
       }
-      $sql = $pdo->prepare("select * from Shohin where  (shohin_mei like ?) ? ? ? ? ");
-      echo $_POST["shohin_mei"],'<br>';
+     
+       
+        $sql = $pdo->prepare("select * from Shohin where  (shohin_mei like ?) ? ? ? ? ");
+     
+       
+      
+      echo $_POST["shohin_mei"],'<br>';/*テスト用 */
+      echo $price,'<br>';
       echo  $cate,'<br>';
       echo $brand,'<br>';
       echo $color,'<br>';
-      echo $price,'<br>';
-      $sql->execute([$_POST['shohin_mei'],$price,$cate,$brand,$color]);
+   
+      $sql->execute(['%'.$_POST['shohin_mei'].'%',$price,$cate,$brand,$color]);
+     
     }else {
       if($flag1){
-       $sql=$pdo->prepare("select * from Shohin where  $price $cate  $brand  $color ");
+      
+          $sql=$pdo->prepare("select * from Shohin where  $price $cate  $brand  $color ");
       }else{
         $sql=$pdo->prepare("select * from Shohin");
       }
