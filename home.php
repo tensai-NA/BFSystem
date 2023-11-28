@@ -54,7 +54,7 @@
     <div class="m-4 has-text-centered ">
         <h2>おすすめ</h2>
         <!--全顧客で一緒の表示にする-->
-            <img src="product_img/lip1.png" width="256px" height="256px">
+            <a href="detail.php?id=8"><img src="product_img/lip1.png" width="256px" height="256px"></a>
             <img src="product_img/perfume4.jpg" width="256px" height="256px">
             <img src="product_img/nail2.png" width="256px" height="256px">
     </div>

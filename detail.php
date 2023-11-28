@@ -33,7 +33,7 @@
 <div class="m-4 has-text-centered ">
     <div class="head">
         <p class="back">
-            <a href="search.php"><i class="fas fa-long-arrow-alt-left fa-3x" ></i></a>
+            <a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-3x" ></i></a>
         </p>
         <p class="headitems">
             <a href="cart.php"><i class="fas fa-shopping-cart fa-3x" ></i></a>
