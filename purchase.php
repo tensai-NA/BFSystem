@@ -90,7 +90,8 @@
 
             $total = 0;
             foreach($sql as $row){
-                $num = 'quantity_',$row['shohin_id'];
+                $num = $row['shohin_id'];
+                //$num = 'quantity_',$row['shohin_id'];
                 if(in_array($row['shohin_id'], $check) != false){
                     echo $row['shohin_mei'],'<br>';
                     echo 'カラー：',$row['color_mei'],'<br>';

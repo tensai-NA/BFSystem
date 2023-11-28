@@ -2,11 +2,12 @@
 <?php
 $pdo=new PDO($connect,USER,PASS);
 if(isset($_POST['add'])){   // 追加ボタンが押された処理
-    $sql=$pdo->prepare("insert into Shohin (shohin_mei,price,shohin_img) value (?, ?, ?)");
-    $sql->execute([$_POST['name'], $_POST['price'], $_POST['img']]);
+    $sql=$pdo->prepare("insert into Shohin value (null,?,?,?,?,?,null,?)");
+    $sql->execute([$_POST['name'], $_POST['price'],$_POST['color'],$_POST['brand'],$_POST['cate'],$_POST['img']]);
+
 }else if(isset($_POST['update'])){  //　更新ボタンが押された処理
-    $sql=$pdo->prepare("update Shohin set shohin_mei=? ,price=? ,shohin_img=? where shohin_id=?");
-    $sql->execute([$_POST['name'], $_POST['price'], $_POST['img'], $_POST['id']]);
+    $sql=$pdo->prepare("update Shohin set shohin_mei=?,price=?,color=?,brand=?,category=?,shohin_img=? where shohin_id=?");
+    $sql->execute([$_POST['name'], $_POST['price'],$_POST['color'],$_POST['brand'],$_POST['cate'],$_POST['img'],$_POST['id']]);
 }else if(isset($_POST['del'])){ //削除ボタンが押された処理
     $sql=$pdo->prepare("delete from Shohin where shohin_id=?");
     $sql->execute([$_POST['id']]);
@@ -59,6 +60,8 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
             </form>
         </tr>
     </table>
+
+
         <?php
             }
 
