@@ -74,7 +74,7 @@
                     echo $row['price'],'円','<br>';
                 }
             ?>
-      個数<input type="number" name="num" min="0">
+      <p>個数<input type="number" name="num" min="0"></p>
         <button name="tuika">カートに入れる</button> 
         </form>
         <!-- </form> -->
