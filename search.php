@@ -35,76 +35,120 @@
 <!--以下　検索結果表示-->
 <?php
    $pdo=new PDO($connect,USER,PASS);
-    $cate="";
+    $cate="";/*それぞれの項目のsql文を格納 */
     $brand="";
     $color="";
     $price="";
+    $flag1=false;/*price～colorまで１つでもあるかどうか*/ 
+    $flag2=false/*cate～colorまで１つでもあるかどうか*/;
+    $flagprice=false;
+
+
+    
+    $prices=
+    array(
+      0 =>1500,
+      1500=>5000,
+      5000=>10000,
+      10000=>30000
+   
+   );
+   
+   
+if(isset($_POST['price'])){
+  
+  foreach ($_POST['price'] as $pr){
+      if($pr==8){
+        $arr3[] = " price >=30000";
+      }else{
+        $arr3[] = " price between '$pr' and '$prices[$pr]' ";
+      }
+     
+}
+    $d = implode("or",$arr3);
+    $price="  ($d)  ";
+    $flag1=true;
+    $flagprice=true;
+   
+}
 
     if(isset($_POST['cate'])){
     foreach($_POST['cate'] as $ca){
         $arr0[] = " category = '$ca' ";
         }
         $a = implode(" OR ",$arr0);
-        $cate=" AND ($a)";
+
+
+          $cate=" $a ";
+          $flag1=true;
+          $flag2=true;
+    
+      
       }
+       
+      
+
     if(isset($_POST['brand'])){
     foreach($_POST['brand'] as $br){
         $arr1[] = " brand = '$br' ";
         }
         $b = implode(" OR ",$arr1);
-        $brand=" OR ($b) ";
+    
+       
+          $brand=" $b ";
+          $flag1=true;
+          if($flag2){
+            $brand=" OR '$brand' ";
+          }else{
+            $flag2=true;
+          }
+      
       }
+
       if(isset($_POST['color'])){
         foreach($_POST['color'] as $co){
             $arr2[] = " color= '$co' ";
             }
             $c = implode(" OR ",$arr2);
-            $color="OR ($c) ";
+           
+          
+              $color=" $c ";
+              $flag1=true;
+              if($flag2){
+                $color=" OR '$color' ";
+              }else{
+            $flag2=true;
+              }
+             
           }
 
-          $sql ="SELECT MAX(price) AS `max` FROM Shohin";
-          $stmt = $pdo->query( $sql );
-       
-         
-          $prices=array(
-            0 =>1500,
-            1500=>5000,
-            5000=>10000,
-            10000=>30000,
-            8=>  $stmt
-         );
-
-      if(isset($_POST['price'])){
-          foreach($_POST['price'] as $pr){
-            $arr3[] = $pr;
-                }
-
-                $min=$arr3[0];
-                $max=$arr3[0];
-            
-                for ($v=1;$v<count($arr3);$v++){
-                
-                  if($min>$arr3[$v]){
-                     $min=$arr3[$v];
-                  }
-                }
-                for ($i=1;$i<count($arr3);$i++){
-                  
-                  if($max<$arr3[$i]){
-                     $max=$arr3[$i];
-                     $count=$i;
-                  }
-                }
-                $max=$prices[$max];
-                $price="AND (price between $min and $max)";  
-              }
+          if($flag2 &&  $flagprice){
+            $price=" '$price' AND ";
+          }
+           
 
 
-    if(isset($_POST['shohin_mei'])){
-      $sql = $pdo->query("select * from Shohin where  (shohin_mei like ?)  $price $cate  $brand  $color ");
-    $sql->execute($_POST['shohin_mei']);
-    }else{
-       $sql=$pdo->query("select * from Shohin where  $price $cate  $brand  $color ");
+
+
+  
+
+    if(isset($_POST['shohin_mei'])){/*何も入力していなくてもtrueになっている */
+      if($flag1){
+          $price =" AND '$price'";
+      }
+      echo $price,'<br>';           
+      echo $cate,'<br>';
+      echo $brand,'<br>';
+      echo $color,'<br>'; 
+      $sql = $pdo->prepare("select * from Shohin where  (shohin_mei like ?)  $price $cate  $brand  $color ");
+      
+      $sql->execute('%'.$_POST['shohin_mei'].'%');
+    }else {
+      if($flag1){
+       $sql=$pdo->prepare("select * from Shohin where  $price $cate  $brand  $color ");
+      }else{
+        $sql=$pdo->prepare("select * from Shohin");
+      }
        $sql->execute();
     }
 
