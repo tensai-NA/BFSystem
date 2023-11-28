@@ -11,7 +11,7 @@
     <title>カート画面</title>
 </head>
 <body>
-    <button type="button" onclick="history.back()">←</button>
+<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-3x" ></i></a>
     <h2>カート</h2>
     <a href="home.php"><i class="fas fa-home"></i></a>
 
