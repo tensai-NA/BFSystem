@@ -30,7 +30,6 @@ if(isset($_SESSION['customer'])){
     $postnum=$_SESSION['customer']['postnum'];
     $address=$_SESSION['customer']['address'];
 }
-
      echo '<input type="text"  class="input  is-normal is-focused m-1" name="user_sei" value="',$user_sei,'">
            <input type="text" class="input  is-normal is-focused m-1"  name="user_mei" value="',$user_mei,'">';
      echo ' </div></div>';
@@ -75,8 +74,10 @@ if(isset($_SESSION['customer'])){
         </div>
         </div>';
        ?>
-     <button onclick="location.href='updatecomp.php'" class="button is-danger m-3">更新</button>
-       <button class="button is-link m-3" onclick="location.href='mypage.php'">キャンセル</button>
+    <button type="submit" class="button is-danger m-3">更新</button>
+</form>
+
+    <button onclick="location.href='mypage.php'" class="button is-link m-3">キャンセル</button>
     </div>
     </div>
     </div>
