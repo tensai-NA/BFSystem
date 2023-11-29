@@ -124,6 +124,7 @@
     <hr>
 
     <?php
+    $repeat=0;
     if(isset($_SESSION['customer'])){
         $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
         $pdo=new PDO($connect,USER,PASS);
