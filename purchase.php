@@ -54,7 +54,7 @@
             $pdo=new PDO($connect,USER,PASS);
             $sql=$pdo->query("select point from User where user_id='".$id."'");
             $point = $sql->fetch(PDO::FETCH_COLUMN);
-            echo '<p>利用可能ポイント',$point,'pt</p>';
+            echo '<p>利用可能ポイント：',$point,'pt</p>';
         }
         ?>
 
@@ -90,8 +90,7 @@
 
             $total = 0;
             foreach($sql as $row){
-                $num = $row['shohin_id'];
-                //$num = 'quantity_',$row['shohin_id'];
+                $num = 'quantity_'.$row['shohin_id'];
                 if(in_array($row['shohin_id'], $check) != false){
                     echo $row['shohin_mei'],'<br>';
                     echo 'カラー：',$row['color_mei'],'<br>';
