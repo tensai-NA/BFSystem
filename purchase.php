@@ -54,7 +54,7 @@
             $pdo=new PDO($connect,USER,PASS);
             $sql=$pdo->query("select point from User where user_id='".$id."'");
             $point = $sql->fetch(PDO::FETCH_COLUMN);
-            echo '<p>利用可能ポイント',$point,'pt</p>';
+            echo '<p>利用可能ポイント：',$point,'pt</p>';
         }
         ?>
 
