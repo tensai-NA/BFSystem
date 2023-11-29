@@ -16,7 +16,7 @@
 <h2>マイページ</h2>
 <?php //エラーメッセージ
     if(!isset($_SESSION['customer'])){
-        echo '<p><a href="login.php">ログインはこちら</a></p>';
+        echo '<p>マイページを閲覧するには<a href="login.php">ログイン</a>してください</p>';
         exit();
     }
 
