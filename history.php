@@ -22,11 +22,13 @@
                     <h1 class="title is-3">購入履歴</h1>
                 </div>
                 <div class="level-right">
+                </div>
+        </nav>
                     <?php
                         if(isset($_SESSION['customer'])){
                             $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
                             $pdo=new PDO($connect,USER,PASS);
-                            $sql=$pdo->query("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price
+                            $sql=$pdo->query("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price, Shohin.shohin_img
                                     from OrderA,Shohin,Color,History
                                     where History.user_id = OrderA.user_id
                                     and   History.shohin_id = Shohin.shohin_id
@@ -34,16 +36,16 @@
                                     and OrderA.user_id = '".$id."'");
  
                             foreach($sql as $row){
+                                echo '<p class="m-4 has-text-left"><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
                                 echo '<h2>',$row['buy_date'],'</h2>';
-                                echo '商品名',$row['shohin_mei'],'<br>';
+                                echo '商品名:',$row['shohin_mei'],'<br>';
                                 echo '色：',$row['color_mei'],'<br>';
                                 echo '価格:￥',$row['price'],'<br>';
                                 echo '<hr>';
                             }
                         }
                     ?>
-                </div>
-        </nav>
+              
     </div>
     </body>
 </html>

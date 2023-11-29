@@ -34,35 +34,182 @@
 
 <!--以下　検索結果表示-->
 <?php
+   $pdo=new PDO($connect,USER,PASS);
+    $cate="";/*それぞれの項目のsql文を格納 */
+    $brand="";
+    $color="";
+    $price="";
+    $flag1=false;/*price～colorまで１つでもあるかどうか*/ 
+    $flag2=false/*cate～colorまで１つでもあるかどうか*/;
+    $flagprice=false;
+    $sql_search="select * from Shohin where  (shohin_mei like ?)";
+    $arr[]="%".$_POST['shohin_mei']."%";
+    $pricef=false;/*それぞれの項目で$sql_searchに入るのが最初か判断 */
+    $catef=false;
+    $brandf=false;
+    $colorf=false;
+    
+    
+    $prices=
+    array(
+      0 =>1500,
+      1500=>5000,
+      5000=>10000,
+      10000=>30000
 
-if (isset($_POST['brand']) && is_array($_POST['brand'])) {
-    $brand = $_POST['brand'];
+   );
+   
+   
+if(isset($_POST['price'])){
+    $sql_search= $sql_search ." AND (" ;
+  
+  foreach ($_POST['price'] as $pr){
+    if(!$pricef){
+      $pricef=true;
+      if($pr==8){
+        $sql_search=  $sql_search . " price >= ?";
+        $arr[]  = 30000;
+      }else{
+        $sql_search=  $sql_search." price between ? and  ? ";
+        $arr[]  = $pr;
+        $arr[]  = $prices[$pr];
+      }
+    }else{
+      if($pr==8){
+        $sql_search=  $sql_search . " AND price >= ?";
+        $arr[]  = 30000;
+      }else{
+        $sql_search=  $sql_search." AND price between ? and  ? ";
+        $arr[]  = $pr;
+        $arr[]  = $prices[$pr];
+      }
+    }
+     
 }
-if (isset($_POST['color']) && is_array($_POST['color'])) {
-    $color= $_POST['color'];
+    $sql_search= $sql_search .") ";
+    $flag1=true;
+    $flagprice=true;
+   
 }
+
+    if(isset($_POST['cate'])){
+
+      if($flag1){
+        $sql_search= $sql_search ." AND ";
+      }else{
+        $flag1=true;
+      }
+      $flag2=true;
+
+     
+    
+    foreach($_POST['cate'] as $ca){
+      if(!$catef){
+        $catef=true;
+        $sql_search=  $sql_search . "  category = ?";
+        $arr[] = $ca;
+      }else{
+      $sql_search=  $sql_search . " or category = ?";
+      $arr[] = $ca;
+        }
+      }
+    
+        
+    
+      
+      }
+       
+      
+
+    if(isset($_POST['brand'])){
+
+      if($flag1 && !$flag2){
+        $sql_search= $sql_search ." AND ";
+      }else if($flag2){
+        $sql_search= $sql_search ." OR ";
+      }else{
+       
+      }
+      $flag1=true;
+      $flag2=true;
+    foreach($_POST['brand'] as $br){
+      if(!$brandf){
+          $brandf=true;
+          $sql_search=  $sql_search . "  brand = ?";
+          $arr[] = $br;
+      }else{
+
+      $sql_search=  $sql_search . " or brand = ?";
+      $arr[] = $br;
+      }
+        }
+    
+      
+      }
+
+      if(isset($_POST['color'])){
+
+          if($flag1 && !$flag2){
+            $sql_search= $sql_search ." AND ";
+          }else if($flag2){
+         $sql_search= $sql_search ." OR ";
+         }else{
+            
+          }
+          $flag1=true;
+          $flag2=true;
+        foreach($_POST['color'] as $co){
+          if(!$colorf){
+            $colorf=true;
+            $sql_search=  $sql_search . " color = ?";
+            $arr[] = $co;
+          }else{
+          $sql_search=  $sql_search . " or color = ?";
+          $arr[] = $co;
+            }
+          }
+              
+             
+          }
+
+         
+           
+         
+           
+
+
+  
 
     if(isset($_POST['shohin_mei'])){
+    
+     
        
-    $sql=$pdo->prepare('select * from Shohin where shohin_mei like ?');
-    $sql->execute(['%'.$_POST['shohin_mei'].'%']);
+        $sql = $pdo->prepare($sql_search);
+        $sql->execute($arr);
+     
+    } 
+
+    $count=$sql-> rowCount();
+    if($count==0){
+      echo '<p class="m-4 has-text-centered ">検索に一致する商品がありません';
     }else{
-       $sql=$pdo->query('select * from Shohin');
-    }
    
+     echo ' <div class="columns">';
     foreach($sql as $row){
        $id=$row['shohin_id'];
        echo'<div class="column">';
        echo '<div style="background:white; padding: 10px;">';
        echo '<div class="section"> <div class="columns is-variable is-8">';
-       echo '<p><img src="images/',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
-       echo '<p><a href="detail.php?id=',$id,'">',$row['shohin_mei'],'</a></p>';
-       echo '<p class="has-text-left">',$row['price'],'円 </p>';
+       echo '<a href="detail.php?id=',$id,'"><p><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
+       echo '<p class="has-text-center">',$row['shohin_mei'],'</a></p>';
+       echo '<p class="has-text-center">',$row['price'],'円 </p>';
        echo '</div></div></div></div>';
     }
-
+  }
+  
  
    ?>
+   </div>
 <!--　デザイン変更予定-->
 <style>
  

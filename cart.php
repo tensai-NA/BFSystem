@@ -11,7 +11,7 @@
     <title>カート画面</title>
 </head>
 <body>
-    <button type="button" onclick="history.back()">←</button>
+<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-3x" ></i></a>
     <h2>カート</h2>
     <a href="home.php"><i class="fas fa-home"></i></a>
 
@@ -47,9 +47,9 @@
 
             echo '<a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a><br>';
             echo $row['color_mei'],'<br>';
-            echo $row['price'],'円','<br>';  
-            echo '数量 ',$row['num'],'<br>';  
-            //echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
+            echo '￥',$row['price'],'<br>';  
+            //echo '数量 ',$row['num'],'<br>';  
+            echo '数量','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1" />','<br>';
 
             /*'
                 if($flag==0){

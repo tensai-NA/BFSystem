@@ -54,7 +54,7 @@
             $pdo=new PDO($connect,USER,PASS);
             $sql=$pdo->query("select point from User where user_id='".$id."'");
             $point = $sql->fetch(PDO::FETCH_COLUMN);
-            echo '<p>利用可能ポイント',$point,'pt</p>';
+            echo '<p>利用可能ポイント：',$point,'pt</p>';
         }
         ?>
 
@@ -90,19 +90,21 @@
 
             $total = 0;
             foreach($sql as $row){
+                $num = 'quantity_'.$row['shohin_id'];
                 if(in_array($row['shohin_id'], $check) != false){
                     echo $row['shohin_mei'],'<br>';
                     echo 'カラー：',$row['color_mei'],'<br>';
                     echo '価格：￥',$row['price'],'<br>';
                     $total = $row['num'] * $row['price'];
                     echo '小計：￥',$total,'<br>';
-                    $sql = $pdo -> prepare('update Cart set flag = 0 where user_id = ? and shohin_id = ? ');
+                    $sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
                 }else{
-                    $sql = $pdo -> prepare('update Cart set flag = 1 where user_id = ? and shohin_id = ? ');
+                    $sql = $pdo -> prepare('update Cart set flag = 1, num = ?  where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
                 }
-                $sql -> execute([$id,$row['shohin_id']]);
+                $count = isset($_POST[$num])?$_POST[$num] : $row['num'];
+                $sql -> execute([$count, $id,$row['shohin_id']]);
 
                 $his=$pdo->prepare("select shohin_id from History
                 where user_id = ?

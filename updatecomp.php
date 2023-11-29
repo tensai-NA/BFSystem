@@ -20,10 +20,9 @@ $msg = '';
                 $_POST['user_sei'],$_POST['user_mei'],$_POST['mail'],
                 $_POST['postnum'],$_POST['address'],$user_id]);
 
-            $sele=$pdo->prepare("select * from where id=?");
+            $sele=$pdo->prepare("select * from User where user_id=?");
             $sele->execute([$user_id]);
             foreach($sele as $row){
-                $_SESSION['customer']=[
                     $_SESSION['customer']=[
                         'user_id'=>$row['user_id'],
                         'user_sei'=>$row['user_sei'],
@@ -34,7 +33,7 @@ $msg = '';
                         'point'=>$row['point'],
                         'address'=>$row['address'],
                         'password'=>$row['password']
-                    ]]; 
+                    ]; 
             }
                 $msg = '更新が完了しました';
         }

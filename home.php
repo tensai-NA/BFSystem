@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
     <title>ホーム画面</title>
 </head>
 <body>
@@ -19,7 +21,7 @@
 <div class="level-left">
     <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
 </div>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
+   
 
 
   <div class="level-right">
@@ -27,9 +29,9 @@
     </div>
 </nav>
    
-<script src="https://code.jquery.com/jquery.min.js"></script>       
  
- <div class="A  "><i class="fas fa-search"></i>　search</div> 
+<script src="https://code.jquery.com/jquery.min.js"></script>
+ <div class="A"><i class="fas fa-search"></i>　search</div> 
  <?php require 'kyotu/searchbox.php'?>
 
   
@@ -41,7 +43,7 @@
             $pdo=new PDO($connect,USER,PASS);
             $sql=$pdo->query("select point from User where user_id='".$id."'");
             $point = $sql->fetch(PDO::FETCH_COLUMN);
-            echo '<p>マイポイント: ',$point,'pt</p>'   ; 
+            echo '<p>マイポイント: ',$point,'pt</p>'; 
         }
         
     ?>
@@ -54,11 +56,36 @@
     <div class="m-4 has-text-centered ">
         <h2>おすすめ</h2>
         <!--全顧客で一緒の表示にする-->
-            <img src="product_img/lip1.png" width="256px" height="256px">
-            <img src="product_img/perfume4.jpg" width="256px" height="256px">
-            <img src="product_img/nail2.png" width="256px" height="256px">
+  
+        <div class="sliderArea">
+        <div class="full-screen-o slider">
+        <div>
+            <a href="detail.php?id=8"><img src="product_img/lip1.png"class="img-item"></a>
+         </div>
+        <div>
+            <img src="product_img/perfume4.jpg" class="img-item">
+        </div>
+        <div>
+            <img src="product_img/nail2.png" class="img-item">
+        </div>
+    </div>
+    </div>
+
+    <div class="m-4">
+        <p>新商品</p>
+
+    </div>
+
+
+
+
     </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery.min.js"></script> 
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/slick.min.js"></script>    
+    <script src="js/home.js"></script> 
+    
 </body>
 </html>

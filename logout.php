@@ -21,9 +21,8 @@
     </p>
     <form action="login.php" method="post">
         <p class="mt-6">
-          <button type="submit" name="logout" class="button is-danger is-rounded is-normal">ログアウトする➝</button>
     <form action="logoutcomp.php" method="post">
-   
+    <button type="submit" name="logout" class="button is-danger is-rounded is-normal">ログアウトする➝</button>
     </form>
 </p>
 <p class="mb-5">

@@ -4,7 +4,7 @@
                 <h5 class="title is-5">検索</h5>
           
                 <div class="control m-1">
-        <label class="label">商品名</label>
+       
         <div class="field has-addons-fullwidth has-addons-centered">
             <p class="control has-icons-left">
                 <input class="input is-success  is-normal is-focused "  type="text" name="shohin_mei"  placeholder="商品名">
@@ -17,26 +17,42 @@
 
                <div class="B m-1  has-text-left"> 絞り込み <i class="fas fa-angle-down"></i></div>
             <div class="shibori has-text-left ml-6 mt-2">
-               
-           <div class="C m-1  has-text-left"> ブランド <i class="fas fa-angle-down"></i></div> 
+
+            <div class="C m-1  has-text-left"> カテゴリー <i class="fas fa-angle-down"></i></div> 
            <div class ="C-main m-5">  
-           <form> 
+          
+           <p class="is-size-5 m-1"><label><input id="checkAll" type="checkbox"  name="cate[]" value="checkall"/>全てのカテゴリー</label></p><!--押すとすべて選択に-->
+     <?php
+           $pdo=new PDO($connect, USER, PASS);
+           $sql=$pdo->prepare('select  * from Categori');
+           $sql->execute();
+           foreach($sql as $row){
+            echo '<label class="mr-3"><input  type="checkbox" class="cate"  name="cate[]" value="',$row['cate_code'],'" />', $row['cate_mei'],'</label>';
+          
+         }
+           ?>
+           </div>
+     
+               
+           <div class="D m-1  has-text-left"> ブランド <i class="fas fa-angle-down"></i></div> 
+           <div class ="D-main m-5">  
+         
            <p class="is-size-5 m-1"><label><input id="checkAll1" type="checkbox"  name="name[]" value="checkall"/>全てのブランド</label></p><!--押すとすべて選択に-->
      <?php
            $pdo=new PDO($connect, USER, PASS);
            $sql=$pdo->prepare('select  * from Brand');
            $sql->execute();
            foreach($sql as $row){
-            echo '<label class="mr-3"><input  type="checkbox" class="brand"  name="brand[]" value="',$row['brand_mei'],'" />', $row['brand_mei'],'</label>';
+            echo '<label class="mr-3"><input  type="checkbox" class="brand"  name="brand[]" value="',$row['brand_code'],'" />', $row['brand_mei'],'</label>';
           
          }
            ?>
            
-
+     
             </div>
-           <div class="D m-1  has-text-left"> カラー <i class="fas fa-angle-down"></i></div> 
+           <div class="E m-1  has-text-left"> カラー <i class="fas fa-angle-down"></i></div> 
 
-           <div class ="D-main m-5">   
+           <div class ="E-main m-5">   
            
            <p class="is-size-5 m-1"><label><input id="checkAll2" type="checkbox" name="color[]" value="all" />全てのカラー</label></p><!--押すとすべて選択に-->
            <?php
@@ -44,7 +60,7 @@
            $sql->execute();
            $count=0;
            foreach($sql as $row){
-            echo '<label class="mr-3"><input  type="checkbox" class="color" name="color[]" value="',$row['color_mei'],'" />', $row['color_mei'],'</label>';
+            echo '<label class="mr-3"><input  type="checkbox" class="color" name="color[]" value="',$row['color_code'],'" />', $row['color_mei'],'</label>';
             $count++;
           
          }
@@ -56,19 +72,35 @@
 
             </div>
                
-           <div class="E m-1  has-text-left"> 金額 <i class="fas fa-angle-down"></i></div>
+           <div class="F m-1  has-text-left"> 金額 <i class="fas fa-angle-down"></i></div>
            
-           <div class="E-main m-5"><!--最適化する予定-->
+           <div class="F-main m-5">
            
         
            
            <p class="is-size-5 m-1"><label class="mr-3"><input id="checkAll3" type="checkbox" name="price[]" value="0" />全ての価格<label></p>
-            <label class="mr-3"><input  type="checkbox" class="price" name="price[]" value="1" />0～1500円<label>
-            <label class="mr-3"><input  type="checkbox" class="price" name="price[]" value="2" />1500～5000円<label>
-            <label class="mr-3"><input  type="checkbox" class="price" name="price[]" value="3" />5000～10000円<label>
-            <label class="mr-3"><input  type="checkbox" class="price" name="price[]" value="4" />10000～30000円<label>
 
-       
+           <?php
+           $sql ="SELECT MAX(price) AS `max` FROM Shohin";
+           $stmt = $pdo->query( $sql );
+            $prices=
+            array(
+               0 =>1500,
+               1500=>5000,
+               5000=>10000,
+               10000=>30000
+            
+            );
+          
+           
+               foreach($prices as $key =>$value){
+                echo '<label class="mr-3"><input  type="checkbox" class="price" name="price[]" value="',$key,'" />', $key,'～',$value,'円</label>';
+               }
+               
+             
+
+       ?>
+            <label class="mr-3"><input  type="checkbox" class="price" name="price[]" value="8" />30000円～</label>
            
                 </div>
 </div>
