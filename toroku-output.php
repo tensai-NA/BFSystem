@@ -7,7 +7,7 @@
 $pdo=new PDO($connect,USER,PASS);
 $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
 if(isset($_SESSION['customer'])){
-    $id=$_SESSION['customer']['id'];
+    $id=$_SESSION['customer']['user_id'];
     $sql=$pdo->prepare('select * from User where id!=? and mail=?');
     $sql->execute([$id,$_POST['mail']]);
 }else{          //メールが一緒のとき

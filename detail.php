@@ -1,6 +1,25 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 
+<?php
+    $msgPass="";
+    $Link="";
+    $id = $_GET['id'];
+    if(isset($_POST["tuika"])){
+        if(isset($_SESSION['customer'])){ // login
+            // dbに保存
+            $user=$_SESSION['customer']['user_id']; //id 取得
+            $pdo=new PDO($connect,USER,PASS);
+            $sql=$pdo->prepare("insert into Cart values(?,?,?,0)");
+            $sql->execute([$user,$id,$_POST['num']]); //$idがとれてない 
+        }else{
+            // エラーメッセージ
+            $msgPass="カートに追加するにはログインしてください";
+            $Link="<a href='login.php'>ログインはこちら</a>";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,24 +33,15 @@
 <body>
 <div class="m-4 has-text-centered ">
     <div class="head">
-    
         <p class="back">
-            <a href="search.php"><i class="fas fa-long-arrow-alt-left fa-3x" ></i></a>
+            <a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
         </p>
-
         <p class="headitems">
-            <a href="cart.php"><i class="fas fa-shopping-cart fa-3x" ></i></a>
-            <a href="home.php"><i class="fas fa-home fa-3x"></i></a>
+            <a href="cart.php"><i class="fas fa-shopping-cart fa-2x" ></i></a>
+            <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
         </p>
-
     </div><hr>
-
-
     <div class="main">
-       
-        <ul>
-          
-        </ul>
         <?php
             /*
             if(isset($_SESSION['customer'])){
@@ -49,38 +59,34 @@
                 }
 
             }
-      */
-            
-            $id = $_GET['id']; //ログイン済みの処理
+      */   
+        echo '<form method="post" action="detail.php">';
+            $id = $_GET['id'];
+        
                 $pdo=new PDO($connect,USER,PASS);
-                $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price
+                $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,shohin_exp
                                     from Shohin
                                     where shohin_id = ?");
                 $sql->execute([$id]);
 
-                echo '<form method="post" action="cart.php">';        
+                // echo '<form method="post" action="cart.php">';
                 foreach($sql as $row){
                     echo '<img src="' ,$row['shohin_img'], '">','<br>';
                     echo $row['shohin_mei'],'<br>';
                     echo $row['price'],'円','<br>';
+                    echo $row['shohin_exp'],'<br>';
+
                 }
-                
-        ?>
-      個数<input type="number" name="num" min="0">
-        <button type="submit">カートに入れる</button> 
+            ?>
+      <p>個数<input type="number" name="num" min="0"></p>
+        <button name="tuika">カートに入れる</button> 
         </form>
+        <!-- </form> -->
+        <p><?= $msgPass ?></p>
+        <p><?= $Link ?></p>
     </div>
 
-    <div class="notlogin">
-        <?php
         
-            if(!isset($_SESSION['customer'])){
-                echo '<p>カートに追加するにはログインしてください</p>';
-                echo '<p><a href="login.php">ログインはこちら</a></p>';
-            exit();
-            }
-        ?>
         
-    </div>
 </body>
 </html>
