@@ -6,16 +6,12 @@
     $Link="";
     $id = $_GET['id'];
     if(isset($_POST["tuika"])){
-        if(isset($_SESSION['customer'])){ // login
+        if(isset($_SESSION['customer'])){ // roguinn  //すでに同じshohin_idがある場合、数量＋1,登録しない
             // dbに保存
-            $user=$_SESSION['customer']['user_id']; //id 取得
+            $user=$_SESSION['customer']['user_id'];
             $pdo=new PDO($connect,USER,PASS);
             $sql=$pdo->prepare("insert into Cart values(?,?,?,0)");
-            $sql->execute([$user,$id,$_POST['num']]); //$idがとれてない 
-        }else{
-            // エラーメッセージ
-            $msgPass="カートに追加するにはログインしてください";
-            $Link="<a href='login.php'>ログインはこちら</a>";
+            $sql->execute([$user,$id,$_POST['num']]);
         }
     }
 ?>
@@ -60,8 +56,6 @@
 
             }
       */   
-        echo '<form method="post" action="detail.php">';
-            $id = $_GET['id'];
         
                 $pdo=new PDO($connect,USER,PASS);
                 $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,shohin_exp
@@ -70,6 +64,7 @@
                 $sql->execute([$id]);
 
                 // echo '<form method="post" action="cart.php">';
+                echo '<form method="post" action="detail.php">';
                 foreach($sql as $row){
                     echo '<img src="' ,$row['shohin_img'], '">','<br>';
                     echo $row['shohin_mei'],'<br>';
@@ -79,7 +74,15 @@
                 }
             ?>
       <p>個数<input type="number" name="num" min="0"></p>
-        <button name="tuika">カートに入れる</button> 
+     <?php 
+     if(isset($_SESSION['customer'])){
+       echo '<button name="tuika">カートに入れる</button> ';
+      }else{
+        echo '<button name="tuika" class="button"  disabled>カートに入れる</button> ';
+        echo '<p>カートに追加するにはログインしてください</p>';
+        echo '<a href="login.php">ログインはこちら</a>';
+      }
+     ?>
         </form>
         <!-- </form> -->
         <p><?= $msgPass ?></p>
