@@ -4,6 +4,7 @@
 <?php
     $msgPass="";
     $Link="";
+    $id = $_GET['id'];
     if(isset($_POST["tuika"])){
         if(isset($_SESSION['customer'])){ // login
             // dbに保存
@@ -33,11 +34,11 @@
 <div class="m-4 has-text-centered ">
     <div class="head">
         <p class="back">
-            <a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-3x" ></i></a>
+            <a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
         </p>
         <p class="headitems">
-            <a href="cart.php"><i class="fas fa-shopping-cart fa-3x" ></i></a>
-            <a href="home.php"><i class="fas fa-home fa-3x"></i></a>
+            <a href="cart.php"><i class="fas fa-shopping-cart fa-2x" ></i></a>
+            <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
         </p>
     </div><hr>
     <div class="main">
@@ -61,8 +62,9 @@
       */   
         echo '<form method="post" action="detail.php">';
             $id = $_GET['id'];
+        
                 $pdo=new PDO($connect,USER,PASS);
-                $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price
+                $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,shohin_exp
                                     from Shohin
                                     where shohin_id = ?");
                 $sql->execute([$id]);
@@ -72,6 +74,8 @@
                     echo '<img src="' ,$row['shohin_img'], '">','<br>';
                     echo $row['shohin_mei'],'<br>';
                     echo $row['price'],'円','<br>';
+                    echo $row['shohin_exp'],'<br>';
+
                 }
             ?>
       <p>個数<input type="number" name="num" min="0"></p>
