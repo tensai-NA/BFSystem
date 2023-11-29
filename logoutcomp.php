@@ -15,9 +15,11 @@
     <?php
         if(isset($_SESSION['customer'])){
             unset($_SESSION['customer']);
-            echo 'ログアウトしました';
+            echo '<p>ログアウトしました</p>';
+            echo '<a href="home.php">ホームへ戻る</a>';
         }else{
-            echo 'すでにログアウトしています';
+            echo '<p>すでにログアウトしています</p>';
+            echo '<a href="home.php">ホームへ戻る</a>';
         }
     ?>
 </body>

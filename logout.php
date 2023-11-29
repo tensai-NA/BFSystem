@@ -19,18 +19,12 @@
     アドレスとパスワードが必要です
     </h6>
     </p>
-    <form action="login.php" method="post">
-        <p class="mt-6">
-    <form action="logoutcomp.php" method="post">
-    <button type="submit" name="logout" class="button is-danger is-rounded is-normal">ログアウトする➝</button>
-    </form>
+<p class="mt-6">
+    <button onclick="location.href='logoutcomp.php'" class="button is-danger is-rounded is-normal">ログアウトする➝</button>
 </p>
 <p class="mb-5">
-    <form action="mypage.php" method="post">
-        <button type="submit" name="cancel" class="button is-link is-rounded is-normal">キャンセル➝</button>
-        </p>
-    </form>
-</div>
+    <button onclick="location.href='mypage.php'" class="button is-link is-rounded is-normal">キャンセル➝</button>
 </p>
+</div>
 </body>
 </html>
