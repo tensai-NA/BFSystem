@@ -12,7 +12,18 @@ $msg = '';
         $sql=$pdo->prepare('select * from User where mail=?');
         $sql->execute([$_POST['mail']]);
     }
+    $minid=$pdo->prepare("select min(del_id) as minid from Delivery where user_id =?");
+    $minid->execute([$user_id]);
+    foreach($minid as $row){
+       $minids=$row['minid'];
+}
+
     if(empty($sql->fetchAll())){
+        $name =  $_POST['user_sei'].$_POST['user_mei'];
+        $sql=$pdo->prepare('update Delivery set del_name= ?,del_address= ?,del_psnum =?,koshinbi=? where del_id= ?');//Delceryの最初の配送先住所を更新
+                $sql->execute([$name,$_POST['address'], $_POST['postnum'],date('Y-m-d'),$minids]);
+        
+        
         if(isset($_SESSION['customer'])){
             $sql=$pdo->prepare('update User set user_sei=?,user_mei=?,mail=?,postnum=?,address=?
                                 where user_id=?');
