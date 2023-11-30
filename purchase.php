@@ -25,7 +25,7 @@
             echo $address ,'<br>';
         }
     ?>
-    <button onclick="location.href='address.php'">変更</button>
+    <button type="button" onclick="location.href='address.php'">変更</button>
     <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>

@@ -11,7 +11,7 @@
     <title>会員情報更新</title>
 </head>
 <body>
-    <form action="updatecomp.php" method="post">
+<form action="updatecomp.php" method="post">
     <div class="m-4 has-text-centered ">
         <h1 class="title is-4"> 会員情報更新</h1>
     <div class="box has-background-light m-6">
@@ -77,7 +77,7 @@ if(isset($_SESSION['customer'])){
     <button type="submit" class="button is-danger m-3">更新</button>
 </form>
 
-    <button onclick="location.href='mypage.php'" class="button is-link m-3">キャンセル</button>
+    <button type="button" onclick="location.href='mypage.php'" class="button is-link m-3">キャンセル</button>
     </div>
     </div>
     </div>
