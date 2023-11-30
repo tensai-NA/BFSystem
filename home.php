@@ -18,20 +18,21 @@
 
 <nav class="level  is-mobile">
 
-<div class="level-left">
-    <a href="mypage.php"><i class="fas fa-user-circle"></i></a>
+<div class="level-left ml-3">
+<img src="sozai/Shopicon.png" width ="40vw" style="max-width:'100%'">
 </div>
    
 
 
   <div class="level-right">
-  <a href="cart.php"><i class="fas fa-shopping-cart"></i></a>
+  <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-lg"></i></a></p>
+  <p class="mr-3" ><a href="cart.php"><i class="fas fa-shopping-cart fa-lg"   ></i></a></p>
     </div>
 </nav>
    
  
 <script src="https://code.jquery.com/jquery.min.js"></script>
- <div class="A"><i class="fas fa-search"></i>　search</div> 
+ <div class="A box m-6 has-background-white-ter"><i class="fas fa-search fa-xs"></i>　search</div> 
  <?php require 'kyotu/searchbox.php'?>
 
   

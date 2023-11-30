@@ -20,7 +20,7 @@
         <div class="level-left">
 
             <script src="https://code.jquery.com/jquery.min.js"></script>
-        <div class="A"><i class="fas fa-search"></i>　seach</div> <!--seachの部分は商品名　（絞り込み検索があれば表示）　例　パンプス　白　1000～　-->
+        <div class="A"><i class="fas fa-search"></i>　search</div> <!--seachの部分は商品名　（絞り込み検索があれば表示）　例　パンプス　白　1000～　-->
         </div>
  
           <div class="level-right">
@@ -94,11 +94,9 @@ if(isset($_POST['price'])){
 
     if(isset($_POST['cate'])){
 
-      if($flag1){
         $sql_search= $sql_search ." AND ";
-      }else{
         $flag1=true;
-      }
+
       $flag2=true;
 
      
@@ -123,7 +121,7 @@ if(isset($_POST['price'])){
 
     if(isset($_POST['brand'])){
 
-      if($flag1 && !$flag2){
+      if(!$flag2 || !$flag1){
         $sql_search= $sql_search ." AND ";
       }else if($flag2){
         $sql_search= $sql_search ." OR ";
@@ -149,7 +147,7 @@ if(isset($_POST['price'])){
 
       if(isset($_POST['color'])){
 
-          if($flag1 && !$flag2){
+          if(!$flag2 || !$flag1){
             $sql_search= $sql_search ." AND ";
           }else if($flag2){
          $sql_search= $sql_search ." OR ";
@@ -182,7 +180,8 @@ if(isset($_POST['price'])){
 
     if(isset($_POST['shohin_mei'])){
     
-     
+     // echo $sql_search,'<br>';
+     // echo var_dump($arr),'<br>'; テスト用
        
         $sql = $pdo->prepare($sql_search);
         $sql->execute($arr);
