@@ -180,8 +180,8 @@ if(isset($_POST['price'])){
 
     if(isset($_POST['shohin_mei'])){
     
-     echo $sql_search,'<br>';
-     echo var_dump($arr),'<br>';
+     // echo $sql_search,'<br>';
+     // echo var_dump($arr),'<br>'; テスト用
        
         $sql = $pdo->prepare($sql_search);
         $sql->execute($arr);
