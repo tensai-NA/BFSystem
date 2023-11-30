@@ -1,6 +1,15 @@
 <?php session_start(); ?>
-
 <?php require 'kyotu/db-connect.php'?>
+<?php
+    if(isset($_POST['update'])){
+        $name = $_POST['sei'].$_POST['mei'];
+        $id = $_SESSION['customer']['user_id'];
+        $pdo=new PDO($connect,USER,PASS);
+        $sql=$pdo->prepare("update Delivery set del_name=?,del_address=?,del_psnum=?,koshinbi=? where user_id = '".$id."'");
+        $sql->execute([$name,$_POST['address'],$_POST['postnum'],date("Y-m-d")]);
+        echo '<p class="has-text-centered has-text-danger-dark">変更しました</p>';
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -14,7 +23,6 @@
 <body>
     <div class="has-text-centered">
     <p >購入確認</p>
-    <form action="purchasecomp.php" method="post">
     <p>配送先住所</p>
     <?php
     if(isset($_SESSION['customer'])){
@@ -25,7 +33,39 @@
             echo $address ,'<br>';
         }
     ?>
-    <button type="button" onclick="location.href='address.php'">変更</button>
+    <!-- <button type="button" onclick="location.href='address.php'">変更</button> -->
+    <div class="A">変更</div>
+    <style>
+            .B{
+                display: none;
+            }
+    </style>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="js/address.js"></script>
+    <div class="B">
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <style>
+            .E{
+                display: none;
+            }
+        </style>
+        <div class="D">住所を変更する</div>
+        <div class="E">
+           <form action="" method="post">
+                <label>お名前</label>
+                    <p><input type="text" name="sei">
+                    <input type="text" name="mei"></p>
+                <label>郵便番号</label>
+                    <p><input type="number" name="postnum"></p>
+                <label>住所</label>
+                    <p><input type="text" name="address"></p>
+                <button type="submit" name="update">変更</button>
+            </form>
+        </div>
+    </div>
+
+
+    <form action="purchasecomp.php" method="post">
     <p>配送希望日 <br>
         <select name="day">
             <option value="">指定しない</option>
