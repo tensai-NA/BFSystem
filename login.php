@@ -85,7 +85,7 @@ if(isset($_POST['login'])){
          
 
     
-        <button type="submit"  class="button is-info m-3 is-small">キャンセル</button>
+        <button    onclick="history.back()"  class="button is-info m-3 is-small">キャンセル</button>
      
 
 
