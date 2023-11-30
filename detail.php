@@ -27,7 +27,7 @@
 
 
             }
-            $msgPass='<p>カートに追加しました</p>';
+            $msgPass='<p>カートにこの商品を'.$_POST['num'].'個追加しました</p>';
             $Link='</p>カートは<a href="cart.php">こちら</p>';
            
            
@@ -109,7 +109,7 @@
 
                 }
             ?>
-      <p>個数<input type="number" name="num" min="0"></p>
+      <p>個数<input type="number" name="num" min="1" value="1"></p>
      <?php 
      if(isset($_SESSION['customer'])){
        echo '<button name="tuika">カートに入れる</button> ';
