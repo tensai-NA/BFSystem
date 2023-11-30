@@ -50,20 +50,23 @@
             }
         </style>
         <div class="D">住所を変更する</div>
-        <div class="E">
+        <div class="E" id="app">
            <form action="" method="post">
                 <label>お名前</label>
                     <p><input type="text" name="sei">
                     <input type="text" name="mei"></p>
                 <label>郵便番号</label>
-                    <p><input type="number" name="postnum"></p>
+                    <p><input type="number" name="postnum" v-model="postnum" /></p>
+                    <p v-if="posterror" class="has-text-danger">郵便番号は7桁の数字で入力してください</p>
                 <label>住所</label>
                     <p><input type="text" name="address"></p>
                 <button type="submit" name="update">変更</button>
             </form>
         </div>
-    </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="js/purchase.js"></script>
 
+    </div>
 
     <form action="purchasecomp.php" method="post">
     <p>配送希望日 <br>
