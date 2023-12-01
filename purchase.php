@@ -1,13 +1,15 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
 <?php
-    if(isset($_POST['update'])){
+    if(isset($_POST['inserts'])){
         $name = $_POST['sei'].$_POST['mei'];
         $id = $_SESSION['customer']['user_id'];
         $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->prepare("update Delivery set del_name=?,del_address=?,del_psnum=?,koshinbi=? where user_id = '".$id."'");
-        $sql->execute([$name,$_POST['address'],$_POST['postnum'],date("Y-m-d")]);
-        echo '<p class="has-text-centered has-text-danger-dark">変更しました</p>';
+        $sql=$pdo->prepare("insert into Delivery values(null,?,?,?,?,?,null,0)");
+        $sql->execute([$id,$name,$_POST['address'],$_POST['postnum'],date("Y-m-d")]);
+        echo '<script>
+        alert("配送先住所を追加しました");
+       </script>';
     }
 ?>
 
@@ -23,50 +25,19 @@
 <body>
     <div class="has-text-centered">
     <p >購入確認</p>
+    <div class="columns">
+        <div class="column">
     <p>配送先住所</p>
-    <?php
-    if(isset($_SESSION['customer'])){
-            $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
-            $pdo=new PDO($connect,USER,PASS);
-            $sql=$pdo->query("select del_address from Delivery where user_id='".$id."'");
-            $address = $sql->fetch(PDO::FETCH_COLUMN);
-            echo $address ,'<br>';
-        }
-    ?>
-    <!-- <button type="button" onclick="location.href='address.php'">変更</button> -->
-    <div class="A">変更</div>
-    <style>
-            .B{
-                display: none;
-            }
-    </style>
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <script src="js/address.js"></script>
-    <div class="B">
-        <script src="https://code.jquery.com/jquery.min.js"></script>
-        <style>
-            .E{
-                display: none;
-            }
-        </style>
-        <div class="D">住所を変更する</div>
-        <div class="E" id="app">
-           <form action="" method="post">
-                <label>お名前</label>
-                    <p><input type="text" name="sei">
-                    <input type="text" name="mei"></p>
-                <label>郵便番号</label>
-                    <p><input type="number" name="postnum" v-model="postnum" /></p>
-                    <p v-if="posterror" class="has-text-danger">郵便番号は7桁の数字で入力してください</p>
-                <label>住所</label>
-                    <p><input type="text" name="address"></p>
-                <button type="submit" name="update">変更</button>
-            </form>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="js/purchase.js"></script>
+    ここに配送先住所を表示
 
-    </div>
+     <button type="button" onclick="location.href='address.php'">変更</button> 
+  
+           
+          
+    
+    
+
+         
 
     <form action="purchasecomp.php" method="post">
     <p>配送希望日 <br>

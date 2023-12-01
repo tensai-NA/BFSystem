@@ -42,7 +42,7 @@ $sql->execute([$_POST['mail']]);
     }
 $id=$_SESSION['customer']['user_id'];
 $name = $_POST['sei'].$_POST['mei'];
-$sql=$pdo->prepare('insert into Delivery values(null,?,?,?,?,?,null)');
+$sql=$pdo->prepare('insert into Delivery values(null,?,?,?,?,?,null,1)');
 $sql->execute([
     $id,$name,$_POST['address'],$_POST['postnum'],date('Y-m-d')
 ]);

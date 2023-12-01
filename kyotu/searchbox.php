@@ -6,7 +6,7 @@
                 <div class="control m-1">
        
         <div class="field has-addons-fullwidth has-addons-centered">
-            <p class="control has-icons-left">
+            <p class="control has-icons-left m-6">
                 <input class="input is-success  is-normal is-focused "  type="text" name="shohin_mei"  placeholder="商品名">
              <span class="icon is-small is-left">
              <i class="fas fa-shopping-bag"></i>
@@ -21,13 +21,13 @@
             <div class="C m-1  has-text-left"> カテゴリー <i class="fas fa-angle-down"></i></div> 
            <div class ="C-main m-5">  
           
-           <p class="is-size-5 m-1"><label><input id="checkAll" type="checkbox"  name="cate[]" value="checkall"/>全てのカテゴリー</label></p><!--押すとすべて選択に-->
+           <p class="is-size-5 m-1"><label><input id="checkAllcate" type="checkbox"  />全てのカテゴリー</label></p><!--押すとすべて選択に-->
      <?php
            $pdo=new PDO($connect, USER, PASS);
            $sql=$pdo->prepare('select  * from Categori');
            $sql->execute();
            foreach($sql as $row){
-            echo '<label class="mr-3"><input  type="checkbox" class="cate"  name="cate[]" value="',$row['cate_code'],'" />', $row['cate_mei'],'</label>';
+            echo '<label class="mr-3"><input  type="checkbox" class="checkscate"  name="cate[]" value="',$row['cate_code'],'" />', $row['cate_mei'],'</label>';
           
          }
            ?>
@@ -37,7 +37,7 @@
            <div class="D m-1  has-text-left"> ブランド <i class="fas fa-angle-down"></i></div> 
            <div class ="D-main m-5">  
          
-           <p class="is-size-5 m-1"><label><input id="checkAll1" type="checkbox"  name="name[]" value="checkall"/>全てのブランド</label></p><!--押すとすべて選択に-->
+           <p class="is-size-5 m-1"><label><input id="checkAll1" type="checkbox"  />全てのブランド</label></p><!--押すとすべて選択に-->
      <?php
            $pdo=new PDO($connect, USER, PASS);
            $sql=$pdo->prepare('select  * from Brand');
@@ -88,13 +88,14 @@
                0 =>1500,
                1500=>5000,
                5000=>10000,
-               10000=>30000
+               10000=>30000,
+
             
             );
           
            
                foreach($prices as $key =>$value){
-                echo '<label class="mr-3"><input  type="checkbox" class="price" name="price[]" value="',$key,'" />', $key,'～',$value,'円</label>';
+                echo '<label class="mr-3"><input  type="checkbox" class="price" name="price[]" value=',$key,' />', $key,'～',$value,'円</label>';
                }
                
              
