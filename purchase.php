@@ -14,9 +14,7 @@
 <body>
     <div class="has-text-centered">
     <p >購入確認</p>
-    <div class="columns">
-        <div class="column">
-    <p>配送先住所</p>
+   
 
     <?php
     if(isset($_SESSION['customer'])){
@@ -26,7 +24,7 @@
     foreach($sql as $row){
         
         echo '<p class="title is-5">現在の配送先住所</p>';
-        echo '<div class="box has-background-light m-5">';
+        echo '<div class="box has-background-light mx-6">';
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo ' <label>郵便番号</label>',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
@@ -37,9 +35,10 @@
     
 }
 ?>
+
   <button type="button" onclick="location.href='address.php'">変更</button> 
-        </div>
-   
+</div>
+
   
            
           

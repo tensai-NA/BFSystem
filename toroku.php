@@ -108,8 +108,7 @@
        
         echo '<input type="submit" class="button is-danger m-5" value="確定">';
         echo '</form>';
-
-        echo '<button onclick="location.href=\'login.php\'" class="button is-info m-5">キャンセル</button>';
+      
         echo '<p><a href="login.php">アカウントをお持ちの方はこちら</a></p>'
         ?>
     </div>
