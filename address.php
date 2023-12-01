@@ -122,7 +122,7 @@ if(isset($_SESSION['customer'])){
         echo '</div>';
         $boxcount++;
     }
- 
+ //変更部分は見えないようにしておく
 
     for($a=0;$a<$boxcount;$a++){
        echo  '<script>
