@@ -13,7 +13,23 @@
     <title>マイページ</title>
 </head>
 <body>
-<h2>マイページ</h2>
+
+
+<nav class="level  is-mobile  mt-5">
+
+<div class="level-left ml-3">
+
+</div>
+   
+<div class="level-itemt ml-3">
+<p class="title is-4">マイページ</p>
+</div>
+
+  <div class="level-right mr-3">
+  <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
+
+    </div>
+</nav>
 <?php //エラーメッセージ
     if(!isset($_SESSION['customer'])){
         echo '<p>マイページを閲覧するには<a href="login.php">ログイン</a>してください</p>';
@@ -30,7 +46,7 @@
 
     ?>
 
-<a href="home.php"><i class="fas fa-home"></i></a>
+
 <!--エラーメッセージ-->
 <hr>
 <?php //ポイント取得
@@ -48,7 +64,7 @@
             if(isset($_SESSION['customer'])){
                 $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
                 $pdo=new PDO($connect,USER,PASS);
-                $sql=$pdo->query("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price
+                $sql=$pdo->query("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price,Shohin.shohin_img ,Shohin.shohin_id
                         from OrderA,Shohin,Color,History
                         where History.user_id = OrderA.user_id
                         and   History.shohin_id = Shohin.shohin_id
@@ -59,17 +75,20 @@
                         ");
 
                 foreach($sql as $row){
+                    echo '<div class="box">';
                     echo '<h2>',$row['buy_date'],'</h2>';
-                    echo '商品名',$row['shohin_mei'],'<br>';
+                
+                    echo  '<a href="detail.php?id=', $row['shohin_id'],'">','<img src="' ,$row['shohin_img'], '">','<br>';
+                    echo '商品名',$row['shohin_mei'],'<br></a>';
                     echo '色：',$row['color_mei'],'<br>';
                     echo '価格:￥',$row['price'],'<br>';
-                    echo '<hr>';
+                    echo '</div>';
                 }
             }
 
 
             ?>
-    　　　　　　　　　　<a href="history.php">購入履歴一覧へ→</a></p>
+   <a href="history.php">購入履歴一覧へ→</a></p>
 
 
 <p><a href="logout.php">ログアウト</a><br>
