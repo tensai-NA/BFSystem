@@ -51,7 +51,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
                 <td><input type="number" class="input is-small" name="brand" require></td> <!--ブランド-->                
                 <td><input type="number" class="input is-small" name="cate" require></td> <!--カテゴリ-->
                 <td><input type="text" class="input is-small" name="img" require></td> <!--画像-->
-                <td><button type="submit" name="add">追加</button></td>
+                <td><button type="submit" class="button is-small is-success is-light is-outlined" name="add">追加</button></td>
             </form>
             </div>
         </tr>
@@ -61,21 +61,22 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
         <tr>
         <div class="field">
             <form action="" method="post">
-            <input type="hidden" name="id" value="<?= $row['shohin_id'] ?>">
-            <td><input type="text" name="name" value="<?=  $row['shohin_mei'] ?>" require></td>
-            <td><input type="number" name="price" value="<?=  $row['price'] ?>" require></td>
-            <td><input type="number" name="color" value="<?=  $row['color'] ?>" require></td>
-            <td><input type="number" name="brand" value="<?=  $row['brand'] ?>" require></td>
-            <td><input type="number" name="cate" value="<?=  $row['category'] ?>" require></td>
-            <td><input type="text" name="img" value="<?= $row['shohin_img'] ?>" require></td>
-            <td><button type="submit" name="update">更新</button>
-                <button type="submit" name="del">削除</button></td>
+            <input type="hidden" name="id" class="input is-small" value="<?= $row['shohin_id'] ?>">
+            <td><input type="text" name="name" class="input is-small" value="<?=  $row['shohin_mei'] ?>" require></td>
+            <td><input type="number" name="price" class="input is-small" value="<?=  $row['price'] ?>" require></td>
+            <td><input type="number" name="color" class="input is-small" value="<?=  $row['color'] ?>" require></td>
+            <td><input type="number" name="brand" class="input is-small" value="<?=  $row['brand'] ?>" require></td>
+            <td><input type="number" name="cate" class="input is-small" value="<?=  $row['category'] ?>" require></td>
+            <td><input type="text" name="img" class="input is-small" value="<?= $row['shohin_img'] ?>" require></td>
+            <td><button type="submit" class="button is-small is-link is-light is-outlined" name="update">更新</button>
+                <button type="submit" class="button is-small is-danger is-light is-outlined" name="del">削除</button></td>
             </form>
         </div>
         </tr>
-    </table>
+   
         <?php
             }
+            echo ' </table>';
             echo '<nav class="pagination" role="navigation" aria-label="pagination">
             <ul class="pagination-list">';
     
@@ -91,6 +92,8 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
     </nav>
     
             <?php
+                echo '<div class="columns">';
+                echo '<div class="column">';
                     echo '<p>カラー</p>';
                     echo '<table>';
                     $color=$pdo->query("select * from Color");
@@ -101,7 +104,9 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
                         echo '</tr>';
                     }
                     echo '</table>';
+                echo '</div>';
 
+                echo '<div class="column">';
                     echo '<p>ブランド</p>';
                     echo '<table>';
                     $brand=$pdo->query("select * from Brand");
@@ -112,7 +117,9 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
                         echo '</tr>';
                     }
                     echo '</table>';
+                echo '</div>';
 
+                echo '<div class="column">';
                     echo '<p>カテゴリー</p>';
                     echo '<table>';
                     $cate=$pdo->query("select * from Categori");
@@ -123,7 +130,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
                         echo '</tr>';
                     }
                     echo '</table>';
-
+                echo '</div>';
         ?>
 </body>
 </html>
