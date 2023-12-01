@@ -4,21 +4,19 @@
 <?php
 $pdo=new PDO($connect,USER,PASS);
 $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
-
- if(isset($_SESSION['customer'])){
-     $id=$_SESSION['customer']['user_id'];
-   $sql=$pdo->prepare('select * from User where user_id<>? and mail=?');
-    $sql->execute([$id,$_POST['mail']]);
-    echo '<p>すでにメールアドレスが登録されています</p>';
-    echo '<a href="toroku.php">登録画面へ戻る</a>';
-    exit();
- }else{          //メールが一緒のとき
+$count=0;
+        //メールが一緒のとき
    $sql=$pdo->prepare('select * from User where mail=?');
     $sql->execute([$_POST['mail']]);
+    
+    $count=$sql-> rowCount();
+    if($count>0){
     echo '<p>すでにメールアドレスが登録されています</p>';
     echo '<a href="toroku.php">登録画面へ戻る</a>';
     exit();
-}
+    }
+ 
+
 
 $sql=$pdo->prepare('insert into User values(null,?,?,?,?,?,?,0)');
 $sql->execute([
