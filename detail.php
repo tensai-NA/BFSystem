@@ -2,8 +2,7 @@
 <?php require 'kyotu/db-connect.php'?>
 
 <?php
-    $msgPass="";
-    $Link="";
+  
     $shohin = $_GET['id'];
     if(isset($_POST["tuika"])){
         if(isset($_SESSION['customer'])){ // roguinn  
@@ -20,16 +19,19 @@
             $sql=$pdo->prepare("insert into Cart values(?,?,?,0)");
             $sql->execute([$user,$shohin,$_POST['num']]);
 
+           
+
             }else{
             $pdo=new PDO($connect, USER, PASS);
             $sql=$pdo->prepare("update Cart set num= num+1 where user_id= ? and shohin_id =?");
             $sql->execute([$user, $shohin]);
-
+          
 
             }
-            $msgPass='<p>カートにこの商品を'.$_POST['num'].'個追加しました</p>';
-            $Link='</p>カートは<a href="cart.php">こちら</p>';
-           
+            
+            echo '<script>
+            alert("カートにこの商品を'.$_POST['num'].'個追加しました");
+           </script>';
            
         }
     }
@@ -62,11 +64,22 @@
             <div class="level-right">
             <p class="mr-4 fa-2x">
             <span class="fa-layers fa-fw bg">
-                 <a href="cart.php"><i class="fas fa-shopping-cart " ></i>
+                 <a href="cart.php"><i class="fas fa-shopping-cart" ></i>
+                <?php
+                     if(isset($_SESSION['customer'])){   
+                        //カートの数量取得 
+                        $user=$_SESSION['customer']['user_id'];
+                        $pdo=new PDO($connect,USER,PASS);
+                        $sql=$pdo->prepare("select * from Cart where user_id = ?");
+                        $sql->execute([$user]);
+                        $count=$sql-> rowCount();
+                    
+                    }
 
-               <span class="fa-layers-counter" style="background: #ad9000;">
-                <!--ここにカートの数量-->仮
-                </span>
+                        echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
+                         echo    $count;
+                         echo  '</span>';
+                ?>
                 </a></span></p>
             <p class="mr-3" >
             <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
@@ -121,8 +134,7 @@
      ?>
         </form>
         <!-- </form> -->
-        <?= $msgPass ?>
-        <?= $Link ?>
+
     </div>
 
         

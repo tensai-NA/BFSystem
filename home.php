@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="css/slick-theme.css">
     <link rel="stylesheet" type="text/css" href="css/slick.css">
     <title>ホーム画面</title>
@@ -26,7 +29,26 @@
 
   <div class="level-right">
   <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-lg"></i></a></p>
-  <p class="mr-3" ><a href="cart.php"><i class="fas fa-shopping-cart fa-lg"   ></i></a></p>
+  <p class="mr-4 fa-2x">
+            <span class="fa-layers fa-fw bg">
+                 <a href="cart.php"><i class="fas fa-shopping-cart" ></i>
+                <?php
+                     if(isset($_SESSION['customer'])){   
+                        //カートの数量取得 
+                        $user=$_SESSION['customer']['user_id'];
+                        $pdo=new PDO($connect,USER,PASS);
+                        $sql=$pdo->prepare("select * from Cart where user_id = ?");
+                        $sql->execute([$user]);
+                        $count=$sql-> rowCount();
+                    
+                    }
+
+                        echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
+                         echo    $count;
+                         echo  '</span>';
+                ?>
+                </a></span></p>
+
     </div>
 </nav>
    
