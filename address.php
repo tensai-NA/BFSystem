@@ -149,7 +149,7 @@ if(isset($_SESSION['customer'])){
   
     
 
-    <div class="F">配送先住所を追加する</div>
+    <div class="F m-5">配送先住所を追加する<i class="fas fa-angle-down"></i></div>
 
 <div class="G box has-background-light m-5">
  <form action="" method="post">
