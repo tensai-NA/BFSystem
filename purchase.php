@@ -1,17 +1,6 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
-<?php
-    if(isset($_POST['inserts'])){
-        $name = $_POST['sei'].$_POST['mei'];
-        $id = $_SESSION['customer']['user_id'];
-        $pdo=new PDO($connect,USER,PASS);
-        $sql=$pdo->prepare("insert into Delivery values(null,?,?,?,?,?,null,0)");
-        $sql->execute([$id,$name,$_POST['address'],$_POST['postnum'],date("Y-m-d")]);
-        echo '<script>
-        alert("配送先住所を追加しました");
-       </script>';
-    }
-?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -28,9 +17,29 @@
     <div class="columns">
         <div class="column">
     <p>配送先住所</p>
-    ここに配送先住所を表示
 
-     <button type="button" onclick="location.href='address.php'">変更</button> 
+    <?php
+    if(isset($_SESSION['customer'])){
+    $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
+    $pdo=new PDO($connect,USER,PASS);
+    $sql=$pdo->query("select del_id, del_address ,del_name, del_psnum from Delivery where user_id='".$id."' and destination=1");
+    foreach($sql as $row){
+        
+        echo '<p class="title is-5">現在の配送先住所</p>';
+        echo '<div class="box has-background-light m-5">';
+        echo ' <label>お名前:</label>',$row['del_name'],'<br>';
+        echo ' <label>郵便番号</label>',$row['del_psnum'],'<br>';
+        echo '住所:',$row['del_address'] ,'<br>';
+      
+
+    }
+
+    
+}
+?>
+  <button type="button" onclick="location.href='address.php'">変更</button> 
+        </div>
+   
   
            
           
