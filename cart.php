@@ -8,12 +8,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    
     <title>カート画面</title>
 </head>
 <body>
-<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-3x" ></i></a>
-    <h2>カート</h2>
-    <a href="home.php"><i class="fas fa-home"></i></a>
+<nav class="level  is-mobile  mt-5">
+
+<div class="level-left ml-3">
+<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
+</div>
+   
+<div class="level-itemt ml-3">
+<p class="title is-4">カート</p>
+</div>
+
+  <div class="level-right mr-3">
+  <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
+
+    </div>
+</nav>
+
+  
+   
 
     <?php
     if(!isset($_SESSION['customer'])){
@@ -36,6 +53,7 @@
         $total=0;
         echo '<form method="post" action="purchase.php">';        
         foreach($sql as $row){
+            echo '<div class="box">';
             echo '<input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" checked /><br>';
             /*
                 if(isset($_POST['checkbox'])){
@@ -44,8 +62,8 @@
                     $flag=1;
                 }
                 */
-
-            echo '<a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a><br>';
+            echo '<a href="detail.php?id=', $row['shohin_id'],'">','<img src="' ,$row['shohin_img'], '">','<br>';
+            echo $row['shohin_mei'],'</a><br>';
             echo $row['color_mei'],'<br>';
             echo '￥',$row['price'],'<br>';  
             //echo '数量 ',$row['num'],'<br>';  
@@ -90,6 +108,7 @@
             }
             echo 'リピート割 -￥',$repeat,'<br>';
             echo '<a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','<br>';
+            echo '</div>';
         }
     }
     ?>
