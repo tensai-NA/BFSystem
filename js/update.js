@@ -2,8 +2,10 @@ new Vue({
     el:'#app',
     data(){
         return{
-            email:'',
-            postnum:''
+            // email: document.getElementById('mail').value,
+            // postnum: document.getElementById('postnum').value
+            email:'mail',
+            postnum:'0000000'
         };
     },
     computed:{

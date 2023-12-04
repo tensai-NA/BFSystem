@@ -4,16 +4,21 @@
 $msgMail = '';
 $msgPass = '';
 $msgError = '';
+$id = $_SESSION['customer']['user_id'];
 $pdo=new PDO($connect,USER,PASS);
-$sql=$pdo->prepare('select * from User where id=?');
-$sql->execute([$_SESSION['user_id']]);
+$sql=$pdo->prepare('select * from User where user_id=?');
+$sql->execute([$id]);
+$data=$sql->fetchAll();
 
-
-if(isset($_POST['send'])){
-    if($_POST['sei'] == ){
-        
+foreach($data as $d){
+    if(isset($_POST['send'])){
+        if($_POST['sei'] == $d['user_sei'] && $_POST['mei'] == $d['user_mei'] && $_POST['mail'] == $d['mail']){  //姓とDBとを比較　&& 名前も比較
+            $msgMail = "指定されたメールアドレスにリンクを送信しました。";
+        }else{
+            $msgMail = "入力されたデータが存在しません。";
+        }
     }
-    //  $msgMail = "指定されたメールアドレスにリンクを送信しました。";
+    
 }
 ?>
 <!DOCTYPE html>
@@ -48,7 +53,7 @@ if(isset($_POST['send'])){
      <div class="field has-addons-fullwidth has-addons-centered">
       
         <p class="control has-icons-left">
-     <input class="input is-success  is-normal is-focused "type="email" name="meru"  placeholder="メールアドレス">
+     <input class="input is-success  is-normal is-focused "type="email" name="mail"  placeholder="メールアドレス">
      <span class="icon is-small is-left">
         <i class="fas fa-mail-bulk"></i>
         </span>
