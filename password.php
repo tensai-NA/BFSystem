@@ -3,8 +3,17 @@
 <?php
 $msgMail = '';
 $msgPass = '';
+$msgError = '';
+$pdo=new PDO($connect,USER,PASS);
+$sql=$pdo->prepare('select * from User where id=?');
+$sql->execute([$_SESSION['user_id']]);
+
+
 if(isset($_POST['send'])){
-     $msgMail = "指定されたメールアドレスにリンクを送信しました。";
+    if($_POST['sei'] == ){
+        
+    }
+    //  $msgMail = "指定されたメールアドレスにリンクを送信しました。";
 }
 ?>
 <!DOCTYPE html>
@@ -30,8 +39,8 @@ if(isset($_POST['send'])){
    <form action="password.php" method="post">
     <label class="label"> お名前 </label><br><!--横並びに-->
     <div class="field  has-addons has-addons-centered ">
-    <input class="input is-info is-normal is-focused m-1"type="text" name="name"  placeholder="姓">
-    <input class="input is-info is-normal is-focused m-1" type="text" name="name"  placeholder="名">
+    <input class="input is-info is-normal is-focused m-1"type="text" name="sei"  placeholder="姓">
+    <input class="input is-info is-normal is-focused m-1" type="text" name="mei"  placeholder="名">
      </div><br>
 
 

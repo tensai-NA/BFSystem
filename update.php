@@ -44,6 +44,7 @@ if(isset($_SESSION['customer'])){
              <i class="fas fa-mail-bulk"></i>
              </span>
             </p>
+            <p v-if="isInValidEmail" class="has-text-danger">Eメールアドレスの形式で入力してください</p>
             </div>
             </div>';
 
@@ -57,6 +58,7 @@ if(isset($_SESSION['customer'])){
             <i class="has-text-weight-bold">〒</i>
              </span>
             </p>
+            <p v-if="isInValidPost" class="has-text-danger">郵便番号は7桁の数字で入力してください。</p>
             </div>
             </div>';
 
@@ -81,5 +83,7 @@ if(isset($_SESSION['customer'])){
     </div>
     </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/update.js"></script>
 </body>
 </html>
