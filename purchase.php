@@ -12,7 +12,7 @@
     <title>購入確認画面</title>
 </head>
 <body>
-    <div class="has-text-centered">
+    <div class="has-text-centered ">
     <p >購入確認</p>
    
 
@@ -99,7 +99,7 @@
         if(isset($_SESSION['customer'])){  //ログイン済みの処理
             $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
             $pdo=new PDO($connect,USER,PASS);
-            $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num
+            $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_mei,Shohin.price,Shohin.shohin_img,Color.color_mei,Cart.num
                     from Shohin,Cart,Color
                     where Shohin.shohin_id = Cart.shohin_id
                     and Shohin.color = Color.color_code
@@ -114,11 +114,15 @@
             foreach($sql as $row){
                 $num = 'quantity_'.$row['shohin_id'];
                 if(in_array($row['shohin_id'], $check) != false){
-                    echo $row['shohin_mei'],'<br>';
+                    echo '<div class="box m-5">';
+                    echo '<a href="detail.php?id=', $row['shohin_id'],'">','<img src="' ,$row['shohin_img'], '">','<br>';
+                    echo $row['shohin_mei'],'<br></a>';
+                    echo '個数：',$row['num'],'<br>';
                     echo 'カラー：',$row['color_mei'],'<br>';
                     echo '価格：￥',$row['price'],'<br>';
                     $total = $row['num'] * $row['price'];
                     echo '小計：￥',$total,'<br>';
+                    echo '</div>';
                     $sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
                 }else{
