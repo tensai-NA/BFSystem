@@ -15,7 +15,7 @@ $count=0;
     echo '<p>すでにメールアドレスが登録されています</p>';
     echo '<a href="toroku.php">登録画面へ戻る</a>';
     exit();
-    }
+    }else{
  
 
 
@@ -45,6 +45,7 @@ $sql=$pdo->prepare('insert into Delivery values(null,?,?,?,?,?,null,1)');
 $sql->execute([
     $id,$name,$_POST['address'],$_POST['postnum'],date('Y-m-d')
 ]);
+    }
 ?>
 
 <script>

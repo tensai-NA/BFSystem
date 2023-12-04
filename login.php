@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'; ?>
 <?php
+
 $msgMail = '';
 $msgPass = '';
 if(isset($_POST['login'])){
@@ -11,6 +12,7 @@ if(isset($_POST['login'])){
     $data = $sql->fetchAll();
     if( empty($data) ){
         $msgMail = "メールアドレスが登録されていません";
+       
     }else{
         foreach($data as $row){
             if(password_verify($_POST['password'],$row['password']) == true){
@@ -80,7 +82,8 @@ if(isset($_POST['login'])){
         <?= $msgPass ?>
             </div></div></div>
            
-           
+
+            
         <button type="submit" class="button is-danger m-3 is-small"  name="login" value="send">ログイン</button>
          
 

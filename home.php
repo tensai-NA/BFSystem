@@ -41,13 +41,17 @@
                         $sql->execute([$user]);
                         $count=$sql-> rowCount();
                     
+                        echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
+                        echo    $count;
+                        echo  '</span>';
+                    }else{
+
                     }
 
-                        echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
-                         echo    $count;
-                         echo  '</span>';
+                       
                 ?>
                 </a></span></p>
+          
 
     </div>
 </nav>
