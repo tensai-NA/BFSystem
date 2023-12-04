@@ -1,30 +1,25 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'; ?>
 <?php
-$msgMail = '';
-$msgPass = '';
-$msgError = '';
-$id = $_SESSION['customer']['user_id'];
-$pdo=new PDO($connect,USER,PASS);
-$sql=$pdo->prepare('select * from User where user_id=?');
-$sql->execute([$id]);
-$data=$sql->fetchAll();
+    $msgMail = '';
+    $msgPass = '';
+    $msgError = '';
+    $id = $_SESSION['customer']['user_id'];
+    $pdo=new PDO($connect,USER,PASS);
+    $sql=$pdo->prepare('select * from User where user_id=?');
+    $sql->execute([$id]);
+    $data=$sql->fetchAll();
 
-foreach($data as $d){
-    if(isset($_POST['send'])){
-        if($_POST['sei'] == $d['user_sei'] && $_POST['mei'] == $d['user_mei'] && $_POST['mail'] == $d['mail']){  //姓とDBとを比較　&& 名前も比較
-            $msgMail = "指定されたメールアドレスにリンクを送信しました。";
-        }else{
-            $msgMail = "入力されたデータが存在しません。";
+    foreach($data as $d){
+        if(isset($_POST['send'])){
+            if($_POST['sei'] == $d['user_sei'] && $_POST['mei'] == $d['user_mei'] && $_POST['mail'] == $d['mail']){  //姓とDBとを比較　&& 名前も比較
+                $msgMail = "指定されたメールアドレスにリンクを送信しました。";
+            }else{
+                $msgMail = "入力されたデータが存在しません。";
+            }
         }
     }
-    
-if(isset($_POST['send'])){
-    echo '<script>
-        alert("指定されたメールアドレスにリンクを送信しました。");
-       </script>';
-  
-}
+        
 ?>
 <!DOCTYPE html>
 <html lang="ja">
