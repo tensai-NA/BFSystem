@@ -30,8 +30,9 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
     <h1 class="title is-4">商品管理</h1>
     <?php
     if(!isset($_SESSION['kanri'])){
-        echo 'このページを参照するにはログインしてください';
+        echo '<p>このページを参照するにはログインしてください</p>';
         echo '<a href="login.php">ログインはこちら</a>';
+        exit;
     }
 
     $per_page = 10;
