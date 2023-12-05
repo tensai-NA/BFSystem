@@ -47,6 +47,7 @@ if(isset($_POST['login'])){
     <div class="field has-addons-fullwidth has-addons-centered">
             <label class="label">管理者名</label>
             <input type="text" class="input is-normal is-focused m-i" name="name">
+            <?= $msgname?>
         </div></div>
         <div class="control m-1">
         <div class="field has-addons-fullwidth has-addons-centered">

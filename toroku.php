@@ -95,8 +95,7 @@
        
         <input type="submit" class="button is-danger m-5" value="確定">
         </form>
-      
-        <p><a href="login.php">アカウントをお持ちの方はこちら</a></p>
+       <button class="button is-info m-5" type="button" onclick="location.href='login.php'">キャンセル</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/toroku.js"></script>
