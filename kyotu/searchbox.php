@@ -17,26 +17,26 @@
 
             <div class="C m-1  has-text-left"> カテゴリー <i class="fas fa-angle-down"></i></div>
             <div class="C-main m-5">
-               <p class="is-size-5 m-1"><label><input id="checkAllcate" type="checkbox" />全てのカテゴリー</label></p><!--押すとすべて選択に-->
+               <p class="is-size-5 m-1"><label><input id="checkAllcate" onchange="Cateall(this)" type="checkbox" />全てのカテゴリー</label></p><!--押すとすべて選択に-->
                <?php
                $pdo = new PDO($connect, USER, PASS);
                $sql = $pdo->prepare('select  * from Categori');
                $sql->execute();
                foreach ($sql as $row) {
-                  echo '<label class="mr-3"><input type="checkbox" class="checkscate" name="cate[]" value="', $row['cate_code'], '" />', $row['cate_mei'], '</label>';
+                  echo '<label class="mr-3"><input type="checkbox" id="cate" class="checkscate" name="cate[]" value="', $row['cate_code'], '" />', $row['cate_mei'], '</label>';
                }
                ?>
             </div>
 
             <div class="D m-1  has-text-left"> ブランド <i class="fas fa-angle-down"></i></div>
             <div class="D-main m-5">
-               <p class="is-size-5 m-1"><label><input id="checkAll1" type="checkbox" />全てのブランド</label></p><!--押すとすべて選択に-->
+               <p class="is-size-5 m-1"><label><input id="checkAll1" onchange="Brandall(this)" type="checkbox" />全てのブランド</label></p><!--押すとすべて選択に-->
                <?php
                $pdo = new PDO($connect, USER, PASS);
                $sql = $pdo->prepare('select  * from Brand');
                $sql->execute();
                foreach ($sql as $row) {
-                  echo '<label class="mr-3"><input type="checkbox" class="brand" name="brand[]" value="', $row['brand_code'], '" />', $row['brand_mei'], '</label>';
+                  echo '<label class="mr-3"><input type="checkbox" id="brand" class="brand" name="brand[]" value="', $row['brand_code'], '" />', $row['brand_mei'], '</label>';
                }
                ?>
             </div>
@@ -44,13 +44,13 @@
             <div class="E m-1  has-text-left"> カラー <i class="fas fa-angle-down"></i></div>
             <div class="E-main m-5">
 
-               <p class="is-size-5 m-1"><label><input id="checkAll2" type="checkbox" name="color[]" value="all" />全てのカラー</label></p><!--押すとすべて選択に-->
+               <p class="is-size-5 m-1"><label><input id="checkAll2" type="checkbox" name="color[]" onchange="Colorall(this)" value="all" />全てのカラー</label></p><!--押すとすべて選択に-->
                <?php
                $sql = $pdo->prepare('select  * from Color');
                $sql->execute();
                $count = 0;
                foreach ($sql as $row) {
-                  echo '<label class="mr-3"><input type="checkbox" class="color" name="color[]" value="', $row['color_code'], '" />', $row['color_mei'], '</label>';
+                  echo '<label class="mr-3"><input type="checkbox" id="color" class="color" name="color[]" value="', $row['color_code'], '" />', $row['color_mei'], '</label>';
                   $count++;
                }
                ?>
@@ -58,7 +58,7 @@
 
             <div class="F m-1  has-text-left"> 金額 <i class="fas fa-angle-down"></i></div>
             <div class="F-main m-5">
-               <p class="is-size-5 m-1"><label class="mr-3"><input id="checkAll3" type="checkbox" name="price[]" value="0" />全ての価格<label></p>
+               <p class="is-size-5 m-1"><label class="mr-3"><input id="checkAll3" type="checkbox" name="price[]" onchange="Priceall(this)" value="0" />全ての価格<label></p>
                <?php
                $sql = "SELECT MAX(price) AS `max` FROM Shohin";
                $stmt = $pdo->query($sql);
@@ -69,10 +69,10 @@
                   10000 => 30000,
                );
                foreach ($prices as $key => $value) {
-                  echo '<label class="mr-3"><input type="checkbox" class="price" name="price[]" value=', $key, ' />', $key, '～', $value, '円</label>';
+                  echo '<label class="mr-3"><input type="checkbox" id="price" class="price" name="price[]" value=', $key, ' />', $key, '～', $value, '円</label>';
                }
                ?>
-               <label class="mr-3"><input type="checkbox" class="price" name="price[]" value="8" />30000円～</label>
+               <label class="mr-3"><input type="checkbox" id="price" class="price" name="price[]" value="8" />30000円～</label>
             </div>
          </div>
          <div class="seach m-5 ">
