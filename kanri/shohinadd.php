@@ -22,6 +22,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>商品管理ページ</title>
 
 </head>
@@ -104,7 +105,7 @@ echo '<div class="columns">';
 //カラー
     echo '<div class="column">';
     echo '<p>カラー</p>';
-    echo '<select>';
+    echo '<select name="sel">';
         $color=$pdo->query("select * from Color");
         foreach($color as $row){
             echo '<option>';
@@ -115,10 +116,12 @@ echo '<div class="columns">';
     echo '</select>';
     echo '</div>'; // column
 
+     echo '<hr class="rule">';
+
 //ブランド
     echo '<div class="column">';
     echo '<p>ブランド</p>';
-    echo '<select>';
+    echo '<select name="sel">';
         $brand=$pdo->query("select * from Brand");
         foreach($brand as $row){
             echo '<option>';
@@ -131,7 +134,7 @@ echo '<div class="columns">';
 //カテゴリ
     echo '<div class="column">';
         echo '<p>カテゴリ</p>';
-        echo '<select>';
+        echo '<select name="sel">';
         $cate=$pdo->query("select * from Categori");
             foreach($cate as $row){
                 echo '<option>';
