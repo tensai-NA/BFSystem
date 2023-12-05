@@ -9,7 +9,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
 }else if(isset($_POST['update'])){  //　更新ボタンが押された処理
     $sql=$pdo->prepare("update Shohin set shohin_mei=?,price=?,color=?,brand=?,category=?,shohin_img=? where shohin_id=?");
     $sql->execute([$_POST['name'], $_POST['price'],$_POST['color'],$_POST['brand'],$_POST['cate'],$_POST['img'],$_POST['id']]);
-}else if(isset($_POST['del'])){ //削除ボタンが押された処理
+}else if(isset($_POST['del'])){ //削除ボタンが押された処理 カートに入っていたらけせないようにする(ituka)
     $sql=$pdo->prepare("delete from Shohin where shohin_id=?");
     $sql->execute([$_POST['id']]);
 }
