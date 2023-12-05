@@ -102,80 +102,45 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
 <?php
 echo '<div class="columns">';
 //カラー
-echo '<div class="dropdown is-hoverable">';
     echo '<div class="column">';
-        echo '<div class="dropdown-trigger">
-            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">';
-            echo '<span>カラー</span>
-            <span class="icon is-small">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-            </button>';
-        echo '</div>';
-    echo '<div class="dropdown-menu" role="menu">';
-    echo '<div class="dropdown-content">';
-        echo '<table>';
+    echo '<p>カラー</p>';
+    echo '<select>';
         $color=$pdo->query("select * from Color");
         foreach($color as $row){
-            echo '<div class="dropdown-item">';
+            echo '<option>';
                 echo $row['color_code'],"：";
                 echo $row['color_mei'];
-            echo '</div>';
+            echo '</option>';
         }
-        echo '</table>';
-    echo '</div>'; //content
-    echo '</div>'; //menu
-    echo '</div>'; // columns
-echo '</div>'; //dropdown
+    echo '</select>';
+    echo '</div>'; // column
 
 //ブランド
-echo '<div class="dropdown is-hoverable">';
     echo '<div class="column">';
-        echo '<div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">';
-            echo '<span>ブランド</span>
-            <span class="icon is-small">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-        </button>';
-        echo '</div>';
-    echo '<div class="dropdown-menu" role="menu">';
-    echo '<div class="dropdown-content">';    
+    echo '<p>ブランド</p>';
+    echo '<select>';
         $brand=$pdo->query("select * from Brand");
         foreach($brand as $row){
-            echo '<div class="dropdown-item">';
+            echo '<option>';
                 echo $row['brand_code'],"：";
                 echo $row['brand_mei'];
-            echo '</div>';
+            echo '</option>';
         }
-    echo '</div>'; //content
-    echo '</div>'; //menu
-    echo '</div>'; // columns
-echo '</div>'; //dropdown
+    echo '</select>';
+    echo '</div>'; // column
 //カテゴリ
-echo '<div class="dropdown is-hoverable">';
     echo '<div class="column">';
-    echo '<div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">';
-        echo '<span>カテゴリ</span>
-            <span class="icon is-small">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-        </button>';
-    echo '</div>';
-    echo '<div class="dropdown-menu" role="menu">';
-    echo '<div class="dropdown-content">';
+        echo '<p>カテゴリ</p>';
+        echo '<select>';
         $cate=$pdo->query("select * from Categori");
             foreach($cate as $row){
-                echo '<div class="dropdown-item">';
+                echo '<option>';
                 echo $row['cate_code'],"：";
                 echo $row['cate_mei'];
-                echo '</div>';
+                echo '</option>';
             }
+        echo '</select>';
     echo '</div>';
-    echo '</div>';
-echo '</div>'; //columns
-echo '</div>'; //dropdown
 echo '</div>';
 ?>
 </body>
