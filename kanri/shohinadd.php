@@ -26,6 +26,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
 
 </head>
 <body>
+<div class="m-4 has-text-centered ">
     <h1 class="title is-4">商品管理</h1>
     <?php
     if(!isset($_SESSION['kanri'])){
@@ -174,6 +175,7 @@ echo '<div class="dropdown is-hoverable">';
     echo '</div>';
 echo '</div>'; //columns
 echo '</div>'; //dropdown
+echo '</div>';
 ?>
 </body>
 </html>
