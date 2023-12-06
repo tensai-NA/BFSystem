@@ -27,23 +27,71 @@
                         if(isset($_SESSION['customer'])){
                             $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
                             $pdo=new PDO($connect,USER,PASS);
-                            $sql=$pdo->query("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price, Shohin.shohin_img
+                            $sql=$pdo->prepare("select OrderA.buy_date,  Shohin.shohin_mei,   Color.color_mei, Shohin.price, Shohin.shohin_img
                                     from OrderA,Shohin,Color,History
                                     where History.user_id = OrderA.user_id
                                     and   History.shohin_id = Shohin.shohin_id
                                     and   Shohin.color = Color.color_code
-                                    and OrderA.user_id = '".$id."'");
- 
+                                    and OrderA.user_id = ?
+                                    order by OrderA.buy_date DESC");
+                            
+                            $sql->execute([$id]);
+                            $date="";
                             foreach($sql as $row){
-                                echo '<p class="m-4 has-text-left"><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
-                                echo '<h2>',$row['buy_date'],'</h2>';
-                                echo '商品名:',$row['shohin_mei'],'<br>';
-                                echo '色：',$row['color_mei'],'<br>';
-                                echo '価格:￥',$row['price'],'<br>';
-                                echo '<hr>';
+
+                                if($date != $row['buy_date']){
+                                    echo '<div class="mb-3 has-text-left">
+                                    <span class="icon-text is-size-4">
+                                        <span class="icon has-text-link">
+                                        <i class="fas fa-prescription-bottle"></i>
+                                        </span>
+                                        <span>
+                                    <strong class="has-text-link">',$row['buy_date'],'</strong>';
+                                    //echo '<p class="m-4 has-text-left-desktop is-size-4-desktop">',$row['buy_date'];
+                                    //echo '<hr>';
+                                    echo '</span>
+                                    </span>
+                                  </div>
+                                  <div class="box">
+                                  ';
+                                    $date = $row['buy_date'];
+                                }
+                                /*
+                                echo '<p class="m-4 has-text-left-desktop"><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'">'; 
+                                echo '<p class="m-4 has-text-right-desktop">','商品名：',$row['shohin_mei'],'<br>';
+                                echo '<p class="m-4 has-text-right-desktop">','色：',$row['color_mei'],'<br>';
+                                echo '<p class="m-4 has-text-right-desktop">','価格：￥',$row['price'],'<br>';
+                                echo '</p>';
+                                */
+                                echo '
+                                <div class="level is-mobile">
+                                  <div class="level-left">
+                                    <div class="media">
+                                      <figure class="media-left">
+                                        <p class="image is-64x64">
+                                        <img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'">
+                                        </p>
+                                      </figure>
+                                      <div class="media-content">
+                                        <div class="is-size-5">
+                                          <strong>商品名：',$row['shohin_mei'],'</strong>
+                                        </div>
+                                        <div class="is-size-7 has-text-grey-light">
+                                        色：',$row['color_mei'],'<br>','価格：￥',$row['price'],'
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <hr>';
                             }
                         }
                     ?>
+                    
+
+      
+
+
               
     </div>
     </body>
