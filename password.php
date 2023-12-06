@@ -1,14 +1,25 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'; ?>
 <?php
-$msgMail = '';
-$msgPass = '';
-if(isset($_POST['send'])){
-    echo '<script>
-        alert("指定されたメールアドレスにリンクを送信しました。");
-       </script>';
-  
-}
+    $msgMail = '';
+    $msgPass = '';
+    $msgError = '';
+    $id = $_SESSION['customer']['user_id'];
+    $pdo=new PDO($connect,USER,PASS);
+    $sql=$pdo->prepare('select * from User where user_id=?');
+    $sql->execute([$id]);
+    $data=$sql->fetchAll();
+
+    foreach($data as $d){
+        if(isset($_POST['send'])){
+            if($_POST['sei'] == $d['user_sei'] && $_POST['mei'] == $d['user_mei'] && $_POST['mail'] == $d['mail']){  //姓とDBとを比較　&& 名前も比較
+                $msgMail = "指定されたメールアドレスにリンクを送信しました。";
+            }else{
+                $msgMail = "入力されたデータが存在しません。";
+            }
+        }
+    }
+        
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -33,8 +44,8 @@ if(isset($_POST['send'])){
    <form action="password.php" method="post">
     <label class="label"> お名前 </label><br><!--横並びに-->
     <div class="field  has-addons has-addons-centered ">
-    <input class="input is-info is-normal is-focused m-1"type="text" name="name"  placeholder="姓">
-    <input class="input is-info is-normal is-focused m-1" type="text" name="name"  placeholder="名">
+    <input class="input is-info is-normal is-focused m-1"type="text" name="sei"  placeholder="姓">
+    <input class="input is-info is-normal is-focused m-1" type="text" name="mei"  placeholder="名">
      </div><br>
 
 
@@ -42,7 +53,7 @@ if(isset($_POST['send'])){
      <div class="field has-addons-fullwidth has-addons-centered">
       
         <p class="control has-icons-left">
-     <input class="input is-success  is-normal is-focused "type="email" name="meru"  placeholder="メールアドレス">
+     <input class="input is-success  is-normal is-focused "type="email" name="mail"  placeholder="メールアドレス">
      <span class="icon is-small is-left">
         <i class="fas fa-mail-bulk"></i>
         </span>

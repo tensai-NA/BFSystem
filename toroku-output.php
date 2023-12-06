@@ -2,6 +2,7 @@
 <?php require 'kyotu/db-connect.php'; ?>
 <?php require 'kyotu/header.php'; ?>
 <?php
+
 $pdo=new PDO($connect,USER,PASS);
 $ps = password_hash($_POST['password'],PASSWORD_DEFAULT);
 $count=0;
