@@ -63,28 +63,29 @@
             </div>
                
             <div class="level-right">
-            <p class="mr-4 fa-2x">
-            <span class="fa-layers fa-fw bg">
-                 <a href="cart.php"><i class="fas fa-shopping-cart" ></i>
-                <?php
-                     if(isset($_SESSION['customer'])){   
-                        //カートの数量取得 
-                        $user=$_SESSION['customer']['user_id'];
-                        $pdo=new PDO($connect,USER,PASS);
-                        $sql=$pdo->prepare("select * from Cart where user_id = ?");
-                        $sql->execute([$user]);
-                        $count=$sql-> rowCount();
-                    
-                    }
+                    <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-lg"></i></a></p>
+                    <p class="mr-4 fa-2x">
+                        <span class="fa-layers fa-fw bg">
+                            <a href="cart.php"><i class="fas fa-shopping-cart"></i>
+                                <?php
+                                if (isset($_SESSION['customer'])) {
+                                    //カートの数量取得 
+                                    $user = $_SESSION['customer']['user_id'];
+                                    $pdo = new PDO($connect, USER, PASS);
+                                    $sql = $pdo->prepare("select * from Cart where user_id = ?");
+                                    $sql->execute([$user]);
+                                    $count = $sql->rowCount();
 
-                        echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
-                         echo    $count;
-                         echo  '</span>';
-                ?>
-                </a></span></p>
-            <p class="mr-3" >
-            <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
-            </p>
+                                    echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
+                                    echo    $count;
+                                    echo  '</span>';
+                                } else {
+                                }
+
+
+                                ?>
+                            </a></span>
+                    </p>
     </div></nav><hr>
 
     <div class="main">

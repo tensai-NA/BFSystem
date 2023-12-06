@@ -13,16 +13,16 @@
 <body>
     <p class="my-6">
 <div class="has-text-centered">
-    <h4>ログアウトしますか？</h4>
+    <p class="is-size-4">ログアウトしますか？</p>
     <p class="my-5">
     <h6>※　再度ログインするためにはメール<br>
     アドレスとパスワードが必要です
     </h6>
     </p>
-<p class="mt-6">
+<p class="mt-5">
     <button onclick="location.href='logoutcomp.php'" class="button is-danger is-rounded is-normal">ログアウトする➝</button>
 </p>
-<p class="mb-5">
+<p class="m-4">
     <button onclick="location.href='mypage.php'" class="button is-link is-rounded is-normal">キャンセル➝</button>
 </p>
 </div>
