@@ -14,7 +14,7 @@
 <body>
     <div class="m-4 has-text-centered ">
         <nav class="level  is-mobile">
-            <div class="level-left">ｓｓ
+            <div class="level-left">
                 <a href="mypage.php"><i class="fas fa-long-arrow-alt-left fa-4x" ></i></a>
                 </div>
                 <div class="level-item">

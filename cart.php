@@ -73,7 +73,7 @@
                 */
             echo '<div class="items2 m-2" >';
        
-            echo '<p><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a></p>';
+            echo '<p class="is-size-5"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a></p>';
             echo '<p>',$row['color_mei'],'</p>';
             echo '￥<p class=" title is-4 " style=" display: inline-block;">',$row['price'],'</p>';  
             //echo '数量 ',$row['num'],'<br>';  
