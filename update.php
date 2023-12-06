@@ -12,7 +12,7 @@
 </head>
 <body>
 <form action="updatecomp.php" method="post">
-<div class="m-4 has-text-centered" id="app">
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold" id="app">
     <h1 class="title is-4"> 会員情報更新</h1>
     <div class="box has-background-light m-6">
         <div class="field">

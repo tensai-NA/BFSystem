@@ -13,8 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="box has-background-light m-6"> 
-
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
     <?php
         if(isset($_SESSION['customer'])){
             unset($_SESSION['customer']);

@@ -54,7 +54,7 @@
     <title>商品詳細画面</title>
 </head>
 <body>
-<div class="m-4 has-text-centered ">
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
 
         <nav class="level  is-mobile">
 
@@ -63,7 +63,7 @@
             </div>
                
             <div class="level-right">
-                    <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-lg"></i></a></p>
+                    <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-2x"></i></a></p>
                     <p class="mr-4 fa-2x">
                         <span class="fa-layers fa-fw bg">
                             <a href="cart.php"><i class="fas fa-shopping-cart"></i>
@@ -124,7 +124,7 @@
 
                 }
             ?>
-      <p>個数<input type="number" name="num" min="1" value="1"></p>
+      <p class="m-4">個数<input type="number" name="num" min="1" value="1" style="width: 45px;"></p>
      <?php 
      if(isset($_SESSION['customer'])){
        echo '<button name="tuika">カートに入れる</button> ';

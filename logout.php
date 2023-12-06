@@ -11,8 +11,7 @@
     <title>Document</title>
 </head>
 <body>
-    <p class="my-6">
-<div class="has-text-centered">
+    <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
     <p class="is-size-4">ログアウトしますか？</p>
     <p class="my-5">
     <h6>※　再度ログインするためにはメール<br>

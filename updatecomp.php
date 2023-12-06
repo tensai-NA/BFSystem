@@ -58,17 +58,15 @@ $msg = '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>更新完了画面</title>
 </head>
 <body>
-<p class="my-6">
-<div class="has-text-centered">
-    <p class="my-6">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>Document</title>
-</head>
-<body>
+
+    
+
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
     <h4><?= $msg ?></h4><br>
     <a href="mypage.php">マイページへ➝</a>
     </p>

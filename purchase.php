@@ -12,8 +12,8 @@
     <title>購入確認画面</title>
 </head>
 <body>
-    <div class="has-text-centered ">
-    <p >購入確認</p>
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+    <p class="title is-3 m-5">購入確認</p><hr>
    
 
     <?php
@@ -24,10 +24,12 @@
     foreach($sql as $row){
         
         echo '<p class="title is-5">現在の配送先住所</p>';
+        echo '<div class="columns  is-mobile  is-centered"> ';
+        echo '<div class="column is-7"> ';
         echo '<div class="box has-background-light mx-6">';
-        echo ' <label>お名前:</label>',$row['del_name'],'<br>';
-        echo ' <label>郵便番号</label>',$row['del_psnum'],'<br>';
-        echo '住所:',$row['del_address'] ,'<br>';
+        echo ' <p class="m-1"><label>お名前:</label>',$row['del_name'],'</p>';
+        echo ' <p class="m-1"><label>郵便番号</label>',$row['del_psnum'],'</p>';
+        echo '<p class="m-1">住所:',$row['del_address'] ,'</p>';
       
 
     }
@@ -37,9 +39,9 @@
 ?>
 
   <button type="button" onclick="location.href='address.php'">変更</button> 
-</div>
+</div></div></div>
 
-  
+  <hr>
            
           
     
@@ -48,7 +50,7 @@
          
 
     <form action="purchasecomp.php" method="post">
-    <p>配送希望日 <br>
+     <p class="title is-5 mx-1">配送希望日 </p>
         <select name="day">
             <option value="">指定しない</option>
             <?php
@@ -59,7 +61,7 @@
         </select>
 
     <p>
-        希望時間帯<br>
+    <p class="title is-5 mt-4 mx-1"> 希望時間帯</p>
         <select name="time">
             <option value="0">指定しない</option>
             <option value="1">午前10時-午後12時</option>
@@ -67,24 +69,24 @@
             <option value="3">午後6時-午後8時</option>
         </select>
     </p>
-    
+    <hr>
     <p>
-        ポイント利用<br>
+    <p class="title is-5 mx-1">ポイント利用</p>
         <?php
         if(isset($_SESSION['customer'])){
             $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
             $pdo=new PDO($connect,USER,PASS);
             $sql=$pdo->query("select point from User where user_id='".$id."'");
             $point = $sql->fetch(PDO::FETCH_COLUMN);
-            echo '<p>利用可能ポイント：',$point,'pt</p>';
+            echo '<p>利用可能ポイント：',$point, ' pt</p>';
         }
         ?>
 
-            ご利用ポイント：<input name="use" type="number" value="0" />pt
+            ご利用ポイント：<input name="use" type="number" value="0" style="width: 80px;" /> pt
     </p>
 
     <p>
-        決済方法 <br>
+    <p class="title is-5 mt-4 mx-1">決済方法 </p>
         <select name="kessai">
             <option value="0">クレジット</option>
             <option value="1">現金</option>
@@ -92,9 +94,9 @@
             <option value="3">後払い</option>
         </select>
     </p>
-
+<hr>
     <p>
-        ご注文内容<br>
+    <p class="title is-5">ご注文内容</p>
         <?php
         if(isset($_SESSION['customer'])){  //ログイン済みの処理
             $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
@@ -114,15 +116,19 @@
             foreach($sql as $row){
                 $num = 'quantity_'.$row['shohin_id'];
                 if(in_array($row['shohin_id'], $check) != false){
-                    echo '<div class="box m-5">';
-                    echo '<a href="detail.php?id=', $row['shohin_id'],'">','<img src="' ,$row['shohin_img'], '">','<br>';
-                    echo $row['shohin_mei'],'<br></a>';
-                    echo '個数：',$row['num'],'<br>';
-                    echo 'カラー：',$row['color_mei'],'<br>';
-                    echo '価格：￥',$row['price'],'<br>';
+                    echo '<div class="columns  is-mobile  is-centered"> ';
+                    echo '<div class="column is-7"> ';
+                    echo '<div class=" box has-background-white-bis box-padding-4 ">';
+                    echo '<div class="left ml-6 mx-6 mb-6" style=" float: left;">';
+                    echo '<a href="detail.php?id=', $row['shohin_id'],'   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '"  style="height: 105%;">','</div>';
+                    echo '<div class="items2 m-2">';
+                    echo '<p class="is-size-6"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</p></a>';
+                    echo '<p class="m-2">個数：',$row['num'],'</p>';
+                    echo '<p class="m-2">カラー：',$row['color_mei'],'</p>';
+                    echo '<p class="m-2">価格：￥',$row['price'],'</p>';
                     $total = $row['num'] * $row['price'];
-                    echo '小計：￥',$total,'<br>';
-                    echo '</div>';
+                    echo '<p class="m-2">小計：￥',$total,'</p>';
+                    echo '</div></div></div></div>';
                     $sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
                 }else{
@@ -187,7 +193,7 @@
         
         ?>
 
-    <button type="submit" button is-active>ご注文を確定する</button><br>
+    <button type="submit" class="button  is-black m-4">ご注文を確定する</button><br>
     </form>
     <a href="cart.php">←カートへ戻る</a>
     </div>
