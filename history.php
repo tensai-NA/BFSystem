@@ -77,7 +77,7 @@
                                           <strong>商品名：',$row['shohin_mei'],'</strong>
                                         </div>
                                         <div class="is-size-7 has-text-grey-light">
-                                        色：',$row['color_mei'],'価格：￥',$row['price'],'
+                                        色：',$row['color_mei'],'<br>','価格：￥',$row['price'],'
                                         </div>
                                       </div>
                                     </div>
