@@ -4,8 +4,8 @@ new Vue({
         return{
             // email: document.getElementById('mail').value,
             // postnum: document.getElementById('postnum').value
-            email:'mail',
-            postnum:'0000000'
+            email:'',
+            postnum:''
         };
     },
     computed:{
