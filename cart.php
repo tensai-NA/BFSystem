@@ -59,10 +59,10 @@
         echo '<form method="post" action="purchase.php">';        
         foreach($sql as $row){
             echo '<div class="columns  is-mobile  is-centered"> ';
-            echo '<div class="column is-9"> ';
-            echo '<div class="box m-6 has-text-centered ">';
+            echo '<div class="column is-10"> ';
+            echo '<div class="box  has-text-centered ">';
             echo '<p  class="has-text-right"><input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" checked /></p>';
-            echo '<div class="left ml-6 mx-6" style=" float: left;">';
+            echo '<div class="left  mx-6" style=" float: left;">';
             echo '<p><a href="detail.php?id=', $row['shohin_id'],'  class="thumbnail"  style=" display: inline-block; height: 150px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '" style="height: 100%;">','</p></a>';
             echo '<p>数量 : ','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1"   style="width: 45px;"/>','</p>';
             echo '</div>';

@@ -46,8 +46,11 @@ $msg = '';
                         'password'=>$row['password']
                     ]; 
             }
-                $msg = '更新が完了しました';
+           
         }
+        $msg = '<p class="title is-4 m-4">更新が完了しました</p>';
+    
+                          
     }
 //}
 ?>
@@ -67,9 +70,16 @@ $msg = '';
     
 
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
-    <h4><?= $msg ?></h4><br>
-    <a href="mypage.php">マイページへ➝</a>
+        <div class="columns  is-mobile  is-centered"> 
+        <div class="column"> 
+         <div class=" box has-background-white-bis box-padding-4 ">
+    <?= $msg ?> 
+    <div class="has-text-centered mt-3 mb-6"> <img src="sozai/check_mark-2.png" width="200vw" style="max-width:'100%'"></div>
+    <p class=" mb-6"><a href="mypage.php">マイページへ➝</a></p>
     </p>
+</div>
+</div>
+</div>
 </div>
 </p>
 </body>

@@ -48,6 +48,7 @@
     <title>住所変更</title>
 </head>
 <body>
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
 <p class="title is-3 "> 配送先住所の選択</p>
     
     <?php
@@ -169,7 +170,7 @@ if(isset($_SESSION['customer'])){
 
 </div>
     <button onclick="history.back()">前のページに戻る</button>
-
+</div>
 </body>
 </html>
 

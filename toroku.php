@@ -75,7 +75,7 @@
                  <label class="label is-size-6 m-5">住所</label>
         <div class="field  has-addons-centered">
                  
-                    <input type="text" class="input  is-primary is-normal is-focused " placeholder="🏠 住所" name="address " style="width: 515px;"  required>
+                    <input type="text" class="input  is-primary is-normal is-focused " placeholder="🏠 住所" name="address" style="width: 515px;"  required>
                     
         </div></div>
 </div>
