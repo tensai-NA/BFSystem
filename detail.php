@@ -54,7 +54,7 @@
     <title>商品詳細画面</title>
 </head>
 <body>
-<div class="m-4 has-text-centered ">
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
 
         <nav class="level  is-mobile">
 
@@ -63,28 +63,29 @@
             </div>
                
             <div class="level-right">
-            <p class="mr-4 fa-2x">
-            <span class="fa-layers fa-fw bg">
-                 <a href="cart.php"><i class="fas fa-shopping-cart" ></i>
-                <?php
-                     if(isset($_SESSION['customer'])){   
-                        //カートの数量取得 
-                        $user=$_SESSION['customer']['user_id'];
-                        $pdo=new PDO($connect,USER,PASS);
-                        $sql=$pdo->prepare("select * from Cart where user_id = ?");
-                        $sql->execute([$user]);
-                        $count=$sql-> rowCount();
-                    
-                    }
+                    <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-2x"></i></a></p>
+                    <p class="mr-4 fa-2x">
+                        <span class="fa-layers fa-fw bg">
+                            <a href="cart.php"><i class="fas fa-shopping-cart"></i>
+                                <?php
+                                if (isset($_SESSION['customer'])) {
+                                    //カートの数量取得 
+                                    $user = $_SESSION['customer']['user_id'];
+                                    $pdo = new PDO($connect, USER, PASS);
+                                    $sql = $pdo->prepare("select * from Cart where user_id = ?");
+                                    $sql->execute([$user]);
+                                    $count = $sql->rowCount();
 
-                        echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
-                         echo    $count;
-                         echo  '</span>';
-                ?>
-                </a></span></p>
-            <p class="mr-3" >
-            <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
-            </p>
+                                    echo  '<span class="fa-layers-counter" style="background: #ad9000;">';
+                                    echo    $count;
+                                    echo  '</span>';
+                                } else {
+                                }
+
+
+                                ?>
+                            </a></span>
+                    </p>
     </div></nav><hr>
 
     <div class="main">
@@ -123,7 +124,7 @@
 
                 }
             ?>
-      <p>個数<input type="number" name="num" min="1" value="1"></p>
+      <p class="m-4">個数<input type="number" name="num" min="1" value="1" style="width: 45px;"></p>
      <?php 
      if(isset($_SESSION['customer'])){
        echo '<button name="tuika">カートに入れる</button> ';

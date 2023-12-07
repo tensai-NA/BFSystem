@@ -12,13 +12,13 @@
 </head>
 <body>
 <form action="updatecomp.php" method="post">
-<div class="m-4 has-text-centered" id="app">
-    <h1 class="title is-4"> 会員情報更新</h1>
-    <div class="box has-background-light m-6">
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold" id="app">
+    <h1 class="title is-3"> 会員情報更新</h1>
+    <div class=" box has-background-white-bis box-padding-4 ">
         <div class="field">
             <div class="control m-1">
-            <label class="label"> お名前 </label>
-            <div class="field  has-addons has-addons-centered ">
+            <label class="label label is-size-6 m-4"> お名前 </label>
+            <div class="field   has-addons-centered ">
             <?php
             $msgmail = '';
             $user_sei=$user_mei=$mail=$password=$shin=$postnum=$address='';
@@ -29,51 +29,36 @@
                 $postnum=$_SESSION['customer']['postnum'];
                 $address=$_SESSION['customer']['address'];
             }
-            echo '<input type="text"  class="input  is-normal is-focused m-1" name="user_sei" value="',$user_sei,'">
-                <input type="text" class="input  is-normal is-focused m-1"  name="user_mei" value="',$user_mei,'">';
+            echo '<input type="text"  class="input  is-normal is-focused m-1" name="user_sei" value="',$user_sei,'"  style="width: 250px;">
+                <input type="text" class="input  is-normal is-focused m-1"  name="user_mei" value="',$user_mei,'"  style="width: 250px;">';
             echo ' </div></div>';
 
         echo '<div class="control m-1">
-                <label class="label">メールアドレス</label>
-                <div class="field has-addons-fullwidth has-addons-centered">
-                    <p class="control has-icons-left">';
+                <label class="label label is-size-6 m-4">メールアドレス</label>
+                <div class="field has-addons-fullwidth has-addons-centered">';
+                
 
-            echo '<input type="text" class="input  is-primary  is-normal is-focused " v-model="email" name="mail" value="',$mail,'" />';
-            echo ' <span class="icon is-small is-left">
-                    <i class="fas fa-mail-bulk"></i>
-                    </span>
-                    </p>
-                    <p v-if="isInValidEmail" class="has-text-danger">Eメールアドレスの形式で入力してください</p>
+            echo '<input type="text" class="input  is-primary  is-normal is-focused " v-model="email" name="mail" value="',$mail,'"  style="width: 515px;"  />';
+            echo ' <p v-if="isInValidEmail" class="has-text-danger">Eメールアドレスの形式で入力してください</p>
                 </div>
             </div>';
 
         echo ' <div class="control m-1">
-                    <label class="label">郵便番号</label>
-                    <div class="field has-addons-fullwidth has-addons-centered">
-                    <p class="control has-icons-left">';
+                    <label class="label label is-size-6 m-4">郵便番号</label>
+                    <div class="field has-addons-fullwidth has-addons-centered">';
 
-            echo '<input type="number" class="input  is-normal is-focused " v-model="postnum" name="postnum" value="',$postnum,'" />';
-            echo '<span class="icon is-small is-left">
-                    <i class="has-text-weight-bold">〒</i>
-                    </span>
-                    </p>
-                    <p v-if="isInValidPost" class="has-text-danger">郵便番号は7桁の数字で入力してください。</p>
+            echo '<input type="number" class="input  is-normal is-focused " v-model="postnum" name="postnum" value="',$postnum,'"   style="width: 515px;" />';
+            echo '<p v-if="isInValidPost" class="has-text-danger">郵便番号は7桁の数字で入力してください。</p>
                     </div>
             </div>';
 
         echo '<div class="control m-1">
-                <label class="label">住所</label>
-                <div class="field has-addons-fullwidth has-addons-centered">
-                <p class="control has-icons-left">';
+                <label class="label label is-size-6 m-4">住所</label>
+                <div class="field has-addons-fullwidth has-addons-centered">';
+               
 
-        echo '<input type="text" class="input  is-primary is-normal is-focused " name="address" value="',$address,'">';
-        echo '
-        <span class="icon is-small is-left">
-        <i class="fas fa-house-user"></i>
-            </span>
-            </p>
-            </div>
-            </div>';
+        echo '<input type="text" class="input  is-primary is-normal is-focused " name="address" value="',$address,'"  style="width: 515px;" >';
+        echo '</div></div>';
         ?>
         <button type="submit" class="button is-danger m-3">更新</button>
     </form>

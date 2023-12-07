@@ -19,7 +19,7 @@
 
 <body>
     <form action="search.php" method="post">
-        <div class="m-4 has-text-centered ">
+    <div class="m-3 has-text-centered is-family-code has-text-weight-semibold">
 
             <nav class="level  is-mobile">
 
@@ -30,7 +30,7 @@
 
 
                 <div class="level-right">
-                    <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-lg"></i></a></p>
+                    <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-2x"></i></a></p>
                     <p class="mr-4 fa-2x">
                         <span class="fa-layers fa-fw bg">
                             <a href="cart.php"><i class="fas fa-shopping-cart"></i>
@@ -60,13 +60,16 @@
 
 
             <script src="https://code.jquery.com/jquery.min.js"></script>
-            <div class="A box m-6 has-background-white-ter"><i class="fas fa-search fa-xs"></i>　search</div>
+            <div class ="columns">
+              <div class="column is-full">
+            <div class="A box m-6 has-background-white-ter "><i class="fas fa-search fa-xs"></i>　search</div>
+                            </div></div>
             <?php require 'kyotu/searchbox.php' ?>
 
 
             <?php
             if (!isset($_SESSION['customer'])) {
-                echo '<p><a href="login.php">ログインはこちら</a></p>';
+                echo '<hr><p class="has-text-centered m-4"><a href="login.php">ログインはこちら</a></p><hr>';
             } else {
                 $id = $_SESSION['customer']['user_id'];
                 $pdo = new PDO($connect, USER, PASS);
@@ -89,13 +92,33 @@
                 <div class="sliderArea">
                     <div class="full-screen-o slider">
                         <div>
-                            <a href="detail.php?id=8"><img src="product_img/lip1.png" class="img-item"></a>
-                        </div>
-                        <div>
-                            <img src="product_img/perfume4.jpg" class="img-item">
-                        </div>
-                        <div>
-                            <img src="product_img/nail2.png" class="img-item">
+                        <?php 
+                         $pdo=new PDO($connect,USER,PASS);
+                       
+                          
+                       
+                              $sql = $pdo->prepare("select count(*) as top,Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei
+                              from History,Shohin 
+                              where History.shohin_id=Shohin.shohin_id
+                              order by top desc  ");
+                                $sql->execute();
+
+                              
+
+                             foreach($sql as $row){
+                             $id=$row['shohin_id'];
+                            
+                             echo '<a href="detail.php?id=',$id,'"><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></a>';
+                   
+                          
+                          
+                            }
+                        
+                      
+                          
+                        ?>
+
+                           
                         </div>
                     </div>
                 </div>
@@ -109,13 +132,13 @@
 
 
             </div>
-        </div>
+      
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://code.jquery.com/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="js/slick.min.js"></script>
         <script src="js/home.js"></script>
-
+        </div>
 </body>
 
 </html>

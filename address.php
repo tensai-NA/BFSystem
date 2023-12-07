@@ -48,7 +48,7 @@
     <title>住所変更</title>
 </head>
 <body>
-    <p class="title is-4">配送先住所の選択</p>
+<p class="title is-3 "> 配送先住所の選択</p>
     
     <?php
   
