@@ -15,10 +15,13 @@
 </head>
 <body>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div class="has-text-centered">
 <p class="my-3">
 <span class="is-size-3">マイページ</span>
 =======
+=======
+>>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
 <div class="m-3 has-text-centered is-family-code has-text-weight-semibold">
 
 <nav class="level  is-mobile  mt-5">
@@ -36,6 +39,9 @@
 
     </div>
 </nav>
+<<<<<<< HEAD
+>>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
+=======
 >>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
 <?php //エラーメッセージ
     if(!isset($_SESSION['customer'])){
@@ -51,6 +57,7 @@
         $sql=$pdo->query("select user_sei from User where user_id='".$id."'");
         $sei = $sql->fetch(PDO::FETCH_COLUMN);
 <<<<<<< HEAD
+<<<<<<< HEAD
         echo '<p><span class="is-size-4">',$sei,'様</span></p>';
 
     ?>
@@ -62,6 +69,8 @@
  <div style="border: solid 3px #000; width:250px; margin: auto; border: solid 3px #87cefa;">
     <?php //ポイント取得
 =======
+=======
+>>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
         echo '<p class="has-text-left m-2 is-size-5">',$sei,'様</p>';
 
     ?>
@@ -76,6 +85,7 @@
         $sql=$pdo->query("select point from User where user_id='".$id."'");
         $point = $sql->fetch(PDO::FETCH_COLUMN);
 <<<<<<< HEAD
+<<<<<<< HEAD
         echo '<p><span class="is-size-5">利用可能ポイント: ',$point,'pt</span></p>';
     ?>
  </div>
@@ -84,6 +94,8 @@
  <p><span class="is-size-5">最近の購入履歴</span></p>
     <hr>
 =======
+=======
+>>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
         echo '<p class="has-text-left m-2">利用可能ポイント: ',$point,'pt</p>';
 ?>
 <hr>
@@ -92,6 +104,9 @@
 
 
 
+<<<<<<< HEAD
+>>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
+=======
 >>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
     <?php
             if(isset($_SESSION['customer'])){
@@ -126,6 +141,7 @@
 
             ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <div class="has-text-right has-text-info">
             <a href="history.php">購入履歴一覧へ→</a></p>
             </div>
@@ -144,12 +160,17 @@
 </form>  
 </div>       
 =======
+=======
+>>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
             <p class="m-2 has-text-right is-size-5 m-3"><a href="history.php">購入履歴一覧へ→</a></p>
 <hr>
 
 <p class="m-2"><a href="logout.php"  class="button is-danger is-rounded is-normal m-3">ログアウト</a></p>
 <p class="m-2"><a href="update.php" class="button is-link is-rounded is-normal m-1">登録情報更新</a></p>
 </div>
+<<<<<<< HEAD
+>>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
+=======
 >>>>>>> 8fa7dac564ed3af4c6d3566ef4e9fa683b39cb8a
 </body>
 </html>   
