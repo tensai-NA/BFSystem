@@ -10,7 +10,7 @@
 </head>
 <body>
 <p class="my-6">
-<div class="has-text-centered">
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
  <h4>登録が完了しました</h4><br>
  </p>
  <p class="my-6">

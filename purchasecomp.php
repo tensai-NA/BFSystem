@@ -10,7 +10,7 @@
     <title>購入完了画面</title>
 </head>
 <body>
-    <div class="has-text-centered">
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
     <p class="mb-4">
         <p><span class="is-size-4">ご注文ありがとうございました！</span></p>
         <p class="my-6">
@@ -37,8 +37,7 @@
                 $total = $row['num'] * $row['price'];
                 echo '小計：￥',$total,'<br>';
                 //Historyに追加
-                $history=$pdo->prepare("insert into History values(null,?,?,?,?)");
-                $history->execute([$id,$row['shohin_id'],$row['num'],$row['price']]);
+           
 
                 $his=$pdo->prepare("select shohin_id from History
                 where user_id = ?
@@ -110,7 +109,22 @@
 
             $sql=$pdo->prepare("insert into OrderA values (null,?,?,?,?,?,?,?,?,?)");
             $sql->execute([$id,$deli['del_id'],$total,$point,$today,$_POST['day'],$kiboutime,$_POST['use'],$houhou]);
-            
+
+            $del1 = $pdo->prepare("select max(order_id) as order_idans from OrderA where user_id = ?");
+            $del1->execute([$id]);
+            $deli1 = $del1->fetch();
+
+            $sql=$pdo->query("select Shohin.price,Cart.num,Cart.shohin_id
+                    from Shohin,Cart,Color
+                    where Shohin.shohin_id = Cart.shohin_id
+                    and Shohin.color = Color.color_code
+                    and Cart.user_id = '".$id."'");
+
+            foreach($sql as $row){
+                $sql=$pdo->prepare("insert into History values(null,?,?,?,?,?)");
+                $pdo=new PDO($connect,USER,PASS);
+                $sql->execute([$id,$deli1['order_idans'],$row['shohin_id'],$row['num'],$row['price']]);
+            }
         }
         
         //カートから商品を削除する

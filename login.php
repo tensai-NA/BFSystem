@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'; ?>
 <?php
+
 $msgMail = '';
 $msgPass = '';
 if(isset($_POST['login'])){
@@ -11,6 +12,7 @@ if(isset($_POST['login'])){
     $data = $sql->fetchAll();
     if( empty($data) ){
         $msgMail = "メールアドレスが登録されていません";
+       
     }else{
         foreach($data as $row){
             if(password_verify($_POST['password'],$row['password']) == true){
@@ -47,45 +49,55 @@ if(isset($_POST['login'])){
 </head>
 <body>
 <form action="login.php" method="post">
-    <div class="m-4 has-text-centered ">
-        <h1 class="title is-4"> ログイン</h1>
+    <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+        <p class="title is-3 "> ログイン</p>
 
    
 
-    <div class=" box has-background-light m-6">
-
+    
+    <div class='columns  is-mobile  is-centered'> 
+            <div class='column is-10'> 
+                <div class=" box has-background-white-bis box-padding-4 ">
         <div class="field">
 
         <div class="control m-1">
-        <label class="label">メールアドレス</label>
-        <div class="field has-addons-fullwidth has-addons-centered">
-            <p class="control has-icons-left">
-                <input class="input is-success  is-normal is-focused "  type="email" name="name"  placeholder="メールアドレス">
-             <span class="icon is-small is-left">
-                <i class="fas fa-mail-bulk"></i>
-                </span>
-                </p>
-                <?= $msgMail ?>
+        <label class="label is-size-6 m-4">メールアドレス</label>
+        <div class="field  has-addons-centered">
+           
+                <input class="input is-success  is-normal is-focused "  type="email" name="name"  placeholder="✉ メールアドレス" style="width: 615px;"  required>
+           
+            
+                <p class="m-3 has-text-danger-dark"><?= $msgMail ?></p>
     </div></div>
 
     <div class="control m-1">
-        <label class="label">パスワード</label>
-        <div class="field has-addons-fullwidth has-addons-centered">
-            <p class="control has-icons-left">
-     <input type="password"  class="input  is-normal is-focused "name="password"  placeholder="パスワード">
-     <span class="icon is-small is-left">
-        <i class="fas fa-key"></i>
-    </span>
-        </p>
-        <?= $msgPass ?>
+        <label class="label is-size-6 m-4">パスワード</label>
+        <div class=" has-addons-centered">
+     <input type="password"  class="input  is-normal is-focused "name="password"  placeholder="🔐 パスワード"  style="width: 615px;"  required>
+   
+       
+         <p class="m-3 has-text-danger-dark"><?= $msgPass ?></p>
             </div></div></div>
            
-        <button type="submit" class="button is-danger m-3 is-small"  name="login" value="send">ログイン</button>
-       <button type="submit"  class="button is-info m-3 is-small">キャンセル</button>
 
-        <p><a href="toroku.php">新規登録はこちら</a></p>
-        <p><a href="password.php">パスワードを忘れた方はこちら</a></p>
-    </form>
+            <div class='columns  is-mobile is-centered'> 
+            <div class='column'> 
+        <button type="submit" class="button is-danger  mx-4 mt-4"  name="login" value="send">ログイン</button>
+
+        <button    onclick="history.back()"  class="button is-info  mx-4 mt-4">キャンセル</button>
+</div>
+</div>
+
+
+      
+        <p class=" mt-5 mb-4 "><a href="toroku.php">新規登録はこちら</a></p>
+      
+        
+        <p class="m-4"><a href="password.php">パスワードを忘れた方はこちら</a></p>
+
+        </form>
+    </div>
+    </div>
     </div>
     </div>
 </body>

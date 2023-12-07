@@ -14,104 +14,76 @@
 </head>
 <body>
     <div id="app">
-        <?php
-            //$sei=$mei=$mail=$password=$password2=$postnum=$address='';
-            //if(isset($_SESSION['customer'])){
-                //$sei=$_SESSION['customer']['sei'];
-                //$mei=$_SESSION['customer']['mei'];
-                //$mail=$_SESSION['customer']['mail'];
-                //$password=$_SESSION['customer']['password'];
-                //$password2=$_SESSION['customer']['password2'];
-                //$postnum=$_SESSION['customer']['postnnum'];
-                //$address=$_SESSION['customer']['address'];
-            //}
-            
+        <form action="toroku-output.php" method="post">
+        <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
         
-        echo '<form action="toroku-output.php" method="post">';
-        echo '<div class="m-4 has-text-centered ">
-                 <h1 class="title is-4"> 会員情報登録</h1>
-                  <div class="box has-background-light m-6">
-                     <div class="field">';
+        <p class="title is-3 "> 会員情報登録</p>
+        <div class='columns  is-mobile  is-centered'> 
+            <div class='column is-10'> 
+            <div class=" box has-background-white-bis box-padding-4 ">
+                     <div class="field">
 
-        echo ' <div class="control m-1">
-                <label class="label"> お名前 </label>
-                <div class="field  has-addons has-addons-centered "> ';
-        echo '<input type="text" class="input  is-normal is-focused m-1" name="sei" placeholder="姓" v-model="sei" />',
-                '<input type="text" class="input  is-normal is-focused m-1" name="mei" placeholder="名" v-model="mei" />';
-        echo '</div><div>';
-
-
-        echo '  <div class="control m-1">
-                 <label class="label">メールアドレス</label>';
-        echo '   <div class="field has-addons-fullwidth has-addons-centered">
-                     <p class="control has-icons-left">
-                         <input type="text"  class="input  is-primary  is-normal is-focused" name="mail" placeholder="メールアドレス" v-model="email" />
-                         <span class="icon is-small is-left">
-                             <i class="fas fa-mail-bulk"></i>
-                          </span>
-                    </p>';
-
-        echo    '<p v-if="isInValidEmail" class="has-text-danger">Eメールアドレスの形式で入力してください</p>';
-        echo '</div></div>';
+        <div class="control m-1">
+                <label class="label is-size-6 m-5"> お名前 </label>
+                <div class="field   has-addons-centered "> 
+        <input type="text" class="input  is-normal is-focused mb-2" name="sei" placeholder="姓" v-model="sei"  style="width: 250px;"  required/>
+                <input type="text" class="input  is-normal is-focused mb-2" name="mei" placeholder="名" v-model="mei" style="width: 250px;"  required/>
+        </div></div>
 
 
-        echo '  <div class="control m-1">
-        <label class="label">パスワード</label>';
-        echo '   <div class="field has-addons-fullwidth has-addons-centered">
-                    <p class="control has-icons-left">
-                     <input type="password"  class="input  is-normal is-focused" name="password" placeholder="パスワード" v-model="pass1" />
-                     <span class="icon is-small is-left">
-                     <i class="fas fa-key"></i>
-                 </span>
-             </p>';
-        echo '</div></div>';
+        <div class="control m-1">
+                 <label class="label is-size-6 m-5">メールアドレス</label>
+        <div class="field has-addons-centered">
+                         <input type="text"  class="input  is-primary  is-normal is-focused" name="mail" placeholder="✉ メールアドレス" v-model="email"  style="width: 515px;" required/>
+                        
+
+        <p v-if="isInValidEmail" class="has-text-danger m-2">Eメールアドレスの形式で入力してください</p>
+        </div></div>
 
 
-        echo ' <div class="control m-1">
-                <label class="label">パスワード確認</label>';
-        echo '  <div class="field has-addons-fullwidth has-addons-centered">
-                    <p class="control has-icons-left">
-                     <input type="password"  class="input  is-primary is-normal is-focused " name="password2" placeholder="パスワード再確認" v-model="pass2" />
-                     <span class="icon is-small is-left">
-                     <i class="fas fa-key"></i>
-                 </span>
-             </p>';
-        echo '<p v-if="isInValidPass" class="has-text-danger">パスワードがちがいます。';
-        echo '</div></div>';
+        <div class="control m-1">
+        <label class="label is-size-6 m-5">パスワード</label>
+        <div class="field  has-addons-centered">
+                  
+                     <input type="password"  class="input  is-normal is-focused" name="password" placeholder="🔐 パスワード" v-model="pass1" style="width: 515px;"  required/>
+                    
+        </div></div>
+
+
+        <div class="control m-1">
+                <label class="label is-size-6 m-5">パスワード確認</label>
+        <div class="field  has-addons-centered">
+                 
+                     <input type="password"  class="input  is-primary is-normal is-focused " name="password2" placeholder="🔐 パスワード再確認" v-model="pass2"  style="width: 515px;"  required/>
+                   
+        <p v-if="isInValidPass" class="has-text-danger m-2">パスワードがちがいます。</p>
+        </div></div>
 
 
 
-        echo '<div class="control m-1">
-                 <label class="label">郵便番号</label>';
-        echo ' <div class="field has-addons-fullwidth has-addons-centered">
-                 <p class="control has-icons-left">
-                    <input type="text" class="input  is-normal is-focused " name="postnum" placeholder="郵便番号" v-model="postnum" />
-                    <span class="icon is-small is-left">
-                    <i class="has-text-weight-bold">〒</i>
-                 </span>
-             </p>';
-        echo '<p v-if="isInValidPost" class="has-text-danger">郵便番号は7桁の数字で入力してください。';
-        echo '</div></div>';
+        <div class="control m-1">
+                 <label class="label is-size-6 m-5">郵便番号</label>
+        <div class="field has-addons-centered">
+                
+                    <input type="text" class="input  is-normal is-focused " name="postnum" placeholder="〒 郵便番号" v-model="postnum" style="width: 515px;"  required/>
+                    
+        <p v-if="isInValidPost" class="has-text-danger m-2">郵便番号は7桁の数字で入力してください。</p>
+        </div></div>
 
 
-        echo ' <div class="control m-1">
-                 <label class="label">住所</label>';
-        echo ' <div class="field has-addons-fullwidth has-addons-centered">
-                 <p class="control has-icons-left">
-                    <input type="text" class="input  is-primary is-normal is-focused " placeholder="住所" name="address" >
-                    <span class="icon is-small is-left">
-                    <i class="fas fa-house-user"></i>
-                  </span>
-                    </p>';
-        echo '</div></div>';
+        <div class="control m-1">
+                 <label class="label is-size-6 m-5">住所</label>
+        <div class="field  has-addons-centered">
+                 
+                    <input type="text" class="input  is-primary is-normal is-focused " placeholder="🏠 住所" name="address " style="width: 515px;"  required>
+                    
+        </div></div>
+</div>
 
        
-        echo '<input type="submit" class="button is-danger m-5" value="確定">';
-        echo '</form>';
-
-        echo '<button onclick="location.href=\'login.php\'" class="button is-info m-5">キャンセル</button>';
-        echo '<p><a href="login.php">アカウントをお持ちの方はこちら</a></p>'
-        ?>
+        <input type="submit" class="button is-danger  mx-4 my-5 " value="確定">
+        </form>
+       <button class="button is-info mx-4 my-5" type="button" onclick="location.href='login.php'">キャンセル</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/toroku.js"></script>

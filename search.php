@@ -1,7 +1,7 @@
 <?php require 'kyotu/db-connect.php'?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,25 +13,30 @@
 </head>
 <body>
 <form action="search.php" method="post">
-    <div class="m-4 has-text-centered ">
+<div class="m-3 has-text-centered is-family-code has-text-weight-semibold">
 
     <nav class="level  is-mobile">
 
         <div class="level-left">
 
             <script src="https://code.jquery.com/jquery.min.js"></script>
-        <div class="A"><i class="fas fa-search"></i>　seach</div> <!--seachの部分は商品名　（絞り込み検索があれば表示）　例　パンプス　白　1000～　-->
+            <div class ="columns ">
+              <div class="column is-full">
+              <div class="A box m-3 has-background-white-ter ">
+                <i class="fas fa-search fa-xs"></i>　search</div> 
+                </div>
+            </div>
         </div>
  
           <div class="level-right">
-            <a href="home.php"><i class="fas fa-home is-6"></i> </a>
+            <a href="home.php"><i class="fas fa-home is-6 fa-2x"></i> </a>
             </div>
         </nav>
 
   
         <?php require 'kyotu/searchbox.php'?>
 
-
+<hr>
 <!--以下　検索結果表示-->
 <?php
    $pdo=new PDO($connect,USER,PASS);
@@ -94,11 +99,9 @@ if(isset($_POST['price'])){
 
     if(isset($_POST['cate'])){
 
-      if($flag1){
         $sql_search= $sql_search ." AND ";
-      }else{
         $flag1=true;
-      }
+
       $flag2=true;
 
      
@@ -123,7 +126,7 @@ if(isset($_POST['price'])){
 
     if(isset($_POST['brand'])){
 
-      if($flag1 && !$flag2){
+      if(!$flag2 || !$flag1){
         $sql_search= $sql_search ." AND ";
       }else if($flag2){
         $sql_search= $sql_search ." OR ";
@@ -149,7 +152,7 @@ if(isset($_POST['price'])){
 
       if(isset($_POST['color'])){
 
-          if($flag1 && !$flag2){
+          if(!$flag2 || !$flag1){
             $sql_search= $sql_search ." AND ";
           }else if($flag2){
          $sql_search= $sql_search ." OR ";
@@ -182,43 +185,39 @@ if(isset($_POST['price'])){
 
     if(isset($_POST['shohin_mei'])){
     
-     
+     // echo $sql_search,'<br>';
+     // echo var_dump($arr),'<br>'; テスト用
        
         $sql = $pdo->prepare($sql_search);
         $sql->execute($arr);
      
     } 
 
+   
     $count=$sql-> rowCount();
     if($count==0){
       echo '<p class="m-4 has-text-centered ">検索に一致する商品がありません';
-    }else{
-   
-     echo ' <div class="columns">';
-    foreach($sql as $row){
-       $id=$row['shohin_id'];
-       echo'<div class="column">';
-       echo '<div style="background:white; padding: 10px;">';
-       echo '<div class="section"> <div class="columns is-variable is-8">';
-       echo '<a href="detail.php?id=',$id,'"><p><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p>';
-       echo '<p class="has-text-center">',$row['shohin_mei'],'</a></p>';
-       echo '<p class="has-text-center">',$row['price'],'円 </p>';
-       echo '</div></div></div></div>';
+    } else {
+      echo '<div class="columns  is-multiline">';
+      foreach($sql as $row){
+         $id=$row['shohin_id'];
+         echo '<div class="column  is-2 is-one-quarter">
+                  <div class="card">
+                    <div class="card-image">';
+                
+         echo '<figure class="image is-square">';
+         echo '<a href="detail.php?id=',$id,'"><p class="m-1"><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p></figure></div>';
+         echo ' <div class="card-content"> <div class="content">';
+         echo '<p class="has-text-centered	"><a href="detail.php?id=',$id,'">',$row['shohin_mei'],'</a></p>';
+         echo '<p class="has-text-centered	">',$row['price'],'円 </p>';
+         echo '</div></div></div></div>';
+      }
+      echo '</div>';
     }
-  }
   
  
    ?>
-   </div>
-<!--　デザイン変更予定-->
-<style>
- 
-.columns > div.column {
-  border: solid 1px #ddd;
-  text-align: center;
-}
- 
-</style>
+ </form>
 
 </body>
 </html>

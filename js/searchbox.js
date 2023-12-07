@@ -30,4 +30,41 @@ $(function() {
     });
 });
 
+function Colorall(checkbox) {
+    var checkboxes = document.querySelectorAll('#color');
+    checkboxes.forEach(function(cb) {
+        if (cb !== checkbox) {
+            cb.checked = checkbox.checked;
+        }
+    });
+}
+
+function Cateall(checkbox) {
+    var checkboxes = document.querySelectorAll('#cate');
+    checkboxes.forEach(function(cb) {
+        if (cb !== checkbox) {
+            cb.checked = checkbox.checked;
+        }
+    });
+}
+
+function Brandall(checkbox) {
+    var checkboxes = document.querySelectorAll('#brand');
+    checkboxes.forEach(function(cb) {
+        if (cb !== checkbox) {
+            cb.checked = checkbox.checked;
+        }
+    });
+}
+function Priceall(checkbox) {
+    var checkboxes = document.querySelectorAll('#price');
+    checkboxes.forEach(function(cb) {
+        if (cb !== checkbox) {
+            cb.checked = checkbox.checked;
+        }
+    });
+}
+
+
+
 

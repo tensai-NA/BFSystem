@@ -12,7 +12,18 @@ $msg = '';
         $sql=$pdo->prepare('select * from User where mail=?');
         $sql->execute([$_POST['mail']]);
     }
+    $minid=$pdo->prepare("select min(del_id) as minid from Delivery where user_id =?");
+    $minid->execute([$user_id]);
+    foreach($minid as $row){
+       $minids=$row['minid'];
+}
+
     if(empty($sql->fetchAll())){
+        $name =  $_POST['user_sei'].$_POST['user_mei'];
+        $sql=$pdo->prepare('update Delivery set del_name= ?,del_address= ?,del_psnum =?,koshinbi=? where del_id= ?');//Delceryの最初の配送先住所を更新
+                $sql->execute([$name,$_POST['address'], $_POST['postnum'],date('Y-m-d'),$minids]);
+        
+        
         if(isset($_SESSION['customer'])){
             $sql=$pdo->prepare('update User set user_sei=?,user_mei=?,mail=?,postnum=?,address=?
                                 where user_id=?');
@@ -47,17 +58,15 @@ $msg = '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>更新完了画面</title>
 </head>
 <body>
-<p class="my-6">
-<div class="has-text-centered">
-    <p class="my-6">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>Document</title>
-</head>
-<body>
+
+    
+
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
     <h4><?= $msg ?></h4><br>
     <a href="mypage.php">マイページへ➝</a>
     </p>
