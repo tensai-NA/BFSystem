@@ -76,7 +76,7 @@
             </div>
          </div>
          <div class="seach m-5 ">
-            <button type="submit" class="button is-info is-outlined is-normal is-rounded">検索</button>
+            <button type="submit" class="button is-info is-outlined is-normal is-rounded is-medium">検索</button>
             </form>
          </div>
       </div>

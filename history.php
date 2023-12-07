@@ -23,6 +23,7 @@
                 <div class="level-right">
                 </div>
         </nav>
+        
                     <?php
                         if(isset($_SESSION['customer'])){
                             $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
@@ -43,20 +44,20 @@
                                 array_push($stack,$row['hisorder_id']);
                                 if($count>0){
                                     if($stack[$count]!=$stack[$count-1]){
-                                        echo' <p class="title is-4 has-text-left">','直近の注文', $countorder,'(',$row['buy_date'],')</p><hr>';
+                                        echo' <p class="title is-5 has-text-left">','直近の注文', $countorder,'(',$row['buy_date'],')</p><hr>';
                                         $countorder++;
                                     }
                                 }else{
-                                    echo' <p class="title is-4 has-text-left">','直近の注文', $countorder,'(',$row['buy_date'],')</p><hr>';
+                                    echo' <p class="title is-5 has-text-left">','直近の注文', $countorder,'(',$row['buy_date'],')</p><hr>';
                                     $countorder++;
                                 }
                                 echo '<div class="columns  is-mobile  is-centered"> ';
                                 echo '<div class="column is-9"> ';
                                 echo '<div class=" box has-background-white-bis box-padding-4 ">';
                               
-                                echo '<div class="left ml-6 mx-6 mb-6" style=" float: left;">';
+                                echo '<div class="left ml-5 mx-5 mb-3" style=" float: left;">';
                                
-                                echo '<p class="m-4"> <a href="detail.php?id=', $row['shohin_id'],'   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;""><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"  style="height: 100%;"></a></p>';
+                                echo '<p> <a href="detail.php?id=', $row['shohin_id'],'   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;""><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"  style="height: 100%;"></a></p>';
                                 echo '</div>';
                                 echo '<div class="items2 m-2">';
                                 echo '<p class="is-size-5"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a></p>';
@@ -68,7 +69,7 @@
                         }
                     
                     ?>
-              
+              <p class="has-text-right">最大20件表示</p>
     </div>
     </body>
 </html>

@@ -58,6 +58,8 @@
         $total=0;
         echo '<form method="post" action="purchase.php">';        
         foreach($sql as $row){
+            echo '<div class="columns  is-mobile  is-centered"> ';
+            echo '<div class="column is-9"> ';
             echo '<div class="box m-6 has-text-centered ">';
             echo '<p  class="has-text-right"><input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" checked /></p>';
             echo '<div class="left ml-6 mx-6" style=" float: left;">';
@@ -119,7 +121,7 @@
             echo '<p>リピート割 -￥',$repeat,'</p>';
             echo '<p><a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','</p>';
             echo '</div>';
-            echo '</div>';
+            echo '</div></div></div>';
   
         }
   
