@@ -14,25 +14,28 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
-<nav class="level  is-mobile  mt-5">
+<nav class="level  is-mobile  mt-6 mx-3">
 
 <div class="level-left ml-3">
 <?php
         $link=$_SERVER['HTTP_REFERER'] ;
-        if(strpos($link,'home') === true){ 
+        if(strpos($link,'home') !== false){ 
 
-            echo '<a href="home.php">';
+            echo '<a href="home.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>ホーム</rt><rp>）</rp></ruby></a>';
 
-        }else{
+        }else if(strpos($link,'detail') !== false){
 
-              echo '<a href="' ,$link,'">';
+              echo '<a href="' ,$link,'"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>商品詳細</rt><rp>）</rp></ruby></a>';
 
+        }elseif(strpos($link,'purchase') !== false){
+
+            echo '<a href="' ,$link,'"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>購入確認</rt><rp>）</rp></ruby></a>';
         }
          
 
 ?>
 
-<i class="fas fa-long-arrow-alt-left fa-2x"></i></a>
+
 </div>
    
 <div class="level-itemt ml-3">
@@ -44,7 +47,7 @@
 
     </div>
 </nav>
-
+<hr>
 
 
 
@@ -85,7 +88,7 @@
                 $checked='checked';
             }
             echo '<p  class="has-text-right"><input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" ',$checked, ' /></p>';
-            echo '<div class="left  mx-6" style=" float: left;">';
+            echo '<div class="left  mx-4" style=" float: left;">';
             echo '<p><a href="detail.php?id=', $row['shohin_id'],'  class="thumbnail"  style=" display: inline-block; height: 150px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '" style="height: 100%;">','</p></a>';
             echo '<p>数量 : ','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1"   style="width: 45px;"/>','</p>';
             echo '</div>';

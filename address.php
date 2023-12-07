@@ -45,12 +45,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
     <title>住所変更</title>
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
-<p class="title is-3 "> 配送先住所の選択</p>
-    
+    <nav class="level  is-mobile mt-6 mx-3">
+
+        <div class="level-left ml-2">
+                <a href="purchase.php" ><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
+                
+        </div>
+        <div class="level-item">
+                <p class="title is-4 "> 配送先住所の選択</p>
+        </div>
+        <div class="level-right ml-3">
+               
+                
+        </div>
+    </nav>
+            
     <?php
   
     if(isset($_SESSION['customer'])){
@@ -60,35 +75,42 @@
     $sql=$pdo->query("select del_id, del_address ,del_name, del_psnum from Delivery where user_id='".$id."' and destination=1");
     foreach($sql as $row){
         
-        echo '<p class="title is-5">現在の配送先住所</p>';
-        echo '<div class="box has-background-light m-5">';
+        echo '<p class="title is-5">現在の配送先住所</p><hr>';
+        echo '<div class="columns  is-mobile  is-centered"> ';
+        echo '<div class="column is-10"> ';
+        echo '<div class="box  has-text-centered has-background-white-ter">';
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
-        echo ' <label>郵便番号</label>',$row['del_psnum'],'<br>';
+        echo ' <label>郵便番号:</label>',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '<div class="',$boxcount,'trigger">変更<i class="fas fa-angle-down"></i></div>
-        <div class="',$boxcount,'box">
+        echo '変更<i class="fas fa-angle-down"></i>
+
+       
          <form action="address.php" method="post">
-         <input type="hidden" name="postIdu" value="',$row['del_id'],'">
-            <label>お名前</label>
+         <input type="hidden" name="postIdu" value="',$row['del_id'],'">';
+      
+         echo '<div class="columns  is-mobile  is-centered"> ';
+         echo '<div class="column is-10"> ';
+         echo '<div class="box  has-text-centered has-background-white-bis">';
+        echo   '<label>お名前</label>
                 <p><input type="text" name="seiu">
                 <input type="text" name="meiu"></p>
           
             <label>郵便番号</label>
-                <p><input type="number" name="postnumu"></p>
+                <p><input type="text" name="postnumu"></p>
 
                 <label>住所</label>
                 <p><input type="text" name="addressu"></p>
 
-            <button name="update">変更</button>
+            <button name="update" class="button is-small is-black m-2">変更</button>
         </form>
-    </div>';
-    echo '</div>';
+    </div></div></div>';
+    echo '</div></div></div>';
     $boxcount++;
     }
 
     
 }
-      echo '<p class="title is-5">配送先住所一覧</p>';
+      echo '<p class="title is-5">配送先住所一覧</p><hr>';
       
 if(isset($_SESSION['customer'])){
     $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
@@ -96,52 +118,43 @@ if(isset($_SESSION['customer'])){
     $count=1;
     $sql=$pdo->query("select del_id,del_address ,del_name, del_psnum from Delivery where user_id='".$id."' and destination=0");
     foreach($sql as $row){
-        echo '配送先住所',$count;
+        echo '<p class=" has-text-left is-size-5 mb-3">配送先住所',$count,'</p>';
         $count++;
-        echo '<div class="box has-background-light m-5">';
+        echo '<div class="columns  is-mobile  is-centered"> ';
+        echo '<div class="column is-10"> ';
+        echo '<div class="box  has-text-centered has-background-white-ter">';
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo '郵便番号:',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '<div class="',$boxcount,'trigger">変更<i class="fas fa-angle-down"></i></div>
-                <div class="',$boxcount,'box">
+        echo '<span onclick="obj=document.getElementById("open',$count,'").style; obj.display=(obj.display=="none")?"block":"none";">
+        <a style="cursor:pointer;">変更<i class="fas fa-angle-down"></i></a></span>
+                
                  <form action="address.php" method="post">
-                 <input type="hidden" name="postIdu" value="',$row['del_id'],'">
-                    <label>お名前</label>
+                 <input type="hidden" name="postIdu" value="',$row['del_id'],'">';
+              echo '<span id="open',$count,'" style="display: none; clear: both;"><div class="columns  is-mobile  is-centered"> ';
+                 echo '<div class="column is-10"> ';
+                 echo '<div class="box  has-text-centered has-background-white-bis">';
+                  echo  ' <label>お名前</label>
                         <p><input type="text" name="seiu">
                         <input type="text" name="meiu"></p>
                   
                     <label>郵便番号</label>
-                        <p><input type="number" name="postnumu"></p>
+                        <p><input type="text" name="postnumu"></p>
 
                         <label>住所</label>
                         <p><input type="text" name="addressu"></p>
 
-                    <button name="update">変更</button>
-                    <button name="swicth">この住所に届ける</button>
+                    <button name="update" class="button is-small is-black m-2">変更</button>
                 </form>
-            </div>';
-        echo '</div>';
+            </div></div></div></span>';
+        echo '</div><button name="swicth" class="button  is-small is-dark is-black m-2">この住所に届ける</button></div></div>';
         $boxcount++;
     }
  //変更部分は見えないようにしておく
 
-    for($a=0;$a<$boxcount;$a++){
-       echo  '<script>
-                    $(function() {
-                        $(".',$a,'trigger").click(function() {
-                            $(".',$a,'box").slideToggle("");
-                        });
-                    });
-            </script>
-
-            <style>
-                    .',$a,'box,{
-                        display: none;
-                    }
-             </style>';
     
 }
-}
+
 
 
     ?>
@@ -150,7 +163,7 @@ if(isset($_SESSION['customer'])){
   
     
 
-    <div class="F m-5">配送先住所を追加する<i class="fas fa-angle-down"></i></div>
+    <div class="F mb-5 "><p class="is-size-5">配送先住所を追加する<i class="fas fa-angle-down"></i></p></div>
 
 <div class="G box has-background-light m-5">
  <form action="" method="post">
@@ -168,9 +181,7 @@ if(isset($_SESSION['customer'])){
 </div>
 
 
-</div>
-    <button onclick="location.href='purchase.php'">前のページに戻る</button>
-</div>
+
 </body>
 </html>
 

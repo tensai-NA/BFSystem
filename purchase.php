@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
-    <p class="title is-3 m-5">購入確認</p><hr>
+    <p class="title is-3 mt-6 ">購入確認</p><hr>
    
 
     <?php
@@ -25,8 +25,8 @@
         
         echo '<p class="title is-5">現在の配送先住所</p>';
         echo '<div class="columns  is-mobile  is-centered"> ';
-        echo '<div class="column is-7"> ';
-        echo '<div class="box has-background-light mx-6">';
+        echo '<div class="column is-9"> ';
+        echo '<div class="box has-background-light ">';
         echo ' <p class="m-1"><label>お名前:</label>',$row['del_name'],'</p>';
         echo ' <p class="m-1"><label>郵便番号</label>',$row['del_psnum'],'</p>';
         echo '<p class="m-1">住所:',$row['del_address'] ,'</p>';
@@ -38,7 +38,7 @@
 }
 ?>
 
-  <button type="button" onclick="location.href='address.php'">変更</button> 
+  <button type="button" onclick="location.href='address.php'" class="m-2">変更</button> 
 </div></div></div>
 
   <hr>
@@ -141,7 +141,7 @@
                 $num = 'quantity_'.$row['shohin_id'];
                 if(in_array($row['shohin_id'], $check) != false){
                     echo '<div class="columns  is-mobile  is-centered"> ';
-                    echo '<div class="column is-7"> ';
+                    echo '<div class="column is-9"> ';
                     echo '<div class=" box has-background-white-bis box-padding-4 ">';
                     echo '<div class="left ml-6 mx-6 mb-6" style=" float: left;">';
                     echo '<a href="detail.php?id=', $row['shohin_id'],'   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '"  style="height: 105%;">','</div>';
@@ -219,7 +219,7 @@
         if($count>0){
         echo '<button type="submit" class="button  is-black m-4">ご注文を確定する</button>';
         }else{
-         echo '<button type="submit" class="button  is-black m-4">ご注文を確定する</button>';
+         echo '<button type="submit" class="button  is-black m-4" disabled>ご注文を確定する</button>';
         }
         
         ?>

@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
-        <nav class="level  is-mobile">
+        <nav class="level  is-mobile mt-6 mx-3">
             <div class="level-left">
                 <a href="mypage.php"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
                 </div>
@@ -52,15 +52,15 @@
                                     $countorder++;
                                 }
                                 echo '<div class="columns  is-mobile  is-centered"> ';
-                                echo '<div class="column is-9"> ';
+                                echo '<div class="column is-10"> ';
                                 echo '<div class=" box has-background-white-bis box-padding-4 ">';
                               
                                 echo '<div class="left ml-5 mx-5 mb-3" style=" float: left;">';
                                
-                                echo '<p> <a href="detail.php?id=', $row['shohin_id'],'   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;""><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"  style="height: 100%;"></a></p>';
+                                echo '<p class="mx-3"> <a href="detail.php?id=', $row['shohin_id'],'   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;""><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"  style="height: 100%;"></a></p>';
                                 echo '</div>';
                                 echo '<div class="items2 m-2">';
-                                echo '<p class="is-size-5"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a></p>';
+                                echo '<p class="is-size-5"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a></p><hr>';
                                 echo '<p class="m-2">色：',$row['color_mei'],'</p>';
                                 echo '<p class="m-2">価格:￥',$row['price'],'</p>';
                                 echo '</div></div></div></div>';

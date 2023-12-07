@@ -13,7 +13,7 @@
 <body>
 <form action="updatecomp.php" method="post">
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold" id="app">
-    <h1 class="title is-3"> 会員情報更新</h1>
+    <p class="title is-3 mt-6"> 会員情報更新</p>
     <div class=" box has-background-white-bis box-padding-4 ">
         <div class="field">
             <div class="control m-1">
@@ -61,10 +61,10 @@
         echo '<input type="text" class="input  is-primary is-normal is-focused " name="address" value="',$address,'"  style="width: 515px;" >';
         echo '</div></div>';
         ?>
-        <button type="submit" class="button is-danger m-3">更新</button>
+        <button type="submit" class="button is-danger mr-3 mt-6 mb-6">更新</button>
     </form>
 
-        <button type="button" onclick="location.href='mypage.php'" class="button is-link m-3">キャンセル</button>
+        <button type="button" onclick="location.href='mypage.php'" class="button is-link ml-3 mt-6 mb-6">キャンセル</button>
         </div>
         </div>
 </div>

@@ -17,7 +17,7 @@
         <form action="toroku-output.php" method="post">
         <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
         
-        <p class="title is-3 "> 会員情報登録</p>
+        <p class="title is-3 mt-6 "> 会員情報登録</p>
         <div class='columns  is-mobile  is-centered'> 
             <div class='column is-10'> 
             <div class=" box has-background-white-bis box-padding-4 ">

@@ -56,7 +56,7 @@
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
 
-        <nav class="level  is-mobile">
+        <nav class="level  is-mobile mt-6 mx-3">
 
             <div class="level-left ml-3">
 <?php
@@ -64,20 +64,37 @@
         $link=$_SERVER['HTTP_REFERER'] ;
         if(strpos($link,'home')  !== false){ 
 
-            echo ' <a href="home.php" ><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>';
+            echo ' <a href="home.php" ><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x" ></i></rb><rp>（</rp><rt>ホーム</rt><rp>）</rp></ruby></a>';
 
         }else if(strpos($link,'search')  !== false){
 
-              echo '<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>';
+              echo '<a href="#" onclick="history.back()"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x" ></i></rb><rp>（</rp><rt>検索</rt><rp>）</rp></ruby></a>';
               
         }else if(strpos($link,'cart')  !== false){
 
+            echo '<a href="cart.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>カート</rt><rp>）</rp></ruby></a>';
+            
+        }else if(strpos($link,'mypage')  !== false){
+
+            echo '<a href="mypage.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>マイページ</rt><rp>）</rp></ruby></a>';
+
+        }else if(strpos($link,'purchase')  !== false){
+
+            echo '<a href="purchase.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>購入確認</rt><rp>）</rp></ruby></a>';
+
+        }else if(strpos($link,'history')  !== false){
+
+            echo '<a href="history.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>購入履歴</rt><rp>）</rp></ruby></a>';
+        }else if(strpos($link,'detail')  !== false){
+
+            echo '<a href="home.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>ホーム</rt><rp>）</rp></ruby></a>';
         }
 ?>
 
             </div>
                
             <div class="level-right">
+            <a href="home.php"><i class="fas fa-home fa-2x mr-4"></i></a>
                     <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-2x"></i></a></p>
                     <p class="mr-4 fa-2x">
                         <span class="fa-layers fa-fw bg">
@@ -132,19 +149,20 @@
                 // echo '<form method="post" action="cart.php">';
                 echo '<form method="post" action="detail.php?id=',$id,'">';
                 foreach($sql as $row){
-                    echo '<img src="' ,$row['shohin_img'], '">','<br>';
-                    echo $row['shohin_mei'],'<br>';
+                    echo '<img src="' ,$row['shohin_img'], '"  border="1">';
+                    echo '<p class="is-size-5 m-3">',$row['shohin_mei'],'</p>';
                     echo $row['price'],'円','<br>';
                     echo $row['shohin_exp'],'<br>';
 
                 }
             ?>
+  
       <p class="m-4">個数<input type="number" name="num" min="1" value="1" style="width: 45px;"></p>
      <?php 
      if(isset($_SESSION['customer'])){
-       echo '<button name="tuika">カートに入れる</button> ';
+       echo '<button name="tuika" class="button is-small is-black m-4">カートに入れる</button> ';
       }else{
-        echo '<button name="tuika" class="button"  disabled>カートに入れる</button> ';
+        echo '<button name="tuika" class="button is-small is-black m-4"  disabled>カートに入れる</button> ';
         echo '<p>カートに追加するにはログインしてください</p>';
         echo '<a href="login.php">ログインはこちら</a>';
       }

@@ -16,7 +16,7 @@
 <body>
 <div class="m-3 has-text-centered is-family-code has-text-weight-semibold">
 
-<nav class="level  is-mobile  mt-5">
+<nav class="level  is-mobile  mt-6 mx-3">
 
 <div class="level-left ml-3">
 
@@ -85,17 +85,19 @@
                     echo ' <div class=" box has-background-white-bis box-padding-4 ">';
                     echo '<p class="title is-5 has-text-left ml-3">',$row['buy_date'],'</p><hr>';
                     echo '<div class="left ml-5 mx-5 mb-3" style=" float: left;">';
-                    echo  '<p class="mx-6"><a href="detail.php?id=', $row['shohin_id'],'  class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '" style="height:100%;">',' </a></p></div>';
+                    echo  '<p class="mx-5"><a href="detail.php?id=', $row['shohin_id'],'  class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '" style="height:100%;">',' </a></p></div>';
                     echo '<div class="items2 m-2">';
                     echo '<p class=" m-1"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</p></a>';
                     echo '<p class="m-2">色：',$row['color_mei'],'</p>';
                     echo '<p class="m-2">価格:￥',$row['price'],'</p>';
                     echo '</div></div></div></div>';
                 }
+                echo '<p class="is-size-7 has-text-right">最大３件表示</p>';
             }
 
 
             ?>
+           
             <p class="m-2 has-text-right is-size-5 m-3"><a href="history.php">購入履歴一覧へ→</a></p>
 <hr>
 

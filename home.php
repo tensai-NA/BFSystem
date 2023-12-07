@@ -21,13 +21,15 @@
     <form action="search.php" method="post">
     <div class="m-3 has-text-centered is-family-code has-text-weight-semibold">
 
-            <nav class="level  is-mobile">
+            <nav class="level  is-mobile mt-6 mx-3">
 
-                <div class="level-left ml-3">
-                    <img src="sozai/Shopicon.png" width="40vw" style="max-width:'100%'">
+                <div class="level-left ml-4">
+                    <img src="sozai/Shopicon.png" width="40vw" style="max-width:'110%'">
+
                 </div>
-
-
+                <div class="level-itemt ml-3">
+                <p class="title is-3 "> 　ホーム</p>
+                    </div>  
 
                 <div class="level-right">
                     <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-2x"></i></a></p>
@@ -57,7 +59,7 @@
 
                 </div>
             </nav>
-
+                <hr>
 
             <script src="https://code.jquery.com/jquery.min.js"></script>
             <div class ="columns">
@@ -138,8 +140,8 @@
                         echo '<figure class="image is-square">';
                         echo '<a href="detail.php?id=',$id,'"><p class="m-1"><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p></figure></div>';
                         echo ' <div class="card-content"> <div class="content">';
-                        echo '<p class="has-text-centered	"><a href="detail.php?id=',$id,'">',$row['shohin_mei'],'</a></p>';
-                        echo '<p class="has-text-centered	">',$row['price'],'円 </p>';
+                        echo '<p class="has-text-centered is-size-7"><a href="detail.php?id=',$id,'">',$row['shohin_mei'],'</a></p><hr>';
+                        echo '<p class="has-text-centered is-size-7	">',$row['price'],'円 </p>';
                         echo '</div></div></div></div>';
                      }
                      echo '</div>';

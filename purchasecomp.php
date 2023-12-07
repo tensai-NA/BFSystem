@@ -31,11 +31,14 @@
                     and Shohin.color = Color.color_code
                     and Cart.user_id = '".$id."'");
             foreach($sql as $row){
-                echo $row['shohin_mei'],'<br>';
+                echo '<div class="columns  is-mobile  is-centered"> ';
+                echo '<div class="column is-7"> ';
+                echo '<div class="box  has-text-centered ">';
+                echo '<p class="is-size-5">',$row['shohin_mei'],'</p>';
                 echo 'カラー：',$row['color_mei'],'<br>';
                 echo '価格：￥',$row['price'],'<br>';
                 $total = $row['num'] * $row['price'];
-                echo '小計：￥',$total,'<br>';
+                echo '小計：￥',$total,'<br></div></div></div>';
                 //Historyに追加
            
 
@@ -136,7 +139,7 @@
          </span></p>
         </p>
         <p class="my-6">
-            <button onclick="location.href='home.php'">ホームへ戻る</button>
+            <button onclick="location.href='home.php'"  class="button  is-black m-4">ホームへ戻る</button>
         </p>
      </p>
     </div>    
