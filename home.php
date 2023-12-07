@@ -85,8 +85,8 @@
 
 
 
-            <div class="m-4 has-text-centered ">
-                <h2>おすすめ</h2>
+            <div class="m-3 has-text-centered is-family-code has-text-weight-semibold ">
+                <p class="title is-4 has-text-success-dark">おすすめ</p>
                 <!--全顧客で一緒の表示にする-->
 
                 <div class="sliderArea">
