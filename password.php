@@ -39,7 +39,7 @@
     会員登録時に登録されたお名前とメールアドレスをご入力の上「送信」をタップしてください<br>
     パスワード再設定ページURLを記載したメールをお送りいたします。<br>
     </p>
-
+    <p><? $msgMail ?></p>
    <div class=" box has-background-light m-6"> <!--ボックスのwidthを指定-->
    <form action="password.php" method="post">
     <label class="label"> お名前 </label><br><!--横並びに-->

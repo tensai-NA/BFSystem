@@ -53,12 +53,51 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
         <tr><th>商品名</th><th>金額</th><th>色</th><th>ブランド</th><th>カテゴリ</th><th>画像ファイル名</th><th>操作</th></tr>
         <tr>
             <div class="field">
+                <!-- コード入力のところをセレクトボックスにする-->
             <form action="" method="post">
                 <td><input type="text" class="input is-small" name="name" require></td> <!--商品名-->
-                <td><input type="number" class="input is-small" name="price" require></td> <!--金額-->
-                <td><input type="number" class="input is-small" name="color" require></td> <!--色-->
-                <td><input type="number" class="input is-small" name="brand" require></td> <!--ブランド-->                
-                <td><input type="number" class="input is-small" name="cate" require></td> <!--カテゴリ-->
+                <td><input type="number" class="input is-small" min=0 name="price" require></td> <!--金額-->
+                <td><div class="select is-small">
+                    <select name="color">
+                    <?php
+                        $color=$pdo->query("select * from Color");
+                        foreach($color as $row){
+                            echo '<option value="',$row['color_code'],'">';
+                                echo $row['color_code'],"：";
+                                echo $row['color_mei'];
+                            echo '</option>';
+                        }
+                    ?>
+                    </select>
+                </div></td>
+                <td><div class="select is-small">
+                <select name="brand">
+                    <?php
+                        $brand=$pdo->query("select * from Brand");
+                        foreach($brand as $row){
+                            echo '<option value="',$row['brand_code'],'">';
+                                echo $row['brand_code'],"：";
+                                echo $row['brand_mei'];
+                            echo '</option>';
+                        }
+                    ?>
+                </select>
+                </div></td>
+
+                <td><div class="select is-small">
+                <select name="cate">
+                    <?php
+                        $cate=$pdo->query("select * from Categori");
+                        foreach($cate as $row){
+                            echo '<option value="',$row['cate_code'],'">';
+                            echo $row['cate_code'],"：";
+                            echo $row['cate_mei'];
+                            echo '</option>';
+                        }
+                    ?>
+                </select>
+                </div></td>
+
                 <td><input type="text" class="input is-small" name="img" require></td> <!--画像-->
                 <td><button type="submit" class="button is-small is-success is-light is-outlined" name="add">追加</button></td>
             </form>
@@ -83,7 +122,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
         </div>
         </tr>
    
-        <?php
+        <?php //改ページ
             }
             echo ' </table>';
             echo '<nav class="pagination" role="navigation" aria-label="pagination">
@@ -100,51 +139,5 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
         </ul>
     </nav>
     
-<?php
-echo '<div class="columns">';
-//カラー
-    echo '<div class="column">';
-    echo '<p>カラー</p>';
-    echo '<select name="sel">';
-        $color=$pdo->query("select * from Color");
-        foreach($color as $row){
-            echo '<option>';
-                echo $row['color_code'],"：";
-                echo $row['color_mei'];
-            echo '</option>';
-        }
-    echo '</select>';
-    echo '</div>'; // column
-
-     echo '<hr class="rule">';
-
-//ブランド
-    echo '<div class="column">';
-    echo '<p>ブランド</p>';
-    echo '<select name="sel">';
-        $brand=$pdo->query("select * from Brand");
-        foreach($brand as $row){
-            echo '<option>';
-                echo $row['brand_code'],"：";
-                echo $row['brand_mei'];
-            echo '</option>';
-        }
-    echo '</select>';
-    echo '</div>'; // column
-//カテゴリ
-    echo '<div class="column">';
-        echo '<p>カテゴリ</p>';
-        echo '<select name="sel">';
-        $cate=$pdo->query("select * from Categori");
-            foreach($cate as $row){
-                echo '<option>';
-                echo $row['cate_code'],"：";
-                echo $row['cate_mei'];
-                echo '</option>';
-            }
-        echo '</select>';
-    echo '</div>';
-echo '</div>';
-?>
 </body>
 </html>
