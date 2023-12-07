@@ -82,7 +82,7 @@
         }
         ?>
 
-            ご利用ポイント：<input name="use" type="number" value="0" style="width: 80px;" /> pt
+            ご利用ポイント：<input name="use" type="number" min="0" max=<?= $point ?> value="0" style="width: 80px;" /> pt
     </p>
 
     <p>
