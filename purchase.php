@@ -108,9 +108,33 @@
                     and Cart.user_id = ?");
             $sql->execute([$id]);
             $check=array();
+
             if(isset($_POST['checkbox'])){
-                $check=$_POST['checkbox']; //チェックボックスがついてるとき
+                $check=$_POST['checkbox']; 
+                //チェックボックスがついてるとき
+                $_SESSION['checkbox']= $check;
+            }else{
+                $check=$_SESSION['checkbox']; 
             }
+            foreach($sql as $row){
+                $num = 'quantity_'.$row['shohin_id'];
+                if(in_array($row['shohin_id'], $check) != false){
+                    $sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
+                    //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
+                }else{
+                    $sql = $pdo -> prepare('update Cart set flag = 1, num = ?  where user_id = ? and shohin_id = ? ');
+                    //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
+                }
+                $count = isset($_POST[$num])?$_POST[$num] : $row['num'];
+                $sql -> execute([$count, $id,$row['shohin_id']]);
+            }
+
+            $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_mei,Shohin.price,Shohin.shohin_img,Color.color_mei,Cart.num
+                    from Shohin,Cart,Color
+                    where Shohin.shohin_id = Cart.shohin_id
+                    and Shohin.color = Color.color_code
+                    and Cart.user_id = ?");
+            $sql->execute([$id]);
 
             $total = 0;
             foreach($sql as $row){
@@ -129,25 +153,27 @@
                     $total = $row['num'] * $row['price'];
                     echo '<p class="m-2">小計：￥',$total,'</p>';
                     echo '</div></div></div></div>';
-                    $sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
+                    //$sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
                 }else{
-                    $sql = $pdo -> prepare('update Cart set flag = 1, num = ?  where user_id = ? and shohin_id = ? ');
+                    //$sql = $pdo -> prepare('update Cart set flag = 1, num = ?  where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
                 }
+                /*
                 $count = isset($_POST[$num])?$_POST[$num] : $row['num'];
                 $sql -> execute([$count, $id,$row['shohin_id']]);
-
+                */
                 $his=$pdo->prepare("select shohin_id from History
                 where user_id = ?
                 and shohin_id = ?
                 ");
                 $his->execute([$id, $row['shohin_id']]);
-
+                
                 $repeat = 0;
                 if(isset($his)){
                     $repeat += $total * 0.1;
                 }
+                
             }
 
             echo '</p>';
@@ -172,6 +198,7 @@
                     $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                     $pdo=new PDO($connect,USER,PASS);
                     $sql=$pdo->query("select num,price from Cart,Shohin where Cart.shohin_id = Shohin.shohin_id and user_id = '".$id."'  and flag=0");
+                    $count = $sql->rowCount();
                     foreach($sql as $row){
                         $total += $row['num'] * $row['price'];
                     }
@@ -189,11 +216,15 @@
             }
     
         }
-
+        if($count>0){
+        echo '<button type="submit" class="button  is-black m-4">ご注文を確定する</button>';
+        }else{
+         echo '<button type="submit" class="button  is-black m-4">ご注文を確定する</button>';
+        }
         
         ?>
 
-    <button type="submit" class="button  is-black m-4">ご注文を確定する</button><br>
+   
     </form>
     <a href="cart.php">←カートへ戻る</a>
     </div>

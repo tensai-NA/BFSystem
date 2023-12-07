@@ -17,6 +17,7 @@
     <?php
         if(isset($_SESSION['customer'])){
             unset($_SESSION['customer']);
+            unset($_SESSION['checkbox']);
             echo '<p class="title is-4">ログアウトしました</p>';
             echo '<p>ご利用ありがとうございました</p>';
             echo '<p><a href="home.php">ホームへ戻る</a></p>';

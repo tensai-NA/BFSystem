@@ -17,7 +17,22 @@
 <nav class="level  is-mobile  mt-5">
 
 <div class="level-left ml-3">
-<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
+<?php
+        $link=$_SERVER['HTTP_REFERER'] ;
+        if(strpos($link,'home') === true){ 
+
+            echo '<a href="home.php">';
+
+        }else{
+
+              echo '<a href="' ,$link,'">';
+
+        }
+         
+
+?>
+
+<i class="fas fa-long-arrow-alt-left fa-2x"></i></a>
 </div>
    
 <div class="level-itemt ml-3">
@@ -61,7 +76,15 @@
             echo '<div class="columns  is-mobile  is-centered"> ';
             echo '<div class="column is-10"> ';
             echo '<div class="box  has-text-centered ">';
-            echo '<p  class="has-text-right"><input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" checked /></p>';
+            if(isset($_SESSION['checkbox'])){
+                $checked="";
+                if(in_array($row['shohin_id'], $_SESSION['checkbox']) != false){
+                    $checked='checked';
+                }
+            }else{
+                $checked='checked';
+            }
+            echo '<p  class="has-text-right"><input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" ',$checked, ' /></p>';
             echo '<div class="left  mx-6" style=" float: left;">';
             echo '<p><a href="detail.php?id=', $row['shohin_id'],'  class="thumbnail"  style=" display: inline-block; height: 150px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '" style="height: 100%;">','</p></a>';
             echo '<p>数量 : ','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1"   style="width: 45px;"/>','</p>';

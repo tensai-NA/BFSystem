@@ -59,7 +59,22 @@
         <nav class="level  is-mobile">
 
             <div class="level-left ml-3">
-                <a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
+<?php
+        
+        $link=$_SERVER['HTTP_REFERER'] ;
+        if(strpos($link,'home')  !== false){ 
+
+            echo ' <a href="home.php" ><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>';
+
+        }else if(strpos($link,'search')  !== false){
+
+              echo '<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>';
+              
+        }else if(strpos($link,'cart')  !== false){
+
+        }
+?>
+
             </div>
                
             <div class="level-right">

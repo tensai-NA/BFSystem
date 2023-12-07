@@ -169,7 +169,7 @@ if(isset($_SESSION['customer'])){
 
 
 </div>
-    <button onclick="history.back()">前のページに戻る</button>
+    <button onclick="location.href='purchase.php'">前のページに戻る</button>
 </div>
 </body>
 </html>
