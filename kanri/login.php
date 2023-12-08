@@ -38,26 +38,30 @@ if(isset($_POST['login'])){
     <title>管理者ログイン</title>
 </head>
 <body>
-<div class="m-4 has-text-centered ">
-<h1 class="title is-4">管理者ログイン</h1>
-<div class="box has-background-light m-6">
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+<p class="title is-3 "> 管理者ログイン</p>
+
+
+<div class='columns  is-mobile  is-centered'> 
+            <div class='column is-10'> 
+                <div class=" box has-background-white-bis box-padding-4 ">
     <div class="field">
     <div class="control m-1">
     <form action="login.php" method="post">
     <div class="field has-addons-fullwidth has-addons-centered">
-            <label class="label">管理者名</label>
-            <input type="text" class="input is-normal is-focused m-i" name="name">
-            <?= $msgname?>
+            <label class="label is-size-6 m-5">管理者名</label>
+            <input type="text" class="input is-normal is-focused m-i"  placeholder="👤 管理者名" name="name" style="width: 615px;"  required >
+            <p class="m-3 has-text-danger-dark"><?= $msgname?></p>
         </div></div>
         <div class="control m-1">
         <div class="field has-addons-fullwidth has-addons-centered">
-            <label class="label">パスワード</label>
-            <input type="password" class="input is-primary is-focused m-i" name="pass">
-            <?= $msgpass ?>
+            <label class="label is-size-6 m-5">パスワード</label>
+            <input type="password" class="input is-primary is-focused m-i" placeholder="🔐 パスワード"  name="pass"  style="width: 615px;"  required>
+            <p class="m-3 has-text-danger-dark"> <?= $msgpass ?></p>
         </div></div>
-        <button name="login"  class="button is-danger m-5" >ログイン</button>
+        <button name="login"  class="button is-danger m-6 mb-6" >ログイン</button>
     </form>
     </div></div>
-</div>
+</div></div></div>
 </body>
 </html>
