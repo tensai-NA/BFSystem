@@ -61,7 +61,9 @@
             <div class="level-left ml-3">
                 <a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
             </div>
-               
+            
+            <p class="title is-3 "> 商品詳細</p>
+
             <div class="level-right">
                     <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-2x"></i></a></p>
                     <p class="mr-4 fa-2x">

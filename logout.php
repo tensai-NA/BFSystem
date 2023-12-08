@@ -8,10 +8,12 @@
     <title>ログアウト確認画面</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>Document</title>
+    <title>ログアウト</title>
 </head>
 <body>
     <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+    <p class="title is-3 "> ログアウト</p>
+
     <p class="is-size-4">ログアウトしますか？</p>
     <p class="my-5">
     <h6>※　再度ログインするためにはメール<br>

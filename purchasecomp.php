@@ -11,6 +11,8 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+    <p class="title is-3 m-5">購入完了</p>
+
     <p class="mb-4">
         <p><span class="is-size-4">ご注文ありがとうございました！</span></p>
         <p class="my-6">

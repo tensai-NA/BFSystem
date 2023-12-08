@@ -27,7 +27,9 @@
                 </div>
             </div>
         </div>
- 
+
+          <p class="title is-3 "> 検索結果</p>
+
           <div class="level-right">
             <a href="home.php"><i class="fas fa-home is-6 fa-2x"></i> </a>
             </div>

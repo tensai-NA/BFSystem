@@ -11,6 +11,7 @@
 <body>
 
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+    <p class="title is-3 m-5">登録完了</p>
         <div class="columns  is-mobile  is-centered"> 
         <div class="column"> 
          <div class=" box has-background-white-bis box-padding-4 ">

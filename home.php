@@ -20,7 +20,6 @@
 <body>
     <form action="search.php" method="post">
     <div class="m-3 has-text-centered is-family-code has-text-weight-semibold">
-
             <nav class="level  is-mobile">
 
                 <div class="level-left ml-3">
@@ -28,7 +27,8 @@
                 </div>
 
 
-
+                <p class="title is-3 "> ホーム</p>
+                
                 <div class="level-right">
                     <p class="mr-4"><a href="mypage.php"><i class="fas fa-user-circle fa-2x"></i></a></p>
                     <p class="mr-4 fa-2x">

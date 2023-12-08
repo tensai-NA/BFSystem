@@ -14,6 +14,8 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+    <p class="title is-3 "> ログアウト完了</p>
+
     <?php
         if(isset($_SESSION['customer'])){
             unset($_SESSION['customer']);
