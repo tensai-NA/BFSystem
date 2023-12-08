@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'; ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -14,34 +13,36 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
-<nav class="level  is-mobile  mt-5">
-
+<nav class="level  is-mobile  mt-6 mx-3">
 <div class="level-left ml-3">
-<a href="#" onclick="history.back()"><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
+<?php
+        $link=$_SERVER['HTTP_REFERER'] ;
+        if(strpos($link,'home') !== false){ 
+            echo '<a href="home.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>ホーム</rt><rp>）</rp></ruby></a>';
+        }else if(strpos($link,'detail') !== false){
+            echo '<a href="' ,$link,'"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>商品詳細</rt><rp>）</rp></ruby></a>';
+        }elseif(strpos($link,'purchase') !== false){
+            echo '<a href="' ,$link,'"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>購入確認</rt><rp>）</rp></ruby></a>';
+        }
+         
+?>
 </div>
    
-<div class="level-itemt ml-3">
-<p class="title is-3 "> カート</p>
-</div>
-
-  <div class="level-right mr-3">
-  <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
-
-    </div>
-</nav>
-
-
-
-
-
-    <?php
+   <div class="level-itemt ml-3">
+   <p class="title is-3 "> カート</p>
+   </div>
+     <div class="level-right mr-3">
+     <a href="home.php"><i class="fas fa-home fa-2x"></i></a>
+       </div>
+   </nav>
+   <hr>
+   <?php
     if(!isset($_SESSION['customer'])){
         echo '<p>カートを閲覧するにはログインしてください</p>';
         echo '<p><a href="login.php">ログインはこちら</a></p>';
         exit();
     }
     ?>
-
     <?php
     if(isset($_SESSION['customer'])){
         $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
@@ -61,9 +62,18 @@
             echo '<div class="columns  is-mobile  is-centered"> ';
             echo '<div class="column is-10"> ';
             echo '<div class="box  has-text-centered ">';
-            echo '<p  class="has-text-right"><input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" checked /></p>';
-            echo '<div class="left  mx-6" style=" float: left;">';
-            echo '<p><a href="detail.php?id=', $row['shohin_id'],'  class="thumbnail"  style=" display: inline-block; height: 150px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '" style="height: 100%;">','</p></a>';
+            if(isset($_SESSION['checkbox'])){
+                $checked="";
+                if(in_array($row['shohin_id'], $_SESSION['checkbox']) != false){
+                    $checked='checked';
+                }
+            }else{
+                $checked='checked';
+            }
+            echo '<p  class="has-text-right"><input type="checkbox" name="checkbox[]" value="'.$row['shohin_id'].'" ',$checked, ' /></p>';
+
+            echo '<div class="left  mx-4" style=" float: left;">';
+            echo '<p class="mx-4"><a href="detail.php?id=', $row['shohin_id'],'  class="thumbnail"  style=" display: inline-block; height: 150px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '" style="height: 90%;">','</p></a>';
             echo '<p>数量 : ','<input type="number" name="quantity_'.$row['shohin_id'].'" value="'.$row['num'].'" min="1"   style="width: 45px;"/>','</p>';
             echo '</div>';
             /*
@@ -75,12 +85,11 @@
                 */
             echo '<div class="items2 m-2" >';
        
-            echo '<p class="is-size-5"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a></p>';
-            echo '<p>',$row['color_mei'],'</p>';
-            echo '￥<p class=" title is-4 " style=" display: inline-block;">',$row['price'],'</p>';  
+            echo '<p class="is-size-5 m-3"><a href="detail.php?id=', $row['shohin_id'],'">',$row['shohin_mei'],'</a></p>';
+            echo '<p class="m-3">',$row['color_mei'],'</p>';
+            echo '￥<p class=" title is-4 m-3" style=" display: inline-block;">',$row['price'],'</p>';  
             //echo '数量 ',$row['num'],'<br>';  
      
-
             /*'
                 if($flag==0){
                     $pdo=new PDO($connect,USER,PASS);
@@ -90,20 +99,15 @@
                     $sql = $pdo -> prepare('update Cart set flag = 1 where user_id = ? and shohin_id = ? ');
                     $sql -> execute([$id,$row['shohin_id']]); 
                 }
-
              */   
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-            echo '<p>小計 ￥',$subtotal,'</p>';
-    
-            echo '<p>ポイント',floor($subtotal/100),'pt','</p>';
-
+            
             $his=$pdo->prepare("select shohin_id from History
             where user_id = ?
             and shohin_id = ?
             ");
             $his->execute([$id, $row['shohin_id']]);
-
             $repeat = 0;
             if(isset($his)){
                 /*
@@ -116,10 +120,9 @@
                 }
                 */
                 $repeat = $subtotal * 0.1;
-
             }
-            echo '<p>リピート割 -￥',$repeat,'</p>';
-            echo '<p><a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','</p>';
+            
+            echo '<p class="mb-5"><a href="cart-delete.php?id=',$row['shohin_id'],'">削除</a>','</p>';
             echo '</div>';
             echo '</div></div></div>';
   
@@ -140,22 +143,14 @@
         foreach($sql as $row){
             $subtotal = $row['num'] * $row['price'];
             $total+=$subtotal;
-
             $repeat = $subtotal * 0.1;
             $totalrepeat += $repeat;
-
         }
-        echo '<div class="left-total" class="has-text-left">';
-        echo '<p>商品合計（税込）',$total,'円','</p>';
-        echo '<p>リピート割 ',$totalrepeat,'円','</p>';
-        echo '<p>送料350円</p>';
-        echo '</div>';
+       
        
     }
     ?>
-
     <hr>
-
     <?php
     $repeat=0;
     if(isset($_SESSION['customer'])){
@@ -173,14 +168,12 @@
             $total+=$subtotal;
             $repeat = $subtotal * 0.1;
         }
-        echo '注文合計',$total-$repeat+350,'円','<br>';
+       
     }
     echo '<button type="submit" name="purchase"  class="button  is-black m-4">ご注文手続きへ</button>';
     }
 }
-
   
-
     ?>
 </form>
 </div>
