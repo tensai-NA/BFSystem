@@ -27,8 +27,8 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
 
 </head>
 <body>
-<div class="m-4 has-text-centered ">
-    <h1 class="title is-4">商品管理</h1>
+<div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+    <p class=" is-size-3 m-5">商品管理</p>
     <?php
     if(!isset($_SESSION['kanri'])){
         echo '<p>このページを参照するにはログインしてください</p>';
@@ -49,7 +49,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
     $sql->bindValue(':per_page', $per_page, PDO::PARAM_INT);
     $sql->execute();
     ?>
-    <table>
+    <table align="center">
         <tr><th>商品名</th><th>金額</th><th>色</th><th>ブランド</th><th>カテゴリ</th><th>画像ファイル名</th><th>操作</th></tr>
         <tr>
             <div class="field">
@@ -99,7 +99,7 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
                 </div></td>
 
                 <td><input type="text" class="input is-small" name="img" require></td> <!--画像-->
-                <td><button type="submit" class="button is-small is-success is-light is-outlined" name="add">追加</button></td>
+                <td><button type="submit" class="button is-small is-success is-light is-outlined m-1 ml-2" name="add">追加</button></td>
             </form>
             </div>
         </tr>
@@ -116,8 +116,8 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
             <td><input type="number" name="brand" min=1 max=11 class="input is-small" value="<?=  $row['brand'] ?>" require></td>
             <td><input type="number" name="cate" min=1 max=10 class="input is-small" value="<?=  $row['category'] ?>" require></td>
             <td><input type="text" name="img" class="input is-small" value="<?= $row['shohin_img'] ?>" require></td>
-            <td><button type="submit" class="button is-small is-link is-light is-outlined" name="update">更新</button>
-                <button type="submit" class="button is-small is-danger is-light is-outlined" name="del">削除</button></td>
+            <td><div class="ml-2"><button type="submit" class="button is-small is-link is-light is-outlined m-1" name="update">更新</button>
+                <button type="submit" class="button is-small is-danger is-light is-outlined m-1" name="del">削除</button></div></td>
             </form>
         </div>
         </tr>
@@ -125,9 +125,11 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
         <?php //改ページ
             }
             echo ' </table>';
-            echo '<nav class="pagination" role="navigation" aria-label="pagination">
-            <ul class="pagination-list">';
-    
+            echo '<nav class="pagination" role="navigation" aria-label="pagination"> 
+          <div class="navbar-start"></div>
+          <div class="navbar-item">
+                <ul class="pagination-list">';
+                        
                 for ($i = 1; $i <= $total_pages; $i++) {
                     if ($i == $page) {
                         echo "<li><a class='pagination-link is-current'>$i</a></li>";
@@ -136,8 +138,12 @@ if(isset($_POST['add'])){   // 追加ボタンが押された処理
                     }
                 }
             ?>
-        </ul>
+                </ul>
+            </div>
+            <div class="navbar-end"></div>
+            
     </nav>
-    
+               
+</div> 
 </body>
 </html>
