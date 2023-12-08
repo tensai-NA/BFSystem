@@ -19,12 +19,12 @@
     <?php
         if(isset($_SESSION['customer'])){
             unset($_SESSION['customer']);
-            echo '<p class="title is-4">ログアウトしました</p>';
+            echo '<p class="title is-5">ログアウトしました</p>';
             echo '<p>ご利用ありがとうございました</p>';
-            echo '<p><a href="home.php">ホームへ戻る</a></p>';
+            echo '<p class="m-3"><a href="home.php">ホームへ戻る</a></p>';
         }else{
-            echo '<p class="title is-4">すでにログアウトしています</p>';
-            echo '<a href="home.php">ホームへ戻る</a>';
+            echo '<p class="title is-5">すでにログアウトしています</p>';
+            echo '<p class="m-3"><a href="home.php">ホームへ戻る</a></p>';
         }
     ?>
     </div>
