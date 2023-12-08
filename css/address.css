@@ -1,0 +1,15 @@
+#ch{
+    display: none;
+}
+.ch{
+    cursor: pointer;
+}
+#ch:checked+label+.op{
+    display: none;
+}
+#A{
+    display: none;
+}
+#A:checked+label+.B{
+    display: none;
+}

@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 <?php require 'kyotu/db-connect.php'?>
-
 <?php
    $id = $_SESSION['customer']['user_id'];
     if(isset($_POST['update'])){
@@ -12,7 +11,6 @@
         alert("配送先住所の内容を変更しました");
        </script>';
     }
-
     if(isset($_POST['inserts'])){
         $name = $_POST['seii'].$_POST['meii'];
         $id = $_SESSION['customer']['user_id'];
@@ -23,7 +21,6 @@
         alert("配送先住所を追加しました");
        </script>';
     }
-
     if(isset($_POST['swicth'])){
         $pdo=new PDO($connect,USER,PASS);
         $sql=$pdo->prepare("update Delivery set destination =0 where user_id = '".$id."' and  destination =1");
@@ -35,9 +32,7 @@
         alert("現在の配送先住所を変更しました");
        </script>';
     }
-  
     ?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -46,28 +41,22 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="css/main.css">
-
+    <link rel="stylesheet" href="css/address.css">
     <title>住所変更</title>
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
     <nav class="level  is-mobile mt-6 mx-3">
-
         <div class="level-left ml-2">
-                <a href="purchase.php" ><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>
-                
+            <a href="purchase.php" ><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>    
         </div>
         <div class="level-item">
                 <p class="title is-4 "> 配送先住所の選択</p>
         </div>
         <div class="level-right ml-3">
-               
-                
         </div>
     </nav>
-            
     <?php
-  
     if(isset($_SESSION['customer'])){
         $boxcount=0;
     $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
@@ -82,12 +71,12 @@
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo ' <label>郵便番号:</label>',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '変更<i class="fas fa-angle-down"></i>
-
-       
+        echo '<input type="checkbox" id="F">';
+        echo '<label class="F" for="F">変更</label><i class="fas fa-angle-down"></i>
          <form action="address.php" method="post">
          <input type="hidden" name="postIdu" value="',$row['del_id'],'">';
       
+         echo '<div class="G">';
          echo '<div class="columns  is-mobile  is-centered"> ';
          echo '<div class="column is-10"> ';
          echo '<div class="box  has-text-centered has-background-white-bis">';
@@ -103,12 +92,10 @@
 
             <button name="update" class="button is-small is-black m-2">変更</button>
         </form>
-    </div></div></div>';
+    </div></div></div></div>';
     echo '</div></div></div>';
     $boxcount++;
     }
-
-    
 }
       echo '<p class="title is-5">配送先住所一覧</p><hr>';
       
@@ -126,8 +113,10 @@ if(isset($_SESSION['customer'])){
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo '郵便番号:',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '変更<i class="fas fa-angle-down"></i>
+        echo '<input type="checkbox" id="ch">';
+        echo '<label class="ch" for="ch">変更</label><i class="fas fa-angle-down"></i>
                 
+            <div class="op">
                  <form action="address.php" method="post">
                  <input type="hidden" name="postIdu" value="',$row['del_id'],'">';
               echo '<div class="columns  is-mobile  is-centered"> ';
@@ -145,7 +134,7 @@ if(isset($_SESSION['customer'])){
 
                     <button name="update" class="button is-small is-black m-2">変更</button>
                 </form>
-            </div></div></div>';
+            </div></div></div></div>';
         echo '</div><button name="swicth" class="button  is-small is-dark is-black m-2">この住所に届ける</button></div></div>';
         $boxcount++;
     }
@@ -153,9 +142,6 @@ if(isset($_SESSION['customer'])){
 
     
 }
-
-
-
     ?>
     <script src="https://code.jquery.com/jquery.min.js"></script>
 
