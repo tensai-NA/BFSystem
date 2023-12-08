@@ -13,10 +13,14 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
-    <p class="title is-3 m-5">購入確認</p><hr>
+    <p class="title is-3 mt-6 ">購入確認</p><hr>
    
 
     <?php
+
+   if(isset($_POST['checkbox']) || isset($_SESSION['checkbox'])){
+
+
     if(isset($_SESSION['customer'])){
     $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
     $pdo=new PDO($connect,USER,PASS);
@@ -25,10 +29,10 @@
         
         echo '<p class="title is-5">現在の配送先住所</p>';
         echo '<div class="columns  is-mobile  is-centered"> ';
-        echo '<div class="column is-7"> ';
-        echo '<div class="box has-background-light mx-6">';
+        echo '<div class="column is-9"> ';
+        echo '<div class="box has-background-light ">';
         echo ' <p class="m-1"><label>お名前:</label>',$row['del_name'],'</p>';
-        echo ' <p class="m-1"><label>郵便番号</label>',$row['del_psnum'],'</p>';
+        echo ' <p class="m-1"><label>郵便番号:</label>',$row['del_psnum'],'</p>';
         echo '<p class="m-1">住所:',$row['del_address'] ,'</p>';
       
 
@@ -38,7 +42,7 @@
 }
 ?>
 
-  <button type="button" onclick="location.href='address.php'">変更</button> 
+  <button type="button" onclick="location.href='address.php'" class="m-2">変更</button> 
 </div></div></div>
 
   <hr>
@@ -82,7 +86,7 @@
         }
         ?>
 
-            ご利用ポイント：<input name="use" type="number" value="0" style="width: 80px;" /> pt
+            ご利用ポイント：<input name="use" type="number" min="0" max=<?= $point ?> value="0" style="width: 80px;" /> pt
     </p>
 
     <p>
@@ -108,16 +112,40 @@
                     and Cart.user_id = ?");
             $sql->execute([$id]);
             $check=array();
+
             if(isset($_POST['checkbox'])){
-                $check=$_POST['checkbox']; //チェックボックスがついてるとき
+                $check=$_POST['checkbox']; 
+                //チェックボックスがついてるとき
+                $_SESSION['checkbox']= $check;
+            }else{
+                $check=$_SESSION['checkbox']; 
             }
+            foreach($sql as $row){
+                $num = 'quantity_'.$row['shohin_id'];
+                if(in_array($row['shohin_id'], $check) != false){
+                    $sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
+                    //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
+                }else{
+                    $sql = $pdo -> prepare('update Cart set flag = 1, num = ?  where user_id = ? and shohin_id = ? ');
+                    //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
+                }
+                $count = isset($_POST[$num])?$_POST[$num] : $row['num'];
+                $sql -> execute([$count, $id,$row['shohin_id']]);
+            }
+
+            $sql=$pdo->prepare("select Shohin.shohin_id,Shohin.shohin_mei,Shohin.price,Shohin.shohin_img,Color.color_mei,Cart.num
+                    from Shohin,Cart,Color
+                    where Shohin.shohin_id = Cart.shohin_id
+                    and Shohin.color = Color.color_code
+                    and Cart.user_id = ?");
+            $sql->execute([$id]);
 
             $total = 0;
             foreach($sql as $row){
                 $num = 'quantity_'.$row['shohin_id'];
                 if(in_array($row['shohin_id'], $check) != false){
                     echo '<div class="columns  is-mobile  is-centered"> ';
-                    echo '<div class="column is-7"> ';
+                    echo '<div class="column is-9"> ';
                     echo '<div class=" box has-background-white-bis box-padding-4 ">';
                     echo '<div class="left ml-6 mx-6 mb-6" style=" float: left;">';
                     echo '<a href="detail.php?id=', $row['shohin_id'],'   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;"">','<img src="' ,$row['shohin_img'], '"  style="height: 105%;">','</div>';
@@ -129,25 +157,27 @@
                     $total = $row['num'] * $row['price'];
                     echo '<p class="m-2">小計：￥',$total,'</p>';
                     echo '</div></div></div></div>';
-                    $sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
+                    //$sql = $pdo -> prepare('update Cart set flag = 0, num = ? where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=0へ更新しました<br>";
                 }else{
-                    $sql = $pdo -> prepare('update Cart set flag = 1, num = ?  where user_id = ? and shohin_id = ? ');
+                    //$sql = $pdo -> prepare('update Cart set flag = 1, num = ?  where user_id = ? and shohin_id = ? ');
                     //echo "商品ID=".$row['shohin_id']." flg=1へ更新しました<br>";
                 }
+                /*
                 $count = isset($_POST[$num])?$_POST[$num] : $row['num'];
                 $sql -> execute([$count, $id,$row['shohin_id']]);
-
+                */
                 $his=$pdo->prepare("select shohin_id from History
                 where user_id = ?
                 and shohin_id = ?
                 ");
                 $his->execute([$id, $row['shohin_id']]);
-
+                
                 $repeat = 0;
                 if(isset($his)){
                     $repeat += $total * 0.1;
                 }
+                
             }
 
             echo '</p>';
@@ -172,6 +202,7 @@
                     $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                     $pdo=new PDO($connect,USER,PASS);
                     $sql=$pdo->query("select num,price from Cart,Shohin where Cart.shohin_id = Shohin.shohin_id and user_id = '".$id."'  and flag=0");
+                    $count = $sql->rowCount();
                     foreach($sql as $row){
                         $total += $row['num'] * $row['price'];
                     }
@@ -189,12 +220,19 @@
             }
     
         }
-
-        
+        if($count>0){
+        echo '<button type="submit" class="button  is-black m-4">ご注文を確定する</button>';
+        }else{
+         echo '<button type="submit" class="button  is-black m-4" disabled>ご注文を確定する</button>';
+        }
+        echo '</form>';
+    }else{
+        echo '<p class="is-size-5 m-4">商品が一つも選択されていません</p>';
+    }
         ?>
 
-    <button type="submit" class="button  is-black m-4">ご注文を確定する</button><br>
-    </form>
+   
+    
     <a href="cart.php">←カートへ戻る</a>
     </div>
     </body>

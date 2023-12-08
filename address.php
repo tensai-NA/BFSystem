@@ -48,7 +48,11 @@
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
     <nav class="level  is-mobile mt-6 mx-3">
         <div class="level-left ml-2">
-            <a href="purchase.php" ><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>    
+            <?php
+              $link=$_SERVER['HTTP_REFERER'] ;
+
+            echo ' <a href="',$link,'" "><i class="fas fa-long-arrow-alt-left fa-2x" ></i></a>';
+                        ?>
         </div>
         <div class="level-item">
                 <p class="title is-4 "> 配送先住所の選択</p>

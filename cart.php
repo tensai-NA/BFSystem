@@ -28,7 +28,7 @@
 ?>
 </div>
    
-   <div class="level-itemt ml-3">
+   <div class="level-item ml-3">
    <p class="title is-3 "> カート</p>
    </div>
      <div class="level-right mr-3">
@@ -44,7 +44,9 @@
     }
     ?>
     <?php
+   
     if(isset($_SESSION['customer'])){
+        unset($_SESSION['checkbox']);
         $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
         $pdo=new PDO($connect,USER,PASS);
         $sql=$pdo->query("select Shohin.shohin_id,Shohin.shohin_img,Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num,Cart.flag
@@ -150,7 +152,6 @@
        
     }
     ?>
-    <hr>
     <?php
     $repeat=0;
     if(isset($_SESSION['customer'])){
@@ -170,6 +171,8 @@
         }
        
     }
+
+    
     echo '<button type="submit" name="purchase"  class="button  is-black m-4">ご注文手続きへ</button>';
     }
 }
