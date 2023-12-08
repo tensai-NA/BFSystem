@@ -41,7 +41,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/address.css">
     <title>住所変更</title>
 </head>
 <body>
@@ -71,12 +70,11 @@
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo ' <label>郵便番号:</label>',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '<input type="checkbox" id="F">';
-        echo '<label class="F" for="F">変更</label><i class="fas fa-angle-down"></i>
+        echo '<div class="A">変更</label><i class="fas fa-angle-down"></i></div>
          <form action="address.php" method="post">
          <input type="hidden" name="postIdu" value="',$row['del_id'],'">';
       
-         echo '<div class="G">';
+         echo '<div class="B">';
          echo '<div class="columns  is-mobile  is-centered"> ';
          echo '<div class="column is-10"> ';
          echo '<div class="box  has-text-centered has-background-white-bis">';
@@ -99,7 +97,13 @@
 }
       echo '<p class="title is-5">配送先住所一覧</p><hr>';
       
+      $arry=0;
+      $cod=["AB","AC","AD","AE","AF"];
+      $code=["BA","BC","BD","BE","BF"];
+  
 if(isset($_SESSION['customer'])){
+    echo '<script src="https://code.jquery.com/jquery.min.js"></script>';
+
     $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
     $pdo=new PDO($connect,USER,PASS);
     $count=1;
@@ -113,10 +117,9 @@ if(isset($_SESSION['customer'])){
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo '郵便番号:',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '<input type="checkbox" id="ch">';
-        echo '<label class="ch" for="ch">変更</label><i class="fas fa-angle-down"></i>
+        echo '<div class="',$cod[$arry],'">変更<i class="fas fa-angle-down"></i></div>
                 
-            <div class="op">
+            <div class="',$code[$arry],'">
                  <form action="address.php" method="post">
                  <input type="hidden" name="postIdu" value="',$row['del_id'],'">';
               echo '<div class="columns  is-mobile  is-centered"> ';
@@ -136,7 +139,22 @@ if(isset($_SESSION['customer'])){
                 </form>
             </div></div></div></div>';
         echo '</div><button name="swicth" class="button  is-small is-dark is-black m-2">この住所に届ける</button></div></div>';
+        echo '<script>
+                $(function() {
+                    $(".',$cod[$arry],'").click(function() {
+                        $(".',$code[$arry],'").slideToggle("");
+                    });
+                });
+            </script>
+            <style>
+        
+                .',$code[$arry],'{
+                    display: none;
+                }
+            </style>';
+
         $boxcount++;
+        $arry++;
     }
  //変更部分は見えないようにしておく
 
@@ -182,6 +200,19 @@ if(isset($_SESSION['customer'])){
     <style>
 
         .G{
+            display: none;
+        }
+    </style>
+    <script>
+    $(function() {
+        $(".A").click(function() {
+            $(".B").slideToggle("");
+        });
+    });
+        </script>
+    <style>
+
+        .B{
             display: none;
         }
     </style>
