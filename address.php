@@ -76,17 +76,17 @@
       
          echo '<div class="B">';
          echo '<div class="columns  is-mobile  is-centered"> ';
-         echo '<div class="column is-10"> ';
-         echo '<div class="box  has-text-centered has-background-white-bis">';
+         echo '<div class="column is-9"> ';
+         echo '<div class="box  has-text-centered has-background-white-ter">';
         echo   '<label>お名前</label>
-                <p><input type="text" name="seiu">
-                <input type="text" name="meiu"></p>
+                <p><input type="text" name="seiu" style="width: 115px;">
+                <input type="text" name="meiu" style="width: 115px;"></p>
           
             <label>郵便番号</label>
-                <p><input type="text" name="postnumu"></p>
+                <p><input type="text" name="postnumu" style="width: 150px;"></p>
 
                 <label>住所</label>
-                <p><input type="text" name="addressu"></p>
+                <p><input type="text" name="addressu" style="width: 150px;"></p>
 
             <button name="update" class="button is-small is-black m-2">変更</button>
         </form>
@@ -117,28 +117,28 @@ if(isset($_SESSION['customer'])){
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo '郵便番号:',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '<div class="',$cod[$arry],'">変更</div><i class="fas fa-angle-down"></i>
+        echo '<div class="',$cod[$arry],'">変更<i class="fas fa-angle-down"></i></div>
                 
             <div class="',$code[$arry],'">
                  <form action="address.php" method="post">
                  <input type="hidden" name="postIdu" value="',$row['del_id'],'">';
               echo '<div class="columns  is-mobile  is-centered"> ';
-                 echo '<div class="column is-10"> ';
-                 echo '<div class="box  has-text-centered has-background-white-bis">';
+                 echo '<div class="column is-9"> ';
+                 echo '<div class="box  has-text-centered has-background-white-ter">';
                   echo  ' <label>お名前</label>
-                        <p><input type="text" name="seiu">
-                        <input type="text" name="meiu"></p>
+                        <p><input type="text" name="seiu"  style="width: 115px;">
+                        <input type="text" name="meiu"  style="width: 115px;"></p>
                   
                     <label>郵便番号</label>
-                        <p><input type="text" name="postnumu"></p>
+                        <p><input type="text" name="postnumu"  style="width: 150px;"></p>
 
                         <label>住所</label>
-                        <p><input type="text" name="addressu"></p>
+                        <p><input type="text" name="addressu" style="width: 150px;"></p>
 
                     <button name="update" class="button is-small is-black m-2">変更</button>
-            </div></div></div></div>';
+            </div></div></div>';
         echo '</div><button name="switch" class="button  is-small is-dark is-black m-2">この住所に届ける</button></div></div>';
-        echo '</form>';
+        echo '</form></div>';
         echo '<script>
                 $(function() {
                     $(".',$cod[$arry],'").click(function() {
@@ -167,20 +167,22 @@ if(isset($_SESSION['customer'])){
     
 
     <div class="F mb-5 "><p class="is-size-5">配送先住所を追加する<i class="fas fa-angle-down"></i></p></div>
-
+    <div class="columns  is-mobile  is-centered"> 
+    <div class="column is-10">
 <div class="G box has-background-light m-5">
  <form action="" method="post">
     <label>お名前</label>
-        <p><input type="text" name="seii">
-        <input type="text" name="meii"></p>
+        <p><input type="text" name="seii" style="width: 115px;">
+        <input type="text" name="meii" style="width: 115px;"></p>
     <label>郵便番号</label>
-        <p><input type="number" name="postnumi"></p>
+        <p><input type="number" name="postnumi" style="width: 150px;"></p>
     <label>住所</label>
-        <p><input type="text" name="addressi"></p>
-    <button type="submit" name="inserts">追加</button>
+        <p><input type="text" name="addressi" style="width: 150px;"></p>
+    <button type="submit" name="inserts" class="button is-small is-dark is-black m-2">追加</button>
 </form>
 </div>
-
+</div>
+</div>
 </div>
 
 

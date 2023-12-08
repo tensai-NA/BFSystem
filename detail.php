@@ -2,7 +2,6 @@
 <?php require 'kyotu/db-connect.php'?>
 
 <?php
-  
     $shohin = $_GET['id'];
     if(isset($_POST["tuika"])){
         if(isset($_SESSION['customer'])){ // roguinn  
@@ -18,26 +17,16 @@
             $pdo=new PDO($connect, USER, PASS);
             $sql=$pdo->prepare("insert into Cart values(?,?,?,0)");
             $sql->execute([$user,$shohin,$_POST['num']]);
-
-           
-
             }else{
             $pdo=new PDO($connect, USER, PASS);
             $sql=$pdo->prepare("update Cart set num= num+1 where user_id= ? and shohin_id =?");
             $sql->execute([$user, $shohin]);
-          
-
             }
-            
             echo '<script>
             alert("カートにこの商品を'.$_POST['num'].'個追加しました");
            </script>';
-           
         }
     }
-        
-  
-              
  ?>
 
 <!DOCTYPE html>

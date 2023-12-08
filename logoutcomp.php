@@ -1,7 +1,5 @@
 <?php session_start(); ?>
-
 <!--完成-->
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>

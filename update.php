@@ -15,7 +15,9 @@
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold" id="app">
    
     <p class="title is-3 mt-6"> 会員情報更新</p>
-    <div class=" box has-background-white-bis box-padding-4 ">
+    <div class='columns  is-mobile  is-centered'>
+                <div class='column is-9'>
+                    <div class=" box has-background-white-bis box-padding-4 ">
         <div class="field">
             <div class="control m-1">
             <label class="label label is-size-6 m-4"> お名前 </label>
@@ -68,6 +70,8 @@
 
        
         <button type="button" onclick="location.href='mypage.php'" class="button is-link ml-3 mt-6 mb-6">キャンセル</button>
+        </div>
+        </div>
         </div>
         </div>
 </div>
