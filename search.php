@@ -15,7 +15,7 @@
 <form action="search.php" method="post">
 <div class="m-3 has-text-centered is-family-code has-text-weight-semibold">
 
-    <nav class="level  is-mobile mt-6 mx-3">
+    <nav class="level  is-mobile">
 
         <div class="level-left">
 
@@ -27,7 +27,9 @@
                 </div>
             </div>
         </div>
- 
+
+          <p class="title is-3 "> 検索結果</p>
+
           <div class="level-right">
             <a href="home.php"><i class="fas fa-home is-6 fa-2x"></i> </a>
             </div>
@@ -48,16 +50,13 @@
     $flag2=false/*cate～colorまで１つでもあるかどうか*/;
     $flagprice=false;
     $sql_search="select * from Shohin where  (shohin_mei like ?)";
-   
+    $arr[]="%".$_POST['shohin_mei']."%";
     $pricef=false;/*それぞれの項目で$sql_searchに入るのが最初か判断 */
     $catef=false;
     $brandf=false;
     $colorf=false;
     
     
-    if(isset($_POST['shohin_mei'])){
-    $arr[]="%".$_POST['shohin_mei']."%";
-    }
     $prices=
     array(
       0 =>1500,
@@ -194,19 +193,7 @@ if(isset($_POST['price'])){
         $sql = $pdo->prepare($sql_search);
         $sql->execute($arr);
      
-    } else{
-      echo '<p class="is-size-7 has-text-right m-5">全件表示</p>';
-      $sql=$pdo->query("select * from Shohin");
-     
-   
-
-    }
-
-    if(isset($_GET['page']) && is_numeric($_GET['page'])) {
-      $page = $_GET['page'];
-    } else {
-      $page = 1;
-    }
+    } 
 
    
     $count=$sql-> rowCount();
@@ -223,12 +210,11 @@ if(isset($_POST['price'])){
          echo '<figure class="image is-square">';
          echo '<a href="detail.php?id=',$id,'"><p class="m-1"><img src="',$row['shohin_img'],'" alt="',$row['shohin_mei'],'"></p></figure></div>';
          echo ' <div class="card-content"> <div class="content">';
-         echo '<p class="has-text-centered	is-size-7"><a href="detail.php?id=',$id,'">',$row['shohin_mei'],'</a></p><hr>';
-         echo '<p class="has-text-centered	is-size-7">',$row['price'],'円 </p>';
+         echo '<p class="has-text-centered	"><a href="detail.php?id=',$id,'">',$row['shohin_mei'],'</a></p>';
+         echo '<p class="has-text-centered	">',$row['price'],'円 </p>';
          echo '</div></div></div></div>';
       }
       echo '</div>';
-      
     }
   
  

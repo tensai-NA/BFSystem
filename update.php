@@ -13,8 +13,7 @@
 <body>
 <form action="updatecomp.php" method="post">
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold" id="app">
-   
-    <p class="title is-3 mt-6"> 会員情報更新</p>
+    <h1 class="title is-3"> 会員情報更新</h1>
     <div class=" box has-background-white-bis box-padding-4 ">
         <div class="field">
             <div class="control m-1">
@@ -39,8 +38,7 @@
                 <div class="field has-addons-fullwidth has-addons-centered">';
                 
 
-            echo ' <input type="text"  class="input  is-primary  is-normal is-focused" name="mail" placeholder="✉ メールアドレス" v-model="email"  style="width: 515px;" required/>';
-                   
+            echo '<input type="text" class="input  is-primary  is-normal is-focused " v-model="email" name="mail" value="',$mail,'"  style="width: 515px;"  />';
             echo ' <p v-if="isInValidEmail" class="has-text-danger">Eメールアドレスの形式で入力してください</p>
                 </div>
             </div>';
@@ -49,7 +47,7 @@
                     <label class="label label is-size-6 m-4">郵便番号</label>
                     <div class="field has-addons-fullwidth has-addons-centered">';
 
-            echo '<input type="number" class="input  is-normal is-focused " v-model="postnum" name="postnum" placeholder="〒 郵便番号"   style="width: 515px;" />';
+            echo '<input type="number" class="input  is-normal is-focused " v-model="postnum" name="postnum" value="',$postnum,'"   style="width: 515px;" />';
             echo '<p v-if="isInValidPost" class="has-text-danger">郵便番号は7桁の数字で入力してください。</p>
                     </div>
             </div>';
@@ -62,12 +60,10 @@
         echo '<input type="text" class="input  is-primary is-normal is-focused " name="address" value="',$address,'"  style="width: 515px;" >';
         echo '</div></div>';
         ?>
-      
-        <button type="submit" class="button is-danger mr-3 mt-6 mb-6">更新</button>
+        <button type="submit" class="button is-danger m-3">更新</button>
     </form>
 
-       
-        <button type="button" onclick="location.href='mypage.php'" class="button is-link ml-3 mt-6 mb-6">キャンセル</button>
+        <button type="button" onclick="location.href='mypage.php'" class="button is-link m-3">キャンセル</button>
         </div>
         </div>
 </div>

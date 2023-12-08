@@ -11,6 +11,8 @@
 </head>
 <body>
 <div class="m-6 has-text-centered is-family-code has-text-weight-semibold">
+    <p class="title is-3 m-5">購入完了</p>
+
     <p class="mb-4">
         <p><span class="is-size-4">ご注文ありがとうございました！</span></p>
         <p class="my-6">
@@ -31,16 +33,11 @@
                     and Shohin.color = Color.color_code
                     and Cart.user_id = '".$id."'");
             foreach($sql as $row){
-               
-                echo '<div class="columns  is-mobile  is-centered"> ';
-                echo '<div class="column is-7"> ';
-                echo '<div class="box  has-text-centered ">';
-                echo '<p class="is-size-5">',$row['shohin_mei'],'</p>';
+                echo $row['shohin_mei'],'<br>';
                 echo 'カラー：',$row['color_mei'],'<br>';
                 echo '価格：￥',$row['price'],'<br>';
                 $total = $row['num'] * $row['price'];
-              
-                echo '小計：￥',$total,'<br></div></div></div>';
+                echo '小計：￥',$total,'<br>';
                 //Historyに追加
            
 
@@ -141,8 +138,7 @@
          </span></p>
         </p>
         <p class="my-6">
-           
-            <button onclick="location.href='home.php'"  class="button  is-black m-4">ホームへ戻る</button>
+            <button onclick="location.href='home.php'">ホームへ戻る</button>
         </p>
      </p>
     </div>    

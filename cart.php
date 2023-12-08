@@ -22,13 +22,13 @@
         }else if(strpos($link,'detail') !== false){
             echo '<a href="' ,$link,'"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>商品詳細</rt><rp>）</rp></ruby></a>';
         }elseif(strpos($link,'purchase') !== false){
-            echo '<a href="search.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>検索</rt><rp>）</rp></ruby></a>';
+            echo '<a href="' ,$link,'"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>購入確認</rt><rp>）</rp></ruby></a>';
         }
          
 ?>
 </div>
    
-<div class="level-item ml-3">
+   <div class="level-item ml-3">
    <p class="title is-3 "> カート</p>
    </div>
      <div class="level-right mr-3">
@@ -44,6 +44,7 @@
     }
     ?>
     <?php
+   
     if(isset($_SESSION['customer'])){
         unset($_SESSION['checkbox']);
         $id = $_SESSION['customer']['user_id']; //ログイン済みの処理
@@ -151,7 +152,6 @@
        
     }
     ?>
-
     <?php
     $repeat=0;
     if(isset($_SESSION['customer'])){
@@ -171,6 +171,8 @@
         }
        
     }
+
+    
     echo '<button type="submit" name="purchase"  class="button  is-black m-4">ご注文手続きへ</button>';
     }
 }
