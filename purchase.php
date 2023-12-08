@@ -28,7 +28,7 @@
         echo '<div class="column is-9"> ';
         echo '<div class="box has-background-light ">';
         echo ' <p class="m-1"><label>お名前:</label>',$row['del_name'],'</p>';
-        echo ' <p class="m-1"><label>郵便番号</label>',$row['del_psnum'],'</p>';
+        echo ' <p class="m-1"><label>郵便番号:</label>',$row['del_psnum'],'</p>';
         echo '<p class="m-1">住所:',$row['del_address'] ,'</p>';
       
 

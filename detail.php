@@ -87,7 +87,7 @@
             echo '<a href="history.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>購入履歴</rt><rp>）</rp></ruby></a>';
         }else if(strpos($link,'detail')  !== false){
 
-            echo '<a href="home.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>ホーム</rt><rp>）</rp></ruby></a>';
+            echo '<a href="search.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>検索</rt><rp>）</rp></ruby></a>';
         }
 ?>
 

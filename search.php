@@ -48,13 +48,14 @@
     $flag2=false/*cate～colorまで１つでもあるかどうか*/;
     $flagprice=false;
     $sql_search="select * from Shohin where  (shohin_mei like ?)";
-    $arr[]="%".$_POST['shohin_mei']."%";
+;
     $pricef=false;/*それぞれの項目で$sql_searchに入るのが最初か判断 */
     $catef=false;
     $brandf=false;
     $colorf=false;
-    
-    
+    if(isset($_POST['shohin_mei'])){
+    $arr[]="%".$_POST['shohin_mei']."%";
+    }
     $prices=
     array(
       0 =>1500,
@@ -191,7 +192,13 @@ if(isset($_POST['price'])){
         $sql = $pdo->prepare($sql_search);
         $sql->execute($arr);
      
-    } 
+    } else{
+      echo '<p class="is-size-7 has-text-right m-5">全件表示</p>';
+      $sql=$pdo->query("select * from Shohin");
+     
+   
+
+    }
 
     if(isset($_GET['page']) && is_numeric($_GET['page'])) {
       $page = $_GET['page'];

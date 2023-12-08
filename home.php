@@ -77,7 +77,7 @@
                 $pdo = new PDO($connect, USER, PASS);
                 $sql = $pdo->query("select point from User where user_id='" . $id . "'");
                 $point = $sql->fetch(PDO::FETCH_COLUMN);
-                echo '<p>マイポイント: ', $point, 'pt</p><hr>';
+                echo '<p class="m-4">マイポイント: ', $point, 'pt</p><hr>';
             }
 
             ?>
