@@ -21,7 +21,7 @@
         alert("配送先住所を追加しました");
        </script>';
     }
-    if(isset($_POST['swicth'])){
+    if(isset($_POST['switch'])){
         $pdo=new PDO($connect,USER,PASS);
         $sql=$pdo->prepare("update Delivery set destination =0 where user_id = '".$id."' and  destination =1");
         $sql->execute();
@@ -117,7 +117,7 @@ if(isset($_SESSION['customer'])){
         echo ' <label>お名前:</label>',$row['del_name'],'<br>';
         echo '郵便番号:',$row['del_psnum'],'<br>';
         echo '住所:',$row['del_address'] ,'<br>';
-        echo '<div class="',$cod[$arry],'">変更<i class="fas fa-angle-down"></i></div>
+        echo '<div class="',$cod[$arry],'">変更</div><i class="fas fa-angle-down"></i>
                 
             <div class="',$code[$arry],'">
                  <form action="address.php" method="post">
@@ -136,9 +136,9 @@ if(isset($_SESSION['customer'])){
                         <p><input type="text" name="addressu"></p>
 
                     <button name="update" class="button is-small is-black m-2">変更</button>
-                </form>
             </div></div></div></div>';
-        echo '</div><button name="swicth" class="button  is-small is-dark is-black m-2">この住所に届ける</button></div></div>';
+        echo '</div><button name="switch" class="button  is-small is-dark is-black m-2">この住所に届ける</button></div></div>';
+        echo '</form>';
         echo '<script>
                 $(function() {
                     $(".',$cod[$arry],'").click(function() {
