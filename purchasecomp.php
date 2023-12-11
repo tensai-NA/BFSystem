@@ -27,7 +27,7 @@
                     $sho = '';
                     $id = $_SESSION['customer']['user_id']; //セッションに入っているIDを取得
                     $pdo = new PDO($connect, USER, PASS);
-                    $sql = $pdo->query("select Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num,Cart.shohin_id
+                    $sql = $pdo->query("select Shohin.shohin_mei,Shohin.price,Color.color_mei,Cart.num,Cart.shohin_id,Shohin.shohin_img
                     from Shohin,Cart,Color
                     where Shohin.shohin_id = Cart.shohin_id
                     and Shohin.color = Color.color_code
@@ -38,12 +38,15 @@
                         echo '<div class="columns  is-mobile  is-centered"> ';
                         echo '<div class="column is-7"> ';
                         echo '<div class="box  has-text-centered ">';
-                        echo '<p class="is-size-5">', $row['shohin_mei'], '</p>';
+                        echo '<div class="left ml-6 mx-6 mb-6" style=" float: left;">';
+                        echo '<a href="detail.php?id=', $row['shohin_id'], '>   class="thumbnail"  style=" display: inline-block; height: 100px; margin-right: 5px; margin-bottom: 20px;"">', '<img src="', $row['shohin_img'], '"  style="height: 105%;">', '</a></div>';
+                       echo '<div class="items2 m-2">';
+                        echo '<p class="is-size-5"><a href="detail.php?id=', $row['shohin_id'], '">', $row['shohin_mei'], '</a></p>';
                         echo 'カラー：', $row['color_mei'], '<br>';
                         echo '価格：￥', $row['price'], '<br>';
                         $total = $row['num'] * $row['price'];
 
-                        echo '小計：￥', $total, '<br></div></div></div>';
+                        echo '小計：￥', $total, '<br></div></div></div></div>';
                         //Historyに追加
 
 
