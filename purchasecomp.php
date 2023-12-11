@@ -31,7 +31,8 @@
                     from Shohin,Cart,Color
                     where Shohin.shohin_id = Cart.shohin_id
                     and Shohin.color = Color.color_code
-                    and Cart.user_id = '" . $id . "'");
+                    and Cart.user_id = '" . $id . "'
+                    and Cart.flag=0");
                     foreach ($sql as $row) {
 
                         echo '<div class="columns  is-mobile  is-centered"> ';
