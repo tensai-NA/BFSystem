@@ -136,7 +136,7 @@
                 //カートから商品を削除する
                 $id = $_SESSION['customer']['user_id'];
                 $delete = new PDO($connect, USER, PASS);
-                $dele = $delete->prepare("delete from Cart where user_id = ?");
+                $dele = $delete->prepare("delete from Cart where user_id = ? and flag=0");
                 $dele->execute([$id]);
                 ?>
             </span></p>
