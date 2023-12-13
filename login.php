@@ -34,7 +34,6 @@ if (isset($_POST['login'])) {
                 }else{
                     $_SESSION['pass']++;
                 }
-                echo $_SESSION['pass'];
                 if($_SESSION['pass'] >= 3){
                     header("Location:password.php");
                     exit();
