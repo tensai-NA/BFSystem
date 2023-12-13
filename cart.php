@@ -23,6 +23,8 @@
             echo '<a href="' ,$link,'"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>商品詳細</rt><rp>）</rp></ruby></a>';
         }elseif(strpos($link,'purchase') !== false){
             echo '<a href="search.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>検索</rt><rp>）</rp></ruby></a>';
+        }elseif(strpos($link,'cart') !== false){
+            echo '<a href="search.php"><ruby><rb><i class="fas fa-long-arrow-alt-left fa-2x"></i></rb><rp>（</rp><rt>検索</rt><rp>）</rp></ruby></a>';
         }
          
 ?>

@@ -112,6 +112,21 @@
   .full-screen-o .slick-dots li:nth-child(5) button {
     background: #e5dfd3;
   }
+  .full-screen-o .slick-dots li:nth-child(6) button {
+    background: #c69772;
+  }
+  .full-screen-o .slick-dots li:nth-child(7) button {
+    background: #da9ac8;
+  }
+  .full-screen-o .slick-dots li:nth-child(8) button {
+    background: #8bacb3;
+  }
+  .full-screen-o .slick-dots li:nth-child(9) button {
+    background: rgb(193, 152, 226);
+  }
+  .full-screen-o .slick-dots li:nth-child(10) button {
+    background: rgb(145, 188, 122);
+  }
   .full-screen-o .slick-dots li button:hover, .full-screen-o .slick-dots li.slick-active button {
     border-radius: 0px;
     width: 12px;
