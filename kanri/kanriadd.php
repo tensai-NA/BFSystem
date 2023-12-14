@@ -5,7 +5,9 @@ if(isset($_POST['toroku'])){
     $pdo=new PDO($connect,USER,PASS);
     $sql=$pdo->prepare("insert into Kanri values(null,?,?)");
     $sql->execute([$_POST['name'],$_POST['pass']]);
-    echo '登録しました。';
+    echo '<script>
+    alert("登録しました。\nログイン画面でログインしてください。");
+   </script>';
 }
 ?>
 
@@ -37,7 +39,7 @@ if(isset($_POST['toroku'])){
         </div></div>
         <button name="toroku" class="button is-danger m-5" >登録</button>
         </form>
-        <button type="button" onclick="location.href='login.php'" class="button is-info m-6 mb-6">ログイン</button>
+        <button type="button" onclick="location.href='login.php'" class="button is-info m-5 mb-6">ログイン</button>
         </div></div>
 </div><div></div>
 </body>
